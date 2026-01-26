@@ -469,7 +469,7 @@
             padding: 14px 15px;
             border: 2px solid #e2e8f0;
             border-radius: 10px;
-            font-size: 16px; /* Prevents iOS zoom */
+            font-size: 16px;
             transition: var(--transition);
             width: 100%;
             -webkit-appearance: none;
@@ -525,6 +525,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            position: relative;
         }
 
         .btn-primary {
@@ -532,7 +533,7 @@
             color: white;
         }
 
-        .btn-primary:hover {
+        .btn-primary:hover:not(.loading) {
             transform: translateY(-3px);
             box-shadow: 0 7px 15px rgba(67, 97, 238, 0.3);
         }
@@ -546,10 +547,8 @@
             background: #cbd5e1;
         }
 
-        /* Mobile Save Button - REMOVED */
-
         /* Loading Effects */
-        .loading {
+        .loading-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -566,7 +565,7 @@
             transition: var(--transition);
         }
 
-        .loading.active {
+        .loading-overlay.active {
             opacity: 1;
             visibility: visible;
         }
@@ -592,46 +591,110 @@
             font-weight: 600;
         }
 
-        /* Success Message */
+        /* Enhanced Success Message */
         .success-message {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(0.8);
             background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
             text-align: center;
             z-index: 1500;
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
-            max-width: 90%;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid rgba(74, 222, 128, 0.2);
         }
 
         .success-message.active {
             opacity: 1;
             visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .success-icon-container {
+            width: 80px;
+            height: 80px;
+            background: rgba(74, 222, 128, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            position: relative;
         }
 
         .success-icon {
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: var(--success-color);
-            margin-bottom: 15px;
+            animation: checkmark 0.5s ease 0.2s both;
+        }
+
+        .success-icon-container::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid var(--success-color);
+            animation: ripple 1.5s infinite;
+        }
+
+        @keyframes checkmark {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
         }
 
         .success-text {
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--dark-color);
             margin-bottom: 10px;
         }
 
         .success-subtext {
             color: var(--gray-color);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
+            margin-bottom: 25px;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .success-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Button Loading State */
+        .btn.loading {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .btn.loading .btn-text {
+            visibility: hidden;
+        }
+
+        .btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
         }
 
         /* Edit Confirmation */
@@ -758,6 +821,40 @@
             100% { opacity: 0.4; }
         }
 
+        /* Error Message */
+        .error-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--danger-color);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+            z-index: 2000;
+            max-width: 350px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .error-message.active {
+            transform: translateX(0);
+        }
+
+        .error-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .error-text {
+            flex: 1;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
         /* Responsive Design */
         @media (min-width: 768px) {
             .container {
@@ -812,7 +909,6 @@
         }
 
         @media (max-width: 767px) {
-            /* Modal ကိုဖုန်းအတွက်အပြည့်အစုံပြမယ် */
             .modal {
                 max-height: 85vh;
                 height: auto;
@@ -825,7 +921,6 @@
             }
             
             .modal-footer {
-                display: flex !important;
                 padding: 15px;
                 background: white;
                 border-top: 1px solid #e2e8f0;
@@ -863,9 +958,14 @@
                 align-self: flex-start;
             }
             
-            /* Mobile save container ကိုဖယ်ရှားမယ် */
-            .mobile-save-container {
-                display: none !important;
+            .success-message {
+                padding: 25px;
+            }
+            
+            .error-message {
+                left: 20px;
+                right: 20px;
+                max-width: none;
             }
         }
 
@@ -926,6 +1026,14 @@
                 padding: 15px;
                 gap: 10px;
             }
+            
+            .success-message {
+                padding: 20px;
+            }
+            
+            .success-text {
+                font-size: 1.3rem;
+            }
         }
 
         @media (max-width: 360px) {
@@ -952,6 +1060,15 @@
             
             .btn {
                 width: 100%;
+            }
+            
+            .success-icon-container {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .success-icon {
+                font-size: 2.5rem;
             }
         }
 
@@ -987,19 +1104,33 @@
     </div>
 
     <!-- Loading Overlay -->
-    <div class="loading" id="loading">
+    <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
         <div class="loading-text" id="loadingText">Initializing...</div>
     </div>
 
-    <!-- Success Message -->
+    <!-- Enhanced Success Message -->
     <div class="success-message" id="successMessage">
-        <div class="success-icon">
-            <i class="fas fa-check-circle"></i>
+        <div class="success-icon-container">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
         </div>
-        <div class="success-text">Successfully Saved</div>
-        <div class="success-subtext">Your data has been saved successfully</div>
-        <button class="btn btn-primary" onclick="closeSuccessMessage()">Continue</button>
+        <div class="success-text" id="successTitle">Successfully Saved!</div>
+        <div class="success-subtext" id="successSubtext">Your data has been saved successfully</div>
+        <div class="success-actions">
+            <button class="btn btn-primary" onclick="closeSuccessMessage()">
+                <span class="btn-text">Continue</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message" id="errorMessage">
+        <div class="error-icon">
+            <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <div class="error-text" id="errorText">An error occurred</div>
     </div>
 
     <!-- Edit Confirmation -->
@@ -1167,7 +1298,9 @@
             <div class="modal-footer">
                 <button class="btn btn-secondary" id="cancelBtn">Cancel</button>
                 <button class="btn btn-primary" id="saveBtn">
-                    <i class="fas fa-save"></i> Save Entry
+                    <span class="btn-text">
+                        <i class="fas fa-save"></i> Save Entry
+                    </span>
                 </button>
             </div>
         </div>
@@ -1192,12 +1325,17 @@
         let longPressTarget = null;
         let unsubscribe = null;
         let db = null;
+        let isSaving = false;
 
         // DOM Elements
-        const loadingElement = document.getElementById('loading');
+        const loadingOverlay = document.getElementById('loadingOverlay');
         const loadingTextElement = document.getElementById('loadingText');
         const successMessageElement = document.getElementById('successMessage');
+        const successTitleElement = document.getElementById('successTitle');
+        const successSubtextElement = document.getElementById('successSubtext');
         const editConfirmationElement = document.getElementById('editConfirmation');
+        const errorMessageElement = document.getElementById('errorMessage');
+        const errorTextElement = document.getElementById('errorText');
         const addEntryBtn = document.getElementById('addEntryBtn');
         const modalOverlay = document.getElementById('modalOverlay');
         const closeModalBtn = document.getElementById('closeModalBtn');
@@ -1267,14 +1405,16 @@
         // Functions
         function showLoading(text = "Initializing...") {
             loadingTextElement.textContent = text;
-            loadingElement.classList.add('active');
+            loadingOverlay.classList.add('active');
         }
 
         function hideLoading() {
-            loadingElement.classList.remove('active');
+            loadingOverlay.classList.remove('active');
         }
 
-        function showSuccessMessage() {
+        function showSuccessMessage(title = "Successfully Saved!", subtext = "Your data has been saved successfully") {
+            successTitleElement.textContent = title;
+            successSubtextElement.textContent = subtext;
             successMessageElement.classList.add('active');
         }
 
@@ -1290,34 +1430,13 @@
             editConfirmationElement.classList.remove('active');
         }
         
-        function showError(message) {
-            // Create a more user-friendly error message
-            const errorDiv = document.createElement('div');
-            errorDiv.style.cssText = `
-                position: fixed;
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: var(--danger-color);
-                color: white;
-                padding: 12px 20px;
-                border-radius: 10px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-                z-index: 2000;
-                max-width: 90%;
-                text-align: center;
-                font-weight: 600;
-                animation: slideDown 0.3s ease;
-            `;
-            errorDiv.textContent = message;
-            document.body.appendChild(errorDiv);
+        function showError(message, duration = 5000) {
+            errorTextElement.textContent = message;
+            errorMessageElement.classList.add('active');
             
             setTimeout(() => {
-                errorDiv.style.opacity = '0';
-                setTimeout(() => {
-                    document.body.removeChild(errorDiv);
-                }, 300);
-            }, 3000);
+                errorMessageElement.classList.remove('active');
+            }, duration);
         }
 
         function handleSafeArea() {
@@ -1407,6 +1526,8 @@
         }
 
         function openAddModal() {
+            if (isSaving) return;
+            
             editingEntryId = null;
             modalTitle.textContent = 'Add New Entry';
             entryForm.reset();
@@ -1427,6 +1548,8 @@
         }
 
         function openEditModal(entryId) {
+            if (isSaving) return;
+            
             const entry = entries.find(e => e.id === entryId);
             if (!entry) return;
             
@@ -1458,6 +1581,7 @@
         }
 
         function closeModal() {
+            if (isSaving) return;
             modalOverlay.classList.remove('active');
         }
 
@@ -1475,6 +1599,17 @@
             return selectedGates;
         }
 
+        function setSaveButtonLoading(isLoading) {
+            isSaving = isLoading;
+            if (isLoading) {
+                saveBtn.classList.add('loading');
+                saveBtn.disabled = true;
+            } else {
+                saveBtn.classList.remove('loading');
+                saveBtn.disabled = false;
+            }
+        }
+
         async function saveEntry() {
             // Validate form
             if (!entryForm.checkValidity()) {
@@ -1482,7 +1617,10 @@
                 return;
             }
             
-            showLoading("Saving entry...");
+            if (isSaving) return;
+            
+            // Set button to loading state
+            setSaveButtonLoading(true);
             
             const entryData = {
                 date: dateInput.value,
@@ -1505,17 +1643,23 @@
                 if (editingEntryId) {
                     // Update existing entry
                     await db.collection('entries').doc(editingEntryId).update(entryData);
+                    showSuccessMessage("Entry Updated!", "Your changes have been saved successfully");
                 } else {
                     // Add new entry
                     await db.collection('entries').add(entryData);
+                    showSuccessMessage("Entry Added!", "New entry has been added successfully");
                 }
                 
-                hideLoading();
-                showSuccessMessage();
+                // Reset button state
+                setSaveButtonLoading(false);
+                
+                // Close modal immediately
                 closeModal();
                 
             } catch (error) {
-                hideLoading();
+                // Reset button state
+                setSaveButtonLoading(false);
+                
                 console.error('Error saving entry:', error);
                 showError('Error saving data: ' + error.message);
             }
@@ -1668,6 +1812,7 @@
                 try {
                     await db.collection('entries').doc(entryId).delete();
                     hideLoading();
+                    showSuccessMessage("Entry Deleted!", "The entry has been deleted successfully");
                 } catch (error) {
                     hideLoading();
                     console.error('Error deleting entry:', error);
