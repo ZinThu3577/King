@@ -1524,13 +1524,6 @@
                             <input type="number" id="parcelQuantity" class="form-input" placeholder="0" min="0" required>
                         </div>
                         <div class="form-group">
-                            <label class="form-label" for="totalPrice">
-                                <i class="fas fa-money-bill"></i>
-                                Total Price (Kyats)
-                            </label>
-                            <input type="number" id="totalPrice" class="form-input" placeholder="0" min="0" required>
-                        </div>
-                        <div class="form-group">
                             <label class="form-label" for="kilometer">
                                 <i class="fas fa-road"></i>
                                 Distance (km)
@@ -1550,21 +1543,21 @@
                                 <i class="fas fa-door-closed"></i>
                                 Door2Door Fee (Kyats)
                             </label>
-                            <input type="number" id="door2doorFee" class="form-input" placeholder="0" min="0" value="0">
+                            <input type="number" id="door2doorFee" class="form-input" placeholder="Enter amount" min="0">
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="expressFee">
                                 <i class="fas fa-shipping-fast"></i>
                                 Express Fee (Kyats)
                             </label>
-                            <input type="number" id="expressFee" class="form-input" placeholder="0" min="0" value="0">
+                            <input type="number" id="expressFee" class="form-input" placeholder="Enter amount" min="0">
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="petrolOilFee">
                                 <i class="fas fa-gas-pump"></i>
                                 Petrol/Oil Fee (Kyats)
                             </label>
-                            <input type="number" id="petrolOilFee" class="form-input" placeholder="0" min="0" value="0">
+                            <input type="number" id="petrolOilFee" class="form-input" placeholder="Enter amount" min="0">
                         </div>
                     </div>
                     
@@ -1666,7 +1659,6 @@
         const dateInput = document.getElementById('date');
         const customerNameInput = document.getElementById('customerName');
         const parcelQuantityInput = document.getElementById('parcelQuantity');
-        const totalPriceInput = document.getElementById('totalPrice');
         const kilometerInput = document.getElementById('kilometer');
         const kgInput = document.getElementById('kg');
         const door2doorFeeInput = document.getElementById('door2doorFee');
@@ -2054,6 +2046,11 @@
                 checkbox.checked = false;
             });
             
+            // Clear fee inputs (remove any placeholder values)
+            door2doorFeeInput.value = '';
+            expressFeeInput.value = '';
+            petrolOilFeeInput.value = '';
+            
             // Focus on first input
             setTimeout(() => {
                 customerNameInput.focus();
@@ -2075,12 +2072,11 @@
             dateInput.value = entry.date || today;
             customerNameInput.value = entry.customerName || '';
             parcelQuantityInput.value = entry.parcelQuantity || 0;
-            totalPriceInput.value = entry.totalPrice || 0;
             kilometerInput.value = entry.kilometer || 0;
             kgInput.value = entry.kg || 0;
-            door2doorFeeInput.value = entry.door2doorFee || 0;
-            expressFeeInput.value = entry.expressFee || 0;
-            petrolOilFeeInput.value = entry.petrolOilFee || 0;
+            door2doorFeeInput.value = entry.door2doorFee || '';
+            expressFeeInput.value = entry.expressFee || '';
+            petrolOilFeeInput.value = entry.petrolOilFee || '';
             updatePetrolCalculation();
             
             // Clear and set checkboxes
@@ -2140,21 +2136,23 @@
             // Set button to loading state
             setSaveButtonLoading(true);
             
+            // Get fee values, convert to numbers, default to 0 if empty
+            const door2doorFee = door2doorFeeInput.value ? parseInt(door2doorFeeInput.value) : 0;
+            const expressFee = expressFeeInput.value ? parseInt(expressFeeInput.value) : 0;
+            const petrolOilFee = petrolOilFeeInput.value ? parseInt(petrolOilFeeInput.value) : 0;
+            
             const entryData = {
                 date: dateInput.value,
                 customerName: customerNameInput.value.trim(),
                 parcelQuantity: parseInt(parcelQuantityInput.value) || 0,
-                totalPrice: parseInt(totalPriceInput.value) || 0,
                 kilometer: parseInt(kilometerInput.value) || 0,
                 kg: parseInt(kgInput.value) || 0,
-                door2doorFee: parseInt(door2doorFeeInput.value) || 0,
-                expressFee: parseInt(expressFeeInput.value) || 0,
-                petrolOilFee: parseInt(petrolOilFeeInput.value) || 0,
+                door2doorFee: door2doorFee,
+                expressFee: expressFee,
+                petrolOilFee: petrolOilFee,
                 buseGate: getSelectedBuseGates(),
                 petrolLiters: parseFloat(kilometerInput.value) / 8 || 0,
-                totalFees: (parseInt(door2doorFeeInput.value) || 0) + 
-                          (parseInt(expressFeeInput.value) || 0) + 
-                          (parseInt(petrolOilFeeInput.value) || 0),
+                totalFees: petrolOilFee, // ယခု Petrol/Oil Fee ကိုပဲ totalFees အဖြစ်သိမ်းမယ်
                 updatedAt: firebase.firestore.FieldValue.serverTimestamp()
             };
             
@@ -2226,8 +2224,8 @@
                 // Calculate petrol
                 const petrolLiters = entry.kilometer ? (entry.kilometer / 8).toFixed(2) : '0.00';
                 
-                // Calculate total fees
-                const totalFees = (entry.door2doorFee || 0) + (entry.expressFee || 0) + (entry.petrolOilFee || 0);
+                // Total Fees ကို Petrol/Oil Fee အတိုင်းပြမယ်
+                const totalFees = entry.petrolOilFee || 0;
                 
                 entriesHTML += `
                     <div class="entry-item" 
@@ -2250,10 +2248,6 @@
                             <div class="detail-item">
                                 <div class="detail-label">Parcels</div>
                                 <div class="detail-value">${entry.parcelQuantity || 0}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Price</div>
-                                <div class="detail-value">${(entry.totalPrice || 0).toLocaleString()} Kyats</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">Distance</div>
@@ -2309,12 +2303,12 @@
             let totalFees = 0;
             
             displayEntries.forEach(entry => {
-                totalMoney += parseInt(entry.totalPrice) || 0;
+                // Total Money ကို Door2Door Fee + Express Fee ပေါင်းပြီးပြမယ်
+                totalMoney += (parseInt(entry.door2doorFee) || 0) + (parseInt(entry.expressFee) || 0);
                 totalPetrol += (parseInt(entry.kilometer) || 0) / 8;
                 totalParcels += parseInt(entry.parcelQuantity) || 0;
-                totalFees += (parseInt(entry.door2doorFee) || 0) + 
-                            (parseInt(entry.expressFee) || 0) + 
-                            (parseInt(entry.petrolOilFee) || 0);
+                // Total Fees ကို Petrol/Oil Fee စုစုပေါင်းအဖြစ်ပြမယ်
+                totalFees += parseInt(entry.petrolOilFee) || 0;
             });
             
             totalMoneyElement.textContent = totalMoney.toLocaleString();
