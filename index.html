@@ -1,1044 +1,939 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VTP • Accounting + Elegant Receipts</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- jsPDF for receipt generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>EFG International School · သုတေသနစာတမ်း</title>
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Font for Burmese -->
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Noto+Sans+Myanmar:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&display=swap');
+        :root {
+            --leaf-green: #5b8c5a;
+            --leaf-light: #8db88b;
+            --gold: #c9a84c;
+            --cream: #fef9f0;
+            --soft-white: #ffffff;
+            --dark-green: #1e4a2c;
+            --medium-green: #2d5a2d;
+            --card-bg: #f8fdf8;
+            --accent: #e8c97a;
+            --text-dark: #2c3e2e;
+            --text-medium: #4a674a;
+            --shadow-soft: 0 8px 32px rgba(30, 74, 44, 0.08);
+            --shadow-card: 0 4px 20px rgba(30, 60, 30, 0.06);
+            --shadow-hover: 0 12px 36px rgba(30, 74, 44, 0.14);
+            --border-radius-lg: 28px;
+            --border-radius-md: 20px;
+            --border-radius-sm: 14px;
+        }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'DM Sans', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        :root {
-            --primary-color: #4361ee;
-            --secondary-color: #3f37c9;
-            --accent-color: #4cc9f0;
-            --success-color: #4ade80;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            --light-color: #f8fafc;
-            --dark-color: #1e293b;
-            --gray-color: #64748b;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-            --safe-area-inset-bottom: env(safe-area-inset-bottom);
-        }
-
-        html {
-            height: -webkit-fill-available;
         }
 
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: var(--dark-color);
-            min-height: 100vh;
-            min-height: -webkit-fill-available;
+            font-family: 'Padauk', 'Noto Sans Myanmar', sans-serif;
+            background: linear-gradient(180deg, #f5f9f0 0%, #fef9f0 15%, #fdf6ea 40%, #fef9f0 70%, #f5f9f0 100%);
+            color: var(--text-dark);
+            line-height: 1.8;
             overflow-x: hidden;
-            padding-bottom: calc(20px + var(--safe-area-inset-bottom));
+            scroll-behavior: smooth;
+            position: relative;
+            min-height: 100vh;
         }
 
-        /* Splash Screen */
-        .splash-screen {
+        /* ========== FALLING LEAVES CONTAINER ========== */
+        .leaves-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .leaf {
+            position: absolute;
+            top: -60px;
+            pointer-events: none;
+            animation: fallLeaf linear infinite;
+            opacity: 0;
+            filter: blur(0.3px);
+            will-change: transform;
+        }
+
+        @keyframes fallLeaf {
+            0% {
+                transform: translateY(-10vh) rotate(0deg) translateX(0px);
+                opacity: 0;
+            }
+            5% {
+                opacity: 0.8;
+            }
+            15% {
+                opacity: 0.65;
+            }
+            30% {
+                opacity: 0.55;
+            }
+            50% {
+                opacity: 0.7;
+            }
+            70% {
+                opacity: 0.45;
+            }
+            85% {
+                opacity: 0.55;
+            }
+            95% {
+                opacity: 0.15;
+            }
+            100% {
+                transform: translateY(105vh) rotate(540deg) translateX(80px);
+                opacity: 0;
+            }
+        }
+
+        /* Sway variation */
+        @keyframes fallLeafSway {
+            0% {
+                transform: translateY(-10vh) rotate(0deg) translateX(0px);
+                opacity: 0;
+            }
+            5% {
+                opacity: 0.75;
+            }
+            20% {
+                transform: translateY(20vh) rotate(90deg) translateX(60px);
+                opacity: 0.6;
+            }
+            40% {
+                transform: translateY(40vh) rotate(180deg) translateX(-40px);
+                opacity: 0.7;
+            }
+            60% {
+                transform: translateY(60vh) rotate(270deg) translateX(50px);
+                opacity: 0.5;
+            }
+            80% {
+                transform: translateY(80vh) rotate(380deg) translateX(-30px);
+                opacity: 0.55;
+            }
+            95% {
+                opacity: 0.12;
+            }
+            100% {
+                transform: translateY(105vh) rotate(540deg) translateX(70px);
+                opacity: 0;
+            }
+        }
+
+        /* ========== SPLASH SCREEN ========== */
+        .splash {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background: linear-gradient(160deg, #e8f0e3 0%, #f7f3e8 30%, #fef9f0 55%, #fdf6ea 80%, #e8f0e3 100%);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            z-index: 9999;
-            animation: fadeOut 1s ease 1s forwards;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 2;
+            isolation: isolate;
+        }
+
+        /* Subtle radial glow behind logo */
+        .splash::before {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(180, 210, 160, 0.45) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.25);
+                opacity: 0.8;
+            }
+        }
+
+        .splash-bg-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 220%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            pointer-events: none;
+            opacity: 0.1;
+            font-weight: 700;
+            font-size: clamp(2.5rem, 7vw, 6rem);
+            white-space: nowrap;
+            animation: scrollText 22s linear infinite;
+            color: var(--dark-green);
+            z-index: 0;
+            letter-spacing: 4px;
+        }
+
+        @keyframes scrollText {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .splash-logo-wrapper {
+            z-index: 3;
+            position: relative;
+            margin-bottom: 1.2rem;
         }
 
         .splash-logo {
-            font-size: 5rem;
+            width: 170px;
+            height: auto;
+            border-radius: 50%;
+            animation: floatLogo 3.5s ease-in-out infinite;
+            filter: drop-shadow(0 12px 28px rgba(30, 74, 44, 0.2));
+            z-index: 3;
+            position: relative;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 4px;
+        }
+
+        @keyframes floatLogo {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-14px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* Sparkle ring */
+        .sparkle-ring {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px dashed rgba(180, 200, 150, 0.5);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: spinRing 20s linear infinite;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        @keyframes spinRing {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .splash-title {
+            z-index: 3;
+            font-size: 2.6rem;
             font-weight: 700;
-            color: white;
-            animation: zoomIn 1s ease-out;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: var(--dark-green);
+            text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.3rem;
+            text-align: center;
+            letter-spacing: 2px;
         }
 
-        @keyframes zoomIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        .splash-sub {
+            z-index: 3;
+            font-size: 1.15rem;
+            color: #3b5e3b;
+            background: rgba(255, 255, 245, 0.75);
+            padding: 0.5rem 2.2rem;
+            border-radius: 40px;
+            letter-spacing: 1.5px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(180, 200, 150, 0.4);
+            font-weight: 500;
         }
 
-        @keyframes fadeOut {
-            0% { opacity: 1; }
-            100% { opacity: 0; visibility: hidden; }
+        .splash-footer {
+            position: absolute;
+            bottom: 28px;
+            z-index: 3;
+            font-size: 0.95rem;
+            color: #5b7b5b;
+            background: rgba(255, 255, 250, 0.7);
+            padding: 0.4rem 2rem;
+            border-radius: 30px;
+            backdrop-filter: blur(6px);
+            letter-spacing: 1px;
+            border: 1px solid rgba(180, 200, 150, 0.3);
         }
 
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 15px;
-            opacity: 0;
-            animation: fadeIn 0.5s ease 1.5s forwards;
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Sticky Bar */
-        .sticky-bar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 15px 20px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--glass-border);
+        /* ========== SCROLL HINT ========== */
+        .btn-scroll-hint {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: var(--transition);
+            justify-content: center;
+            margin-top: -50px;
+            z-index: 10;
+            position: relative;
         }
-
-        .stats-container {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            flex: 1;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: 5px;
-            scrollbar-width: none;
-        }
-        .stats-container::-webkit-scrollbar { display: none; }
-        .stat-box {
-            background: white;
-            padding: 12px 15px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            min-width: 140px;
-            transition: var(--transition);
-            flex-shrink: 0;
-        }
-        .stat-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
-        .stat-label { font-size: 0.85rem; color: var(--gray-color); margin-bottom: 5px; display: flex; align-items: center; gap: 6px; }
-        .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); line-height: 1.2; }
-        .stat-unit { font-size: 0.9rem; color: var(--gray-color); font-weight: 500; }
-
-        .add-btn {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
+        .scroll-down {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
-            transition: var(--transition);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-            margin-left: 10px;
-        }
-        .add-btn:hover { transform: scale(1.1); box-shadow: 0 8px 20px rgba(67, 97, 238, 0.5); }
-        .add-btn:active { transform: scale(0.95); }
-
-        /* Filter Section */
-        .filter-section {
             background: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: var(--shadow);
-            margin-bottom: 20px;
-            display: none;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .filter-section.active { display: flex; }
-        .filter-header { display: flex; justify-content: space-between; align-items: center; }
-        .filter-title { font-size: 1.2rem; font-weight: 700; color: var(--dark-color); display: flex; align-items: center; gap: 10px; }
-        .filter-title i { color: var(--primary-color); }
-        .filter-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .filter-group { display: flex; flex-direction: column; }
-        .filter-label { margin-bottom: 8px; font-weight: 600; color: var(--dark-color); font-size: 0.9rem; }
-        .filter-input, .filter-select { padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 16px; transition: var(--transition); width: 100%; -webkit-appearance: none; }
-        .filter-input:focus, .filter-select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2); }
-        .filter-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px; }
-        .btn-filter { padding: 12px 20px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: var(--transition); border: none; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
-        .btn-apply { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; }
-        .btn-clear { background: #e2e8f0; color: var(--dark-color); }
-        .active-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; min-height: 30px; }
-        .filter-tag { background: rgba(67, 97, 238, 0.1); color: var(--primary-color); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; }
-        .filter-tag .close { cursor: pointer; font-size: 0.8rem; margin-left: 4px; }
-        .filter-toggle {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            background: rgba(67, 97, 238, 0.1);
-            color: var(--primary-color);
-            border: none;
-            border-radius: 10px;
-            padding: 10px 15px;
-            font-weight: 600;
+            animation: bounceDown 2.2s infinite;
             cursor: pointer;
-            transition: var(--transition);
-            margin-bottom: 15px;
-            width: 100%;
-        }
-        .filter-toggle i { transition: var(--transition); }
-        .filter-toggle.active i { transform: rotate(180deg); }
-
-        /* List Container */
-        .list-container {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: var(--shadow);
-            margin-bottom: 20px;
-        }
-        .list-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f1f5f9;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .list-title {
             font-size: 1.3rem;
+            color: var(--medium-green);
+            border: 2px solid rgba(150, 190, 140, 0.4);
+            transition: all 0.3s;
+        }
+        .scroll-down:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+        }
+        @keyframes bounceDown {
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-12px);
+            }
+            60% {
+                transform: translateY(-6px);
+            }
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 1rem;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 40px 40px 0 0;
+            margin-top: -2.5rem;
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 -20px 50px rgba(30, 60, 30, 0.06);
+            border: 1px solid rgba(200, 220, 190, 0.35);
+            border-bottom: none;
+        }
+
+        section {
+            margin-bottom: 3.5rem;
+            position: relative;
+        }
+
+        h2 {
+            font-size: 1.9rem;
+            color: var(--dark-green);
+            border-left: 7px solid var(--leaf-green);
+            padding-left: 1.2rem;
+            margin-bottom: 1.4rem;
             font-weight: 700;
-            color: var(--dark-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .list-title i { color: var(--primary-color); }
-        .total-count { font-size: 0.9rem; color: var(--gray-color); font-weight: 500; }
-
-        .no-data { text-align: center; padding: 40px 15px; color: var(--gray-color); display: block; }
-        .no-data.hidden { display: none; }
-        .no-data i { font-size: 3rem; margin-bottom: 15px; color: #cbd5e1; }
-        .no-data p { font-size: 1rem; margin-bottom: 5px; }
-
-        .entry-list { display: flex; flex-direction: column; gap: 12px; }
-
-        /* Entry item */
-        .entry-item {
-            background: #f8fafc;
-            border-radius: 15px;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            transition: var(--transition);
-            border-left: 5px solid var(--primary-color);
+            letter-spacing: 0.5px;
             position: relative;
-            overflow: hidden;
-            animation: slideIn 0.3s ease;
-            flex-direction: column;
-            gap: 15px;
         }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .entry-item:hover { background: #f1f5f9; }
-        .entry-details {
-            flex: 1;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 12px;
-            width: 100%;
-        }
-        .detail-item { display: flex; flex-direction: column; }
-        .detail-label { font-size: 0.75rem; color: var(--gray-color); margin-bottom: 4px; }
-        .detail-value { font-weight: 600; color: var(--dark-color); font-size: 0.9rem; word-break: break-word; }
-
-        .entry-actions {
-            display: flex;
-            gap: 8px;
-            align-self: flex-end;
-            width: 100%;
-            justify-content: flex-end;
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 1.2rem;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--leaf-light), transparent);
+            border-radius: 2px;
         }
 
-        /* Buttons */
-        .edit-btn, .delete-btn, .receipt-btn {
-            background: none;
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-        .edit-btn { color: var(--primary-color); background: rgba(67, 97, 238, 0.1); }
-        .edit-btn:hover { background: rgba(67, 97, 238, 0.2); }
-        .delete-btn { color: var(--danger-color); background: rgba(239, 68, 68, 0.1); }
-        .delete-btn:hover { background: rgba(239, 68, 68, 0.2); }
-        .receipt-btn { color: var(--success-color); background: rgba(74, 222, 128, 0.1); }
-        .receipt-btn:hover { background: rgba(74, 222, 128, 0.2); }
-
-        /* Glass confirmations */
-        .glass-confirmation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1500;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            padding: 15px;
-        }
-        .glass-confirmation.active { opacity: 1; visibility: visible; }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(20px);
-            border-radius: 25px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
-            transform: translateY(30px) scale(0.95);
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        .glass-confirmation.active .glass-card { transform: translateY(0) scale(1); }
-        .glass-icon { font-size: 3.5rem; margin-bottom: 20px; display: inline-block; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .glass-text { font-size: 1.3rem; font-weight: 700; color: var(--dark-color); margin-bottom: 15px; }
-        .glass-subtext { color: var(--gray-color); margin-bottom: 30px; font-size: 1rem; line-height: 1.5; }
-        .glass-buttons { display: flex; justify-content: center; gap: 15px; }
-        .glass-btn { padding: 14px 25px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: var(--transition); border: none; font-size: 1rem; flex: 1; min-width: 120px; }
-        .glass-btn-primary { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3); }
-        .glass-btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4); }
-        .glass-btn-secondary { background: rgba(226, 232, 240, 0.8); color: var(--dark-color); backdrop-filter: blur(10px); }
-        .glass-btn-secondary:hover { background: rgba(203, 213, 225, 0.9); }
-
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            backdrop-filter: blur(5px);
-            padding: 15px;
-        }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal {
-            background: white;
-            width: 100%;
-            max-width: 700px;
-            max-height: 90vh;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            transform: translateY(30px);
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-        }
-        .modal-overlay.active .modal { transform: translateY(0); }
-        .modal-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-shrink: 0;
-        }
-        .modal-title { font-size: 1.3rem; font-weight: 600; }
-        .close-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.3rem;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: var(--transition);
-            flex-shrink: 0;
-        }
-        .close-btn:hover { background: rgba(255, 255, 255, 0.2); }
-        .modal-body { padding: 20px; overflow-y: auto; max-height: calc(90vh - 180px); flex: 1; -webkit-overflow-scrolling: touch; }
-        .form-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 20px; }
-        .form-group { display: flex; flex-direction: column; }
-        .form-label { margin-bottom: 8px; font-weight: 600; color: var(--dark-color); display: flex; align-items: center; gap: 8px; font-size: 0.95rem; }
-        .form-label i { color: var(--primary-color); }
-        .form-input, .form-select { padding: 14px 15px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 16px; transition: var(--transition); width: 100%; -webkit-appearance: none; }
-        .form-input:focus, .form-select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2); }
-        .checkbox-group { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
-        .checkbox-item { display: flex; align-items: center; gap: 8px; flex: 1 0 calc(50% - 6px); }
-        .checkbox-item input { width: 18px; height: 18px; accent-color: var(--primary-color); }
-        .modal-footer {
-            padding: 20px;
-            background: #f8fafc;
-            border-top: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            flex-shrink: 0;
-        }
-
-        .btn {
-            padding: 14px 20px;
-            border-radius: 10px;
+        h3 {
+            font-size: 1.35rem;
+            color: var(--medium-green);
+            margin: 1.6rem 0 0.7rem;
             font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            font-size: 1rem;
-            flex: 1;
-            min-height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            position: relative;
-        }
-        .btn-primary { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; }
-        .btn-secondary { background: #e2e8f0; color: var(--dark-color); }
-        .btn-primary:hover:not(.loading) { transform: translateY(-3px); box-shadow: 0 7px 15px rgba(67, 97, 238, 0.3); }
-        .btn-secondary:hover { background: #cbd5e1; }
-        .btn.loading { cursor: not-allowed; opacity: 0.8; }
-        .btn.loading .btn-text { visibility: hidden; }
-        .btn.loading::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s linear infinite;
         }
 
-        /* Loading overlay */
-        .loading-overlay {
-            position: fixed;
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius-lg);
+            padding: 1.8rem 2rem;
+            margin: 1.2rem 0;
+            box-shadow: var(--shadow-card);
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(180, 205, 170, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--leaf-light), var(--gold));
+            border-radius: 3px 0 0 3px;
+            opacity: 0;
+            transition: opacity 0.35s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(160, 200, 150, 0.5);
+        }
+        .card:hover::before {
+            opacity: 1;
+        }
+        .card p {
+            margin-bottom: 0.6rem;
+        }
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== TABLE ========== */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-soft);
+            margin: 1.2rem 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 500px;
+            background: white;
+        }
+        th {
+            background: linear-gradient(135deg, #2d5a2d, #1f4b2c);
+            color: white;
+            padding: 1rem 1.2rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            text-align: left;
+        }
+        td {
+            padding: 1rem 1.2rem;
+            background: #f8fdf8;
+            border-bottom: 1px solid #e0ece0;
+            transition: background 0.2s;
+        }
+        tr:hover td {
+            background: #edf7ed;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        td:first-child {
+            font-weight: 600;
+            color: var(--medium-green);
+            text-align: center;
+        }
+
+        /* ========== LEADERS GRID ========== */
+        .leaders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .leader-item {
+            background: white;
+            border-radius: var(--border-radius-md);
+            padding: 1.3rem 0.9rem;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(180, 205, 170, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        .leader-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--leaf-light), transparent);
+            border-radius: 2px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .leader-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(160, 200, 150, 0.5);
+        }
+        .leader-item:hover::after {
+            opacity: 1;
+        }
+        .leader-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--dark-green);
+            margin-bottom: 0.3rem;
+        }
+        .leader-role {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.4;
+        }
+
+        /* ========== VIDEO ========== */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--border-radius-lg);
+            margin: 2rem 0;
+            box-shadow: var(--shadow-soft);
+            border: 3px solid rgba(180, 205, 170, 0.3);
+            background: #000;
+        }
+        .video-wrapper iframe {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
+            border: none;
+            border-radius: calc(var(--border-radius-lg) - 3px);
         }
-        .loading-overlay.active { opacity: 1; visibility: visible; }
-        .spinner { width: 50px; height: 50px; border: 5px solid rgba(67, 97, 238, 0.2); border-radius: 50%; border-top-color: var(--primary-color); animation: spin 1s linear infinite; margin-bottom: 15px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .loading-text { font-size: 1rem; color: var(--primary-color); font-weight: 600; }
 
-        /* Success message */
-        .success-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            background: white;
-            padding: 30px;
-            border-radius: 25px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        /* ========== HIGHLIGHT BOX ========== */
+        .highlight-box {
+            background: linear-gradient(135deg, #fffdf5, #fff7e0);
+            border-left: 6px solid #e8c97a;
+            padding: 1.4rem 1.8rem;
+            border-radius: var(--border-radius-sm);
+            margin: 1.5rem 0;
+            font-style: normal;
+            box-shadow: 0 2px 12px rgba(180, 150, 80, 0.08);
+            line-height: 1.9;
+        }
+        .highlight-box strong {
+            color: #8b6914;
+        }
+
+        /* ========== MOTTO ========== */
+        .motto {
+            font-size: 1.8rem;
+            font-weight: 700;
             text-align: center;
-            z-index: 1500;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            max-width: 400px;
-            width: 90%;
-            border: 1px solid rgba(74, 222, 128, 0.2);
+            color: var(--dark-green);
+            margin: 1.8rem 0;
+            background: linear-gradient(135deg, #eaf7ea, #f1f9f1);
+            padding: 1.4rem;
+            border-radius: 30px;
+            letter-spacing: 2px;
+            border: 1px solid rgba(160, 200, 150, 0.4);
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 16px rgba(30, 74, 44, 0.05);
         }
-        .success-message.active { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
-        .success-icon-container { width: 80px; height: 80px; background: rgba(74, 222, 128, 0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 20px; position: relative; }
-        .success-icon { font-size: 3rem; color: var(--success-color); animation: checkmark 0.5s ease 0.2s both; }
-        .success-icon-container::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 2px solid var(--success-color);
-            animation: ripple 1.5s infinite;
-        }
-        @keyframes checkmark { 0% { transform: scale(0); opacity: 0; } 50% { transform: scale(1.2); } 100% { transform: scale(1); opacity: 1; } }
-        @keyframes ripple { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
-        .success-text { font-size: 1.5rem; font-weight: 700; color: var(--dark-color); margin-bottom: 10px; }
-        .success-subtext { color: var(--gray-color); margin-bottom: 25px; font-size: 1rem; line-height: 1.4; }
-        .success-actions { display: flex; justify-content: center; gap: 10px; }
 
-        /* Error message */
-        .error-message {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--danger-color);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
-            z-index: 2000;
-            max-width: 350px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transform: translateX(120%);
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        /* ========== FOOTER ========== */
+        footer {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            color: var(--text-medium);
+            font-size: 0.9rem;
+            background: linear-gradient(180deg, #e5f0e5, #d8ead8);
+            border-radius: 0 0 30px 30px;
+            margin-top: 2rem;
+            letter-spacing: 0.5px;
+            border-top: 1px solid rgba(160, 200, 150, 0.3);
         }
-        .error-message.active { transform: translateX(0); }
-        .error-icon { font-size: 1.5rem; flex-shrink: 0; }
-        .error-text { flex: 1; font-size: 0.9rem; line-height: 1.4; }
 
-        /* Responsive */
-        @media (min-width: 768px) {
-            .filter-section { display: flex !important; }
-            .filter-toggle { display: none !important; }
-            .entry-item { flex-direction: row; align-items: center; }
-            .entry-actions { width: auto; }
-            .form-grid { grid-template-columns: repeat(2, 1fr); }
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .splash-logo {
+                width: 130px;
+            }
+            .splash-title {
+                font-size: 2rem;
+            }
+            .splash-sub {
+                font-size: 1rem;
+                padding: 0.4rem 1.5rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding: 2rem 1rem 0.5rem;
+                border-radius: 30px 30px 0 0;
+            }
+            .card {
+                padding: 1.3rem 1.2rem;
+            }
+            .leaders-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 0.7rem;
+            }
+            .leader-item {
+                padding: 1rem 0.6rem;
+            }
+            .motto {
+                font-size: 1.3rem;
+                padding: 1rem;
+            }
+            .sparkle-ring {
+                width: 150px;
+                height: 150px;
+            }
+            .splash::before {
+                width: 250px;
+                height: 250px;
+            }
         }
-        @media (max-width: 767px) {
-            .modal-footer { flex-direction: column; }
-            .btn { width: 100%; }
-            .checkbox-item { flex: 1 0 100%; }
+
+        @media (max-width: 480px) {
+            .splash-logo {
+                width: 110px;
+            }
+            .splash-title {
+                font-size: 1.6rem;
+            }
+            .splash-sub {
+                font-size: 0.85rem;
+                padding: 0.35rem 1.2rem;
+            }
+            .splash-footer {
+                font-size: 0.8rem;
+                padding: 0.3rem 1.5rem;
+            }
+            h2 {
+                font-size: 1.3rem;
+                padding-left: 0.8rem;
+            }
+            .card {
+                padding: 1rem 0.9rem;
+                border-radius: var(--border-radius-sm);
+            }
+            .leaders-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+            .leader-item {
+                padding: 0.8rem 0.4rem;
+                border-radius: var(--border-radius-sm);
+            }
+            .leader-name {
+                font-size: 0.9rem;
+            }
+            .leader-role {
+                font-size: 0.7rem;
+            }
+            .motto {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Splash Screen -->
-    <div class="splash-screen"><div class="splash-logo">VTP</div></div>
 
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="spinner"></div>
-        <div class="loading-text" id="loadingText">Initializing...</div>
-    </div>
+    <!-- ========== FALLING LEAVES CONTAINER ========== -->
+    <div class="leaves-container" id="leavesContainer" aria-hidden="true"></div>
 
-    <!-- Success Message -->
-    <div class="success-message" id="successMessage">
-        <div class="success-icon-container"><div class="success-icon"><i class="fas fa-check-circle"></i></div></div>
-        <div class="success-text" id="successTitle">Successfully Saved!</div>
-        <div class="success-subtext" id="successSubtext"></div>
-        <div class="success-actions"><button class="btn btn-primary" onclick="closeSuccessMessage()"><span class="btn-text">Continue</span></button></div>
-    </div>
-
-    <!-- Error Message -->
-    <div class="error-message" id="errorMessage"><div class="error-icon"><i class="fas fa-exclamation-circle"></i></div><div class="error-text" id="errorText"></div></div>
-
-    <!-- Delete Confirmation -->
-    <div class="glass-confirmation" id="deleteConfirmation">
-        <div class="glass-card">
-            <div class="glass-icon"><i class="fas fa-trash-alt"></i></div>
-            <div class="glass-text">Delete Entry</div>
-            <div class="glass-subtext">Are you sure you want to delete this entry? This action cannot be undone.</div>
-            <div class="glass-buttons"><button class="glass-btn glass-btn-secondary" onclick="cancelDelete()">Cancel</button><button class="glass-btn glass-btn-primary" onclick="confirmDelete()">Delete</button></div>
+    <!-- ========== SPLASH SCREEN ========== -->
+    <div class="splash">
+        <div class="splash-bg-text" aria-hidden="true">
+            EFG International School Research &nbsp; EFG International School Research &nbsp; EFG International School Research
         </div>
-    </div>
 
-    <!-- Edit Confirmation -->
-    <div class="glass-confirmation" id="editConfirmation">
-        <div class="glass-card">
-            <div class="glass-icon"><i class="fas fa-edit"></i></div>
-            <div class="glass-text">Edit Entry</div>
-            <div class="glass-subtext">Are you sure you want to edit this entry?</div>
-            <div class="glass-buttons"><button class="glass-btn glass-btn-secondary" onclick="cancelEdit()">Cancel</button><button class="glass-btn glass-btn-primary" onclick="confirmEdit()">Edit</button></div>
+        <!-- Sparkle ring around logo -->
+        <div class="splash-logo-wrapper">
+            <div class="sparkle-ring"></div>
+            <!-- EFG Logo from Google Drive -->
+            <img class="splash-logo"
+            src="https://drive.google.com/thumbnail?id=1ulAEI3WHLBPDrHtsRGtbQOvfxDXjPxnQ&sz=w400"
+            alt="EFG Logo"
+            loading="eager"
+            onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22180%22 height=%22180%22%3E%3Crect width=%22180%22 height=%22180%22 rx=%2290%22 fill=%22%23d4e9d6%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2224%22 font-weight=%22bold%22 fill=%22%232d5a2d%22%3EEFG%3C/text%3E%3C/svg%3E';">
         </div>
+
+        <div class="splash-title">မွှေးပျံ့ပန်းတိုင်</div>
+        <div class="splash-sub">Exude Fragrance Goal</div>
+        <div class="splash-footer">EFG Research by Tr. Zion</div>
     </div>
 
-    <!-- Receipt Confirmation (with gentle bounce) -->
-    <div class="glass-confirmation" id="receiptConfirmation">
-        <div class="glass-card" style="animation: gentleBounce 0.4s;">
-            <div class="glass-icon"><i class="fas fa-receipt"></i></div>
-            <div class="glass-text">Generate Receipt</div>
-            <div class="glass-subtext">Create a beautiful PDF receipt for this entry?</div>
-            <div class="glass-buttons"><button class="glass-btn glass-btn-secondary" onclick="cancelReceipt()">Cancel</button><button class="glass-btn glass-btn-primary" onclick="confirmReceipt()">Yes, Generate</button></div>
-        </div>
+    <!-- Scroll hint -->
+    <div class="btn-scroll-hint" data-aos="fade-up" data-aos-delay="700">
+        <div class="scroll-down" onclick="document.querySelector('.container').scrollIntoView({behavior:'smooth'});">↓</div>
     </div>
 
-    <!-- Main Container -->
+    <!-- ========== MAIN RESEARCH CONTENT ========== -->
     <div class="container">
-        <!-- Sticky Bar -->
-        <div class="sticky-bar">
-            <div class="stats-container">
-                <div class="stat-box"><div class="stat-label"><i class="fas fa-money-bill-wave"></i>Total Money</div><div class="stat-value" id="totalMoney">0</div><div class="stat-unit">Kyats</div></div>
-                <div class="stat-box"><div class="stat-label"><i class="fas fa-gas-pump"></i>Petrol Cost</div><div class="stat-value" id="totalPetrol">0</div><div class="stat-unit">Liters</div><div class="petrol-info">8 km = 1 liter</div></div>
-                <div class="stat-box"><div class="stat-label"><i class="fas fa-boxes"></i>Total Parcels</div><div class="stat-value" id="totalParcels">0</div><div class="stat-unit">Parcels</div></div>
-                <div class="stat-box"><div class="stat-label"><i class="fas fa-money-bill-alt"></i>Total Fees</div><div class="stat-value" id="totalFees">0</div><div class="stat-unit">Kyats</div></div>
-                <div class="real-time-indicator"><div class="pulse-dot"></div><span>Live Updates</span></div>
-            </div>
-            <button class="add-btn" id="addEntryBtn"><i class="fas fa-plus"></i></button>
-        </div>
 
-        <!-- Filter Toggle / Section -->
-        <button class="filter-toggle" id="filterToggle"><i class="fas fa-filter"></i><span>Show Filters</span></button>
-        <div class="filter-section" id="filterSection">
-            <div class="filter-header"><div class="filter-title"><i class="fas fa-filter"></i>Filter Records</div><div class="total-count" id="filteredCount">Showing all entries</div></div>
-            <div class="filter-controls">
-                <div class="filter-group"><label class="filter-label">Start Date</label><input type="date" class="filter-input" id="filterStartDate"></div>
-                <div class="filter-group"><label class="filter-label">End Date</label><input type="date" class="filter-input" id="filterEndDate"></div>
-                <div class="filter-group"><label class="filter-label">Customer Name</label><input type="text" class="filter-input" id="filterCustomer" placeholder="Search by name"></div>
+        <!-- Video: Smiling Child -->
+        <section data-aos="fade-up" data-aos-duration="800" data-aos-once="false">
+            <div class="video-wrapper">
+                <iframe src="https://drive.google.com/file/d/1xCQnTGvDKvUuY9YZ6TEtlEwrgXy7XAwy/preview"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                title="ကလေးငယ်လေး ပြုံးပြနေပုံ"
+                loading="lazy"></iframe>
             </div>
-            <div class="active-filters" id="activeFilters"></div>
-            <div class="filter-actions"><button class="btn-filter btn-clear" id="clearFiltersBtn"><i class="fas fa-times"></i> Clear Filters</button><button class="btn-filter btn-apply" id="applyFiltersBtn"><i class="fas fa-search"></i> Apply Filters</button></div>
-        </div>
+            <p style="text-align:center; color:#5b7b5b; margin-top:0.6rem; font-size:0.95rem;">
+                ✨ ချစ်စရာကောင်းသော ကလေးငယ် — EFG မှ ပျော်ရွှင်မှုအပြည့် ✨
+            </p>
+        </section>
 
-        <!-- Entry List -->
-        <div class="list-container">
-            <div class="list-header"><div class="list-title"><i class="fas fa-list"></i>Accounting Records</div><div class="total-count" id="totalCount">Total: 0 entries</div></div>
-            <div class="entry-list" id="entryList">
-                <div class="no-data" id="noData"><i class="fas fa-inbox"></i><p>No accounting records found</p><p>Click the + button to add your first entry</p></div>
+        <!-- Introduction -->
+        <section data-aos="fade-right" data-aos-duration="800" data-aos-once="false">
+            <h2>ခြုံငုံလေ့လာသုံးသပ်ချက်</h2>
+            <div class="card">
+                <p><strong>EFG (Exude Fragrance Goal) “မွှေးပျံ့ပန်းတိုင်”</strong> ဟူသောအမည်ဖြင့် ၂၀၁၅ ခုနှစ်ဝန်းကျင်တွင် တာမွေမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး၌ ကိုယ်ပိုင်အထက်တန်းကျောင်းအဖြစ် စတင်ရပ်တည်ခဲ့သည်။ ၂၀၁၉ ခုနှစ်တွင် EFG International Preschool &amp; Learning Center ကို စစ်တောင်းအပိုင်း ၃၊ ယုဇနဥယျာဉ်မြို့တော်၌ စတင်ဖွင့်လှစ်ခဲ့ပြီး ယခုအခါ ချင်းတွင်းရိပ်မွန်အိမ်ရာသို့ ပင်မကျောင်းဆောင်ကြီး ပြောင်းရွှေ့ထားပါသည်။</p>
+                <p>EFG သည် ကလေးသူငယ်များ၏ ဘက်စုံဉာဏ်ရည်ဖွံ့ဖြိုးရေးကို ဦးတည်ကာ နိုင်ငံတကာအဆင့်မီ သင်ရိုးညွှန်းတမ်းများဖြင့် သင်ကြားပေးနေသည့် မူကြိုနှင့် အင်္ဂလိပ်စာသင်ကြားရေးစင်တာတစ်ခုဖြစ်သည်။</p>
             </div>
-        </div>
+        </section>
+
+        <!-- Campus Locations -->
+        <section data-aos="fade-up" data-aos-duration="800" data-aos-once="false">
+            <h2>ကျောင်းခွဲများ တည်နေရာ</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>စဉ်</th><th>ကျောင်းခွဲအမည်</th><th>မှတ်ချက်</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>၁</td><td>ဒဂုံဆိပ်ကမ်း ကျောင်းခွဲ (၁)</td><td></td></tr>
+                        <tr><td>၂</td><td>ဒဂုံဆိပ်ကမ်း ကျောင်းခွဲ (၂)</td><td></td></tr>
+                        <tr><td>၃</td><td>မြောက်ဒဂုံ ကျောင်းခွဲ</td><td></td></tr>
+                        <tr><td>၄</td><td><strong>သန်လျင် ကျောင်းခွဲ</strong></td><td>၂၀၂၄ ဇန်နဝါရီ – တတိယမြောက်ကျောင်းခွဲအဖြစ် သန်လျင်မြို့ပတ်လမ်းတွင် အသစ်တိုးချဲ့ဖွင့်လှစ်</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Logo Philosophy -->
+        <section data-aos="fade-left" data-aos-duration="800" data-aos-once="false">
+            <h2>ကျောင်းအမှတ်တံဆိပ်၏ အဓိပ္ပာယ်</h2>
+            <div class="card">
+                <p><strong>🌳 သစ်ပင်ကြီး</strong> – ကျောင်းသည် ကလေးငယ်များ၏ ကြီးထွားမှုအတွက် အာဟာရပြည့်သော မြေဆီလွှာကောင်းတစ်ခု။</p>
+                <p><strong>🍃 အရောင်စုံအရွက်လေးများ</strong> – ကလေးတစ်ဦးချင်းစီ၏ မတူညီသော ထူးခြားသည့်အရည်အချင်းများ (Diversity) ကို ကိုယ်စားပြု။</p>
+                <p><strong>📚 စာအုပ်နှင့် ခဲတံ</strong> – ပညာရေး၏ အခြေခံအုတ်မြစ်၊ ကလေးတို့၏ စူးစမ်းလိုစိတ်နှင့် တီထွင်ဖန်တီးနိုင်စွမ်း (Creativity) ကို အမြဲရှင်သန်စေမည့် ကတိ။</p>
+                <p><strong>🧒👧 ပျော်ရွှင်နေသော ကလေးငယ်နှစ်ဦး</strong> – “ကလေး” သည် ဗဟိုချက်။ ပျော်ရွှင်စွာကစားရင်း သင်ယူခြင်း (Learning through Play) မှ ဖြစ်ပေါ်လာသော ဦးနှောက်ဖွံ့ဖြိုးမှုကို ဖော်ညွှန်း။</p>
+            </div>
+        </section>
+
+        <!-- Motto -->
+        <section data-aos="zoom-in" data-aos-duration="800" data-aos-once="false">
+            <div class="motto">
+                “We Can, We Care, We Learn”
+            </div>
+            <div class="highlight-box">
+                <strong>We Can (ငါတို့ လုပ်နိုင်တယ်)</strong> – ကလေးငယ်တိုင်း “ငါလုပ်နိုင်တယ်” ဆိုသည့် Growth Mindset ဖြင့် ယုံကြည်မှုရှိစေရန်။<br>
+                <strong>We Care (ငါတို့ ဂရုစိုက်တယ်)</strong> – စိတ်ခံစားမှု၊ ဘေးကင်းလုံခြုံမှုနှင့် ကိုယ်ချင်းစာတရားကို မိသားစုသဖွယ်ဂရုစိုက်။<br>
+                <strong>We Learn (ငါတို့ သင်ယူတယ်)</strong> – ကလေးရော ဆရာပါ အမြဲမပြတ်သင်ယူပြီး အကောင်းဆုံးရလဒ်ကို ဖော်ဆောင်။
+            </div>
+        </section>
+
+        <!-- Founder & Leaders -->
+        <section data-aos="fade-up" data-aos-duration="800" data-aos-once="false">
+            <h2>တည်ထောင်သူနှင့် ခေါင်းဆောင်များ</h2>
+            <p><strong>တည်ထောင်သူနှင့် မတည်ဒါရိုက်တာ – ဆရာကြီး ဦးကျော်ငြိမ်းသန့်</strong> (Founder &amp; Managing Director)။ ညီအကိုများဖြစ်သော ဘဘဦးသန့်ဇင်နှင့် ဘဘဦးထိန်လင်းတို့မှာ ရှယ်ယာဝင်များဖြစ်သည်။</p>
+            <h3>ကျောင်းအုပ်ကြီးများနှင့် အဓိကတာဝန်ရှိသူများ</h3>
+            <div class="leaders-grid">
+                <div class="leader-item"><div class="leader-name">Tr. May May</div><div class="leader-role">Principal</div></div>
+                <div class="leader-item"><div class="leader-name">Tr. Irin</div><div class="leader-role">Personal Assistant</div></div>
+                <div class="leader-item"><div class="leader-name">Tr. Niana</div><div class="leader-role">Coordinator / Thanlyin Asst. Principal</div></div>
+                <div class="leader-item"><div class="leader-name">Tr. Raymond</div><div class="leader-role">Manager / DS-1 Asst. Principal</div></div>
+                <div class="leader-item"><div class="leader-name">Tr. Chris</div><div class="leader-role">Subject Leader</div></div>
+                <div class="leader-item"><div class="leader-name">Tr. Treeza</div><div class="leader-role">Academic Manager</div></div>
+                <div class="leader-item"><div class="leader-name">Tr. George</div><div class="leader-role">Motivational Coach</div></div>
+                <div class="leader-item"><div class="leader-name">Tr. Isabella</div><div class="leader-role">Project Leader</div></div>
+                <div class="leader-item"><div class="leader-name">Tr. Joy</div><div class="leader-role">Class Teacher Coach</div></div>
+                <div class="leader-item"><div class="leader-name">Tr. Lynx</div><div class="leader-role">Exam Developer / ND Asst. Principal</div></div>
+                <div class="leader-item"><div class="leader-name">Tr. Lily</div><div class="leader-role">DS-2 Asst. Principal</div></div>
+                <div class="leader-item"><div class="leader-name">Tr. Phoenix</div><div class="leader-role">Assessor</div></div>
+            </div>
+        </section>
+
+        <!-- Male Teachers Role -->
+        <section data-aos="fade-right" data-aos-duration="800" data-aos-once="false">
+            <h2>အမျိုးသားဆရာများ၏ အခန်းကဏ္ဍ</h2>
+            <div class="card">
+                <p><strong>၁။ ကာယဗလနှင့် ကြမ်းတမ်းခက်ထန်သော ကစားနည်းများ</strong> – ကြွက်သားကြီးများဖွံ့ဖြိုးရန် အပြေးအလွှားကစားခြင်းများကို အတူပါဝင်ပေး။</p>
+                <p><strong>၂။ ဖခင်ကဲ့သို့ အားကိုးထိုက်သော Role Model</strong> – ကလေးများအတွက် ယုံကြည်မှု၊ တာဝန်ယူမှု စံပြပုဂ္ဂိုလ်။</p>
+                <p><strong>၃။ ကျား/မ ညီမျှမှုနှင့် မခွဲခြားတတ်စေရန်</strong> – “စာသင်တာဟာ အမျိုးသမီးတွေပဲလုပ်တဲ့အလုပ်” ဟူသော အမြင်ကို ဖျက်ထုတ်ပေး။</p>
+                <p><strong>၄။ စွန့်စားလိုစိတ်နှင့် ခံနိုင်ရည်ရှိမှု (Resilience)</strong> – “လုပ်ကြည့်၊ ပြုတ်ကျရင် ပြန်ထ” ဆိုသည့် စိန်ခေါ်မှုဖြင့် EQ ဖွံ့ဖြိုးစေ။</p>
+            </div>
+        </section>
+
+        <!-- Curriculum -->
+        <section data-aos="fade-left" data-aos-duration="800" data-aos-once="false">
+            <h2>သင်ရိုးညွှန်းတမ်း</h2>
+            <div class="table-wrapper">
+                <table>
+                    <tr><th>ဘာသာရပ်အုပ်စု</th><th>ဘာသာရပ်များ</th></tr>
+                    <tr><td>Major Subjects (၄ ခု)</td><td>Myanmar, English, Maths, Science</td></tr>
+                    <tr><td>IQ / EQ</td><td>Music &amp; Dance, IQ, EQ, IT</td></tr>
+                    <tr><td>Social Science</td><td>History, Geography, Fine Art, Health &amp; Fitness (၂၀၂၆ မှ Government Course)</td></tr>
+                    <tr><td>Minor Subjects (၂ ခု)</td><td>(ကျောင်းမှ ထပ်ဆောင်းသတ်မှတ်ထားသော ဘာသာရပ်များ)</td></tr>
+                </table>
+            </div>
+            <p style="margin-top:0.8rem;">Cambridge အခြေခံ Oxford သင်ရိုး၊ ကိုယ်ပိုင်သင်ရိုးများကို အသုံးပြုပြီး Primary 4 တွင် Pearson သင်ရိုးကိုလည်း ဖြည့်စွက်ထားသည်။</p>
+        </section>
+
+        <!-- Vision & Mission -->
+        <section data-aos="fade-up" data-aos-duration="800" data-aos-once="false">
+            <h2>မျှော်မှန်းချက်နှင့် လုပ်ငန်းစဉ်</h2>
+            <p><strong>Vision</strong> – မြန်မာနိုင်ငံရှိ ရှေးဦးအရွယ်ကလေးငယ်များကို နိုင်ငံတကာအဆင့်မီ အတွေးအခေါ်၊ အရည်အချင်းနှင့် စာရိတ္တကောင်းမွန်သော ခေါင်းဆောင်ငယ်များအဖြစ် ပေါ်ထွက်စေရန်။</p>
+            <p><strong>Mission</strong> – ပျော်ရွှင်ဘေးကင်းသော ပတ်ဝန်းကျင်၊ ခေတ်မီထောက်ကူပစ္စည်းများ၊ ကျွမ်းကျင်ဆရာများဖြင့် ကလေးများ၏ ဘက်စုံအရည်အသွေးကို အချိုးညီစွာ ဖွံ့ဖြိုးစေရန်။</p>
+        </section>
+
+        <!-- Student Plenary Festival -->
+        <section data-aos="fade-right" data-aos-duration="800" data-aos-once="false">
+            <h2>ထူးခြားသော လှုပ်ရှားမှုများ</h2>
+            <p><strong>ကျောင်းသားစုံညီပွဲတော် (Student Plenary Festival)</strong> – Sky Star Hotel ၌ နှစ်စဉ်ကျင်းပ၊ စင်မြင့်ထက်တွင် သီချင်းကပြခြင်း၊ ပြဇာတ်တိုများ ဖျော်ဖြေခြင်းဖြင့် Stage Courage ရရှိစေကာ ဆုချီးမြှင့်ခြင်းဖြင့် Positive Reinforcement ပေး။</p>
+            <p><strong>နွေရာသီသင်တန်းများ (Summer Camps)</strong> – ပြင်ပကလေးများပါ တက်ရောက်နိုင်သည့် အထူးစွမ်းရည်မြှင့်သင်တန်းများ။</p>
+        </section>
+
+        <!-- SWOT -->
+        <section data-aos="fade-up" data-aos-duration="800" data-aos-once="false">
+            <h2>SWOT ဆန်းစစ်ချက်</h2>
+            <div class="card">
+                <p><strong>✅ အားသာချက်များ</strong> – ထူးခြားသောအမှတ်တံဆိပ်၊ ဗျူဟာကျသောနေရာများ၊ ခေတ်မီအဆောက်အအုံ။</p>
+                <p><strong>⚠️ အားနည်းချက်များ</strong> – အထက်တန်းပညာရေးမရှိသေးခြင်း၊ ဆရာအရည်အသွေးထိန်းသိမ်းရန် လိုအပ်ချက်။</p>
+                <p><strong>🌱 အခွင့်အလမ်းများ</strong> – ဒစ်ဂျစ်တယ်နည်းပညာတိုးချဲ့ခြင်း၊ Summer Camp များချဲ့ထွင်ခြင်း။</p>
+                <p><strong>⚡ စိန်ခေါ်မှုများ</strong> – စီးပွားရေးဖောင်းပွမှု၊ ပြိုင်ဘက်အသစ်များ ပေါ်ထွက်လာခြင်း။</p>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section data-aos="fade-up" data-aos-duration="800" data-aos-once="false">
+            <h2>နိဂုံးနှင့် အကြံပြုချက်များ</h2>
+            <p>EFG သည် မြန်မာနိုင်ငံ၏ ရှေးဦးအရွယ်ပညာရေးတွင် ခိုင်မာသောနေရာရရှိထားပြီး <strong>“မွှေးပျံ့ပန်းတိုင်”</strong> အယူအဆဖြင့် ကလေးတစ်ဦးချင်းစီ၏ အတွင်းစိတ်အလှကို ဖော်ထုတ်ပေးလျက်ရှိသည်။</p>
+            <p><strong>အကြံပြုချက်များ</strong><br>
+                ၁။ Middle School အထိ သင်ရိုးတိုးချဲ့ရန် ပြင်ဆင်ပါ။<br>
+                ၂။ ECCD၊ Child Psychology သင်တန်းများကို ဆရာများအား ပုံမှန်ပံ့ပိုးပါ။<br>
+            ၃။ မိဘများနှင့် ဒစ်ဂျစ်တယ်ဆက်သွယ်ရေးစနစ် တည်ဆောက်ပါ။</p>
+        </section>
+
+        <footer>
+            © ၂၀၂၆ EFG International Preschool &amp; Learning Centre · သုတေသနစာတမ်း by Tr. Zion
+        </footer>
     </div>
 
-    <!-- Add/Edit Modal -->
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal">
-            <div class="modal-header"><div class="modal-title" id="modalTitle">Add New Entry</div><button class="close-btn" id="closeModalBtn"><i class="fas fa-times"></i></button></div>
-            <div class="modal-body">
-                <form id="entryForm">
-                    <div class="form-grid">
-                        <div class="form-group"><label class="form-label" for="date"><i class="fas fa-calendar-alt"></i>Date</label><input type="date" id="date" class="form-input" required></div>
-                        <div class="form-group"><label class="form-label" for="customerName"><i class="fas fa-user"></i>Customer Name</label><input type="text" id="customerName" class="form-input" placeholder="Enter customer name" required></div>
-                        <div class="form-group"><label class="form-label" for="parcelQuantity"><i class="fas fa-box"></i>Parcel Quantity</label><input type="number" id="parcelQuantity" class="form-input" placeholder="0" min="0" required></div>
-                        <div class="form-group"><label class="form-label" for="kilometer"><i class="fas fa-road"></i>Distance (km)</label><input type="number" id="kilometer" class="form-input" placeholder="0" min="0" required><div class="petrol-info" id="petrolCalc">Petrol needed: 0 liters (8 km = 1 liter)</div></div>
-                        <div class="form-group"><label class="form-label" for="kg"><i class="fas fa-weight-hanging"></i>Weight (kg)</label><input type="number" id="kg" class="form-input" placeholder="0" min="0" required></div>
-                        <div class="form-group"><label class="form-label" for="door2doorFee"><i class="fas fa-door-closed"></i>Door2Door Fee (Kyats)</label><input type="number" id="door2doorFee" class="form-input" placeholder="Enter amount" min="0"></div>
-                        <div class="form-group"><label class="form-label" for="expressFee"><i class="fas fa-shipping-fast"></i>Express Fee (Kyats)</label><input type="number" id="expressFee" class="form-input" placeholder="Enter amount" min="0"></div>
-                        <div class="form-group"><label class="form-label" for="petrolOilFee"><i class="fas fa-gas-pump"></i>Petrol/Oil Fee (Kyats)</label><input type="number" id="petrolOilFee" class="form-input" placeholder="Enter amount" min="0"></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label"><i class="fas fa-map-marker-alt"></i>Bus Gates</label>
-                        <div class="checkbox-group" id="buseGateGroup">
-                            <div class="checkbox-item"><input type="checkbox" id="gate1" value="Aung Mingalar"><label for="gate1">Aung Mingalar</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="gate2" value="Dagon Aye Yar"><label for="gate2">Dagon Aye Yar</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="gate3" value="Aung San Kwin"><label for="gate3">Aung San Kwin</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="gate4" value="Thiri Mingalar"><label for="gate4">Thiri Mingalar</label></div>
-                            <div class="checkbox-item"><input type="checkbox" id="gate5" value="Par Ya Mi"><label for="gate5">Par Ya Mi</label></div>
-                            <!-- NEW GATE: BaYintNaung -->
-                            <div class="checkbox-item"><input type="checkbox" id="gate6" value="BaYintNaung"><label for="gate6">BaYintNaung</label></div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer"><button class="btn btn-secondary" id="cancelBtn">Cancel</button><button class="btn btn-primary" id="saveBtn"><span class="btn-text"><i class="fas fa-save"></i> Save Entry</span></button></div>
-        </div>
-    </div>
-
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
     <script>
-        // Firebase Config
-        const firebaseConfig = {
-            apiKey: "AIzaSyARguxf3-DdOCE9tGLfPLcGIWxRMmHZdns",
-            authDomain: "control-my-v1.firebaseapp.com",
-            projectId: "control-my-v1",
-            storageBucket: "control-my-v1.firebasestorage.app",
-            messagingSenderId: "780907108895",
-            appId: "1:780907108895:web:2e6455329d329fcf38932a",
-            measurementId: "G-PWGS7VL1RV"
-        };
-
-        // Global variables
-        let entries = [], filteredEntries = [], editingEntryId = null, deleteEntryId = null, receiptEntryId = null;
-        let longPressTimer = null, longPressTarget = null, unsubscribe = null, db = null, isSaving = false;
-        let activeFilters = { startDate: '', endDate: '', customer: '' }, isFilterActive = false;
-
-        // DOM elements
-        const loadingOverlay = document.getElementById('loadingOverlay'), loadingTextElement = document.getElementById('loadingText');
-        const successMessageElement = document.getElementById('successMessage'), successTitleElement = document.getElementById('successTitle'), successSubtextElement = document.getElementById('successSubtext');
-        const deleteConfirmation = document.getElementById('deleteConfirmation'), editConfirmation = document.getElementById('editConfirmation');
-        const receiptConfirmation = document.getElementById('receiptConfirmation');
-        const errorMessageElement = document.getElementById('errorMessage'), errorTextElement = document.getElementById('errorText');
-        const addEntryBtn = document.getElementById('addEntryBtn'), modalOverlay = document.getElementById('modalOverlay'), closeModalBtn = document.getElementById('closeModalBtn'), cancelBtn = document.getElementById('cancelBtn'), saveBtn = document.getElementById('saveBtn');
-        const entryForm = document.getElementById('entryForm'), entryList = document.getElementById('entryList'), noDataElement = document.getElementById('noData');
-        const totalMoneyElement = document.getElementById('totalMoney'), totalPetrolElement = document.getElementById('totalPetrol'), totalParcelsElement = document.getElementById('totalParcels'), totalFeesElement = document.getElementById('totalFees'), totalCountElement = document.getElementById('totalCount');
-        const filteredCountElement = document.getElementById('filteredCount'), modalTitle = document.getElementById('modalTitle');
-        const dateInput = document.getElementById('date'), customerNameInput = document.getElementById('customerName'), parcelQuantityInput = document.getElementById('parcelQuantity'), kilometerInput = document.getElementById('kilometer'), kgInput = document.getElementById('kg'), door2doorFeeInput = document.getElementById('door2doorFee'), expressFeeInput = document.getElementById('expressFee'), petrolOilFeeInput = document.getElementById('petrolOilFee'), petrolCalcElement = document.getElementById('petrolCalc');
-        const filterStartDate = document.getElementById('filterStartDate'), filterEndDate = document.getElementById('filterEndDate'), filterCustomer = document.getElementById('filterCustomer'), applyFiltersBtn = document.getElementById('applyFiltersBtn'), clearFiltersBtn = document.getElementById('clearFiltersBtn'), activeFiltersElement = document.getElementById('activeFilters'), filterToggle = document.getElementById('filterToggle'), filterSection = document.getElementById('filterSection');
-
-        // Set today
-        const today = new Date().toISOString().split('T')[0];
-        dateInput.value = today;
-
-        // Event listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => initFirebase(), 1500);
-            addEntryBtn.addEventListener('click', openAddModal);
-            closeModalBtn.addEventListener('click', closeModal);
-            cancelBtn.addEventListener('click', closeModal);
-            saveBtn.addEventListener('click', saveEntry);
-            kilometerInput.addEventListener('input', updatePetrolCalculation);
-            applyFiltersBtn.addEventListener('click', applyFilters);
-            clearFiltersBtn.addEventListener('click', clearFilters);
-            filterToggle.addEventListener('click', toggleFilterSection);
-            modalOverlay.addEventListener('click', function(e) { if (e.target === modalOverlay) closeModal(); });
-            entryForm.addEventListener('keypress', e => { if (e.key === 'Enter') e.preventDefault(); });
-            updatePetrolCalculation();
-            handleSafeArea();
-            filterStartDate.addEventListener('change', applyFilters);
-            filterEndDate.addEventListener('change', applyFilters);
-            filterCustomer.addEventListener('input', applyFilters);
-            checkScreenSize();
-            window.addEventListener('resize', checkScreenSize);
+        // ========== Initialize AOS ==========
+        AOS.init({
+            once: false,
+            mirror: true,
+            offset: 50,
+            duration: 700,
+            easing: 'ease-in-out',
         });
 
-        // Helper functions
-        function showLoading(text = "Loading...") { loadingTextElement.textContent = text; loadingOverlay.classList.add('active'); }
-        function hideLoading() { loadingOverlay.classList.remove('active'); }
-        function showSuccessMessage(title = "Success!", subtext = "") { successTitleElement.textContent = title; successSubtextElement.textContent = subtext; successMessageElement.classList.add('active'); }
-        function closeSuccessMessage() { successMessageElement.classList.remove('active'); }
-        function showDeleteConfirmation() { deleteConfirmation.classList.add('active'); }
-        function closeDeleteConfirmation() { deleteConfirmation.classList.remove('active'); }
-        function showEditConfirmation() { editConfirmation.classList.add('active'); }
-        function closeEditConfirmation() { editConfirmation.classList.remove('active'); }
-        function showReceiptConfirmation(entryId) { receiptEntryId = entryId; receiptConfirmation.classList.add('active'); }
-        function cancelReceipt() { receiptConfirmation.classList.remove('active'); receiptEntryId = null; }
-        function showError(message, duration = 5000) { errorTextElement.textContent = message; errorMessageElement.classList.add('active'); setTimeout(() => errorMessageElement.classList.remove('active'), duration); }
-        function handleSafeArea() { const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream; document.documentElement.style.setProperty('--safe-area-inset-bottom', isIOS ? '20px' : '0px'); }
-        function toggleFilterSection() { filterSection.classList.toggle('active'); filterToggle.innerHTML = filterSection.classList.contains('active') ? '<i class="fas fa-filter"></i><span>Hide Filters</span>' : '<i class="fas fa-filter"></i><span>Show Filters</span>'; filterToggle.classList.toggle('active'); }
+        // ========== FALLING LEAVES ANIMATION ==========
+        (function() {
+            const container = document.getElementById('leavesContainer');
+            const leafEmojis = ['🍃', '🍂', '🍁', '🌿', '🍀', '🍃', '🍂', '🌱', '🍁', '🍃', '🌿', '🍂'];
+            const totalLeaves = 28;
 
-        function initFirebase() {
-            showLoading("Connecting to Firestore...");
-            try {
-                firebase.initializeApp(firebaseConfig);
-                db = firebase.firestore();
-                setupRealtimeListener();
-            } catch (error) { console.error(error); hideLoading(); showError("Firebase init failed."); }
-        }
+            function createLeaf() {
+                const leaf = document.createElement('span');
+                leaf.className = 'leaf';
+                leaf.textContent = leafEmojis[Math.floor(Math.random() * leafEmojis.length)];
+                leaf.setAttribute('aria-hidden', 'true');
 
-        function setupRealtimeListener() {
-            showLoading("Setting up real-time updates...");
-            try {
-                if (unsubscribe) unsubscribe();
-                unsubscribe = db.collection('entries').orderBy('createdAt', 'desc').onSnapshot(snapshot => { processSnapshot(snapshot); hideLoading(); }, error => { hideLoading(); showError("DB error: " + error.message); });
-            } catch (error) { console.error(error); hideLoading(); showError("Listener error."); }
-        }
+                // Random properties
+                const size = Math.floor(Math.random() * 18) + 16; // 16px - 34px
+                const leftPos = Math.random() * 100; // 0% - 100%
+                const duration = Math.random() * 10 + 10; // 10s - 20s
+                const delay = Math.random() * 15; // 0s - 15s stagger
+                const swayType = Math.random() > 0.5 ? 'fallLeaf' : 'fallLeafSway';
+                const opacityBase = Math.random() * 0.3 + 0.35; // 0.35 - 0.65
 
-        function processSnapshot(snapshot) {
-            entries = [];
-            snapshot.forEach(doc => { entries.push({ id: doc.id, ...doc.data() }); });
-            applyExistingFilters();
-            renderEntries();
-            updateStats();
-        }
+                leaf.style.fontSize = size + 'px';
+                leaf.style.left = leftPos + '%';
+                leaf.style.animationDuration = duration + 's';
+                leaf.style.animationDelay = delay + 's';
+                leaf.style.animationName = swayType;
+                leaf.style.opacity = opacityBase;
 
-        function updateActiveFiltersDisplay() {
-            activeFiltersElement.innerHTML = '';
-            Object.keys(activeFilters).forEach(key => {
-                if (activeFilters[key]) {
-                    let displayText = '';
-                    let value = activeFilters[key];
-                    if (key === 'startDate') displayText = `From: ${new Date(value).toLocaleDateString()}`;
-                    else if (key === 'endDate') displayText = `To: ${new Date(value).toLocaleDateString()}`;
-                    else if (key === 'customer') displayText = `Customer: ${value}`;
-                    const filterTag = document.createElement('div');
-                    filterTag.className = 'filter-tag';
-                    filterTag.innerHTML = `${displayText} <span class="close" onclick="removeFilter('${key}')"><i class="fas fa-times"></i></span>`;
-                    activeFiltersElement.appendChild(filterTag);
+                container.appendChild(leaf);
+
+                // Remove and recreate leaf after animation ends
+                const totalTime = (duration + delay) * 1000;
+                setTimeout(() => {
+                    if (leaf.parentNode) {
+                        leaf.remove();
+                        createLeaf();
+                    }
+                }, totalTime + 500);
+            }
+
+            // Create initial leaves
+            for (let i = 0; i < totalLeaves; i++) {
+                createLeaf();
+            }
+
+            // Periodically ensure we have enough leaves
+            setInterval(() => {
+                const currentLeaves = container.querySelectorAll('.leaf').length;
+                if (currentLeaves < totalLeaves - 5) {
+                    for (let i = 0; i < 8; i++) {
+                        createLeaf();
+                    }
+                }
+            }, 8000);
+
+            // Logo image fallback handling
+            window.addEventListener('load', () => {
+                const logo = document.querySelector('.splash-logo');
+                if (logo) {
+                    logo.style.opacity = '1';
+                    // If image fails to load from Google Drive, the onerror handler
+                    // will replace it with an inline SVG fallback
                 }
             });
-            isFilterActive = !!(activeFilters.startDate || activeFilters.endDate || activeFilters.customer);
-        }
-        function removeFilter(filterKey) { activeFilters[filterKey] = ''; document.getElementById(`filter${filterKey.charAt(0).toUpperCase()+filterKey.slice(1)}`).value = ''; applyExistingFilters(); }
-        function applyFilters() { activeFilters.startDate = filterStartDate.value; activeFilters.endDate = filterEndDate.value; activeFilters.customer = filterCustomer.value.trim(); applyExistingFilters(); if (window.innerWidth < 768) { filterSection.classList.remove('active'); filterToggle.innerHTML = '<i class="fas fa-filter"></i><span>Show Filters</span>'; filterToggle.classList.remove('active'); } }
-        function applyExistingFilters() {
-            if (!activeFilters.startDate && !activeFilters.endDate && !activeFilters.customer) {
-                filteredEntries = [...entries]; isFilterActive = false; filteredCountElement.textContent = 'Showing all entries';
-            } else {
-                filteredEntries = entries.filter(entry => {
-                    let matches = true;
-                    if (activeFilters.startDate && entry.date) {
-                        const entryDate = new Date(entry.date); entryDate.setHours(0,0,0,0);
-                        const startDate = new Date(activeFilters.startDate); startDate.setHours(0,0,0,0);
-                        if (entryDate < startDate) matches = false;
-                    }
-                    if (activeFilters.endDate && entry.date) {
-                        const entryDate = new Date(entry.date); entryDate.setHours(0,0,0,0);
-                        const endDate = new Date(activeFilters.endDate); endDate.setHours(23,59,59,999);
-                        if (entryDate > endDate) matches = false;
-                    }
-                    if (activeFilters.customer && entry.customerName && !entry.customerName.toLowerCase().includes(activeFilters.customer.toLowerCase())) matches = false;
-                    return matches;
-                });
-                isFilterActive = true;
-                filteredCountElement.textContent = `Showing ${filteredEntries.length} of ${entries.length} entries`;
-            }
-            updateActiveFiltersDisplay();
-            renderEntries();
-            updateStats();
-        }
-        function clearFilters() { filterStartDate.value = ''; filterEndDate.value = ''; filterCustomer.value = ''; activeFilters = { startDate: '', endDate: '', customer: '' }; applyExistingFilters(); }
-
-        function openAddModal() { if (isSaving) return; editingEntryId = null; modalTitle.textContent = 'Add New Entry'; entryForm.reset(); dateInput.value = today; updatePetrolCalculation(); document.querySelectorAll('#buseGateGroup input[type="checkbox"]').forEach(cb => cb.checked = false); door2doorFeeInput.value = ''; expressFeeInput.value = ''; petrolOilFeeInput.value = ''; modalOverlay.classList.add('active'); setTimeout(() => customerNameInput.focus(), 300); }
-        function openEditModal(entryId) { if (isSaving) return; const entry = entries.find(e => e.id === entryId); if (!entry) return; editingEntryId = entryId; modalTitle.textContent = 'Edit Entry'; dateInput.value = entry.date || today; customerNameInput.value = entry.customerName || ''; parcelQuantityInput.value = entry.parcelQuantity || 0; kilometerInput.value = entry.kilometer || 0; kgInput.value = entry.kg || 0; door2doorFeeInput.value = entry.door2doorFee || ''; expressFeeInput.value = entry.expressFee || ''; petrolOilFeeInput.value = entry.petrolOilFee || ''; updatePetrolCalculation(); document.querySelectorAll('#buseGateGroup input[type="checkbox"]').forEach(cb => cb.checked = false); if (entry.buseGate && Array.isArray(entry.buseGate)) entry.buseGate.forEach(gate => { let cb = document.querySelector(`#buseGateGroup input[value="${gate}"]`); if (cb) cb.checked = true; }); modalOverlay.classList.add('active'); }
-        function closeModal() { if (isSaving) return; modalOverlay.classList.remove('active'); }
-        function updatePetrolCalculation() { const km = parseFloat(kilometerInput.value) || 0; petrolCalcElement.textContent = `Petrol needed: ${(km/8).toFixed(2)} liters (8 km = 1 liter)`; }
-        function getSelectedBuseGates() { return Array.from(document.querySelectorAll('#buseGateGroup input:checked')).map(cb => cb.value); }
-        function setSaveButtonLoading(isLoading) { isSaving = isLoading; saveBtn.classList.toggle('loading', isLoading); saveBtn.disabled = isLoading; }
-
-        async function saveEntry() { if (!entryForm.checkValidity()) { entryForm.reportValidity(); return; } if (isSaving) return; setSaveButtonLoading(true); const door2doorFee = parseInt(door2doorFeeInput.value) || 0; const expressFee = parseInt(expressFeeInput.value) || 0; const petrolOilFee = parseInt(petrolOilFeeInput.value) || 0; const entryData = { date: dateInput.value, customerName: customerNameInput.value.trim(), parcelQuantity: parseInt(parcelQuantityInput.value) || 0, kilometer: parseInt(kilometerInput.value) || 0, kg: parseInt(kgInput.value) || 0, door2doorFee, expressFee, petrolOilFee, buseGate: getSelectedBuseGates(), petrolLiters: (parseInt(kilometerInput.value) || 0) / 8, totalFees: petrolOilFee, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }; if (!editingEntryId) entryData.createdAt = firebase.firestore.FieldValue.serverTimestamp(); try { if (editingEntryId) { await db.collection('entries').doc(editingEntryId).update(entryData); showSuccessMessage("Entry Updated!", "Changes saved."); } else { await db.collection('entries').add(entryData); showSuccessMessage("Entry Added!", "New entry added."); } setSaveButtonLoading(false); closeModal(); } catch (error) { setSaveButtonLoading(false); showError('Error: ' + error.message); } }
-
-        function renderEntries() {
-            const displayEntries = isFilterActive ? filteredEntries : entries;
-            if (displayEntries.length === 0) {
-                noDataElement.style.display = 'block'; entryList.innerHTML = ''; entryList.appendChild(noDataElement);
-                totalCountElement.textContent = isFilterActive ? 'No matching entries' : 'Total: 0 entries';
-                return;
-            }
-            noDataElement.style.display = 'none';
-            let entriesHTML = '';
-            displayEntries.forEach(entry => {
-                const dateDisplay = entry.date ? new Date(entry.date).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' }) : 'Not set';
-                const buseGateText = (entry.buseGate && Array.isArray(entry.buseGate)) ? entry.buseGate.join(', ') : 'No gates';
-                const truncatedGates = buseGateText.length > 30 ? buseGateText.substring(0,27)+'…' : buseGateText;
-                const petrolLiters = entry.kilometer ? (entry.kilometer/8).toFixed(2) : '0.00';
-                const totalFeesVal = entry.petrolOilFee || 0;
-                entriesHTML += `<div class="entry-item" data-id="${entry.id}" onmousedown="startLongPress('${entry.id}')" onmouseup="clearLongPress()" onmouseleave="clearLongPress()" ontouchstart="startLongPress('${entry.id}')" ontouchend="clearLongPress()" ontouchcancel="clearLongPress()">
-                    <div class="entry-details">
-                        <div class="detail-item"><div class="detail-label">Date</div><div class="detail-value">${dateDisplay}</div></div>
-                        <div class="detail-item"><div class="detail-label">Customer</div><div class="detail-value">${entry.customerName || 'N/A'}</div></div>
-                        <div class="detail-item"><div class="detail-label">Parcels</div><div class="detail-value">${entry.parcelQuantity || 0}</div></div>
-                        <div class="detail-item"><div class="detail-label">Distance</div><div class="detail-value">${entry.kilometer || 0} km</div></div>
-                        <div class="detail-item"><div class="detail-label">Petrol</div><div class="detail-value">${petrolLiters} L</div></div>
-                        <div class="detail-item"><div class="detail-label">Door2Door</div><div class="detail-value">${(entry.door2doorFee || 0).toLocaleString()} Ks</div></div>
-                        <div class="detail-item"><div class="detail-label">Express</div><div class="detail-value">${(entry.expressFee || 0).toLocaleString()} Ks</div></div>
-                        <div class="detail-item"><div class="detail-label">Petrol/Oil</div><div class="detail-value">${(entry.petrolOilFee || 0).toLocaleString()} Ks</div></div>
-                        <div class="detail-item"><div class="detail-label">Total Fees</div><div class="detail-value">${totalFeesVal.toLocaleString()} Ks</div></div>
-                        <div class="detail-item"><div class="detail-label">Bus Gates</div><div class="detail-value" title="${buseGateText}">${truncatedGates}</div></div>
-                    </div>
-                    <div class="entry-actions">
-                        <button class="receipt-btn" onclick="event.stopPropagation(); receiptEntryPrompt('${entry.id}')" title="Receipt"><i class="fas fa-receipt"></i></button>
-                        <button class="edit-btn" onclick="event.stopPropagation(); editEntry('${entry.id}')" title="Edit"><i class="fas fa-edit"></i></button>
-                        <button class="delete-btn" onclick="event.stopPropagation(); deleteEntryPrompt('${entry.id}')" title="Delete"><i class="fas fa-trash"></i></button>
-                    </div>
-                </div>`;
-            });
-            entryList.innerHTML = entriesHTML;
-            totalCountElement.textContent = `Total: ${displayEntries.length} ${isFilterActive ? 'filtered' : ''} entries`;
-        }
-
-        function updateStats() {
-            const displayEntries = isFilterActive ? filteredEntries : entries;
-            let totalMoney = 0, totalPetrol = 0, totalParcels = 0, totalFees = 0;
-            displayEntries.forEach(entry => {
-                totalMoney += (parseInt(entry.door2doorFee)||0) + (parseInt(entry.expressFee)||0);
-                totalPetrol += (parseInt(entry.kilometer)||0) / 8;
-                totalParcels += parseInt(entry.parcelQuantity)||0;
-                totalFees += parseInt(entry.petrolOilFee)||0;
-            });
-            totalMoneyElement.textContent = totalMoney.toLocaleString();
-            totalPetrolElement.textContent = totalPetrol.toFixed(2);
-            totalParcelsElement.textContent = totalParcels.toLocaleString();
-            totalFeesElement.textContent = totalFees.toLocaleString();
-        }
-
-        function startLongPress(entryId) { longPressTarget = entryId; longPressTimer = setTimeout(() => { editingEntryId = entryId; showEditConfirmation(); clearLongPress(); }, 1000); }
-        function clearLongPress() { if (longPressTimer) clearTimeout(longPressTimer); longPressTimer = null; }
-        function confirmEdit() { closeEditConfirmation(); if (editingEntryId) openEditModal(editingEntryId); }
-        function cancelEdit() { closeEditConfirmation(); editingEntryId = null; }
-        function deleteEntryPrompt(entryId) { deleteEntryId = entryId; showDeleteConfirmation(); }
-        function cancelDelete() { closeDeleteConfirmation(); deleteEntryId = null; }
-        async function confirmDelete() { if (!deleteEntryId) { closeDeleteConfirmation(); return; } closeDeleteConfirmation(); showLoading("Deleting..."); try { await db.collection('entries').doc(deleteEntryId).delete(); hideLoading(); showSuccessMessage("Deleted!", "Entry removed."); deleteEntryId = null; } catch (error) { hideLoading(); showError('Delete error: ' + error.message); deleteEntryId = null; } }
-        function editEntry(entryId) { editingEntryId = entryId; showEditConfirmation(); }
-        function receiptEntryPrompt(entryId) { showReceiptConfirmation(entryId); }
-
-        // ================== ENHANCED RECEIPT with visible watermark ==================
-        async function confirmReceipt() {
-            if (!receiptEntryId) { cancelReceipt(); return; }
-            const entry = entries.find(e => e.id === receiptEntryId);
-            if (!entry) { showError("Entry not found"); cancelReceipt(); return; }
-            cancelReceipt();
-            showLoading("Crafting elegant receipt...");
-            try {
-                await generateReceiptPDF(entry);
-                hideLoading();
-                showSuccessMessage("Receipt Ready", "Your beautiful PDF has been downloaded.");
-            } catch (error) {
-                hideLoading();
-                showError("PDF generation failed: " + error.message);
-            }
-        }
-
-        function generateReceiptPDF(entry) {
-            return new Promise((resolve, reject) => {
-                try {
-                    const { jsPDF } = window.jspdf;
-                    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a5' });
-                    const pageWidth = doc.internal.pageSize.getWidth();
-                    const pageHeight = doc.internal.pageSize.getHeight();
-
-                    // Soft background
-                    doc.setFillColor(250, 250, 252);
-                    doc.rect(0, 0, pageWidth, pageHeight, 'F');
-
-                    // ---- WATERMARK: VTP Myanmar (large, light gray, diagonal) ----
-                    doc.saveGraphicsState();
-                    doc.setGState(new doc.GState({ opacity: 0.15 }));
-                    doc.setTextColor(180, 180, 180);
-                    doc.setFontSize(42);
-                    doc.setFont('helvetica', 'bold');
-                    doc.text('VTP Myanmar', pageWidth/2, pageHeight/2, { align: 'center', angle: 35 });
-                    doc.restoreGraphicsState();
-
-                    // Decorative header band
-                    doc.setFillColor(67, 97, 238);
-                    doc.rect(0, 0, pageWidth, 22, 'F');
-                    doc.setTextColor(255, 255, 255);
-                    doc.setFontSize(14);
-                    doc.setFont('helvetica', 'bold');
-                    doc.text('VTP MYANMAR', 10, 15);
-                    doc.setFontSize(9);
-                    doc.setFont('helvetica', 'normal');
-                    doc.text('OFFICIAL RECEIPT', pageWidth-35, 15);
-
-                    // Main content card (white background with subtle border)
-                    doc.setFillColor(255, 255, 255);
-                    doc.setDrawColor(200, 200, 220);
-                    doc.setLineWidth(0.3);
-                    doc.roundedRect(8, 28, pageWidth-16, pageHeight-42, 3, 3, 'FD');
-
-                    // Title inside card
-                    doc.setTextColor(33, 33, 33);
-                    doc.setFontSize(13);
-                    doc.setFont('helvetica', 'bold');
-                    doc.text('PAYMENT RECEIPT', pageWidth/2, 40, { align: 'center' });
-
-                    // Decorative line under title
-                    doc.setDrawColor(67, 97, 238);
-                    doc.setLineWidth(0.7);
-                    doc.line(pageWidth/2-25, 43, pageWidth/2+25, 43);
-
-                    // Receipt details (two columns)
-                    doc.setFontSize(10);
-                    let y = 52;
-                    const col1 = 15;
-                    const col2 = 70;
-                    const lineH = 7;
-
-                    const addRow = (label, value) => {
-                        doc.setFont('helvetica', 'bold');
-                        doc.text(label, col1, y);
-                        doc.setFont('helvetica', 'normal');
-                        doc.text(value.toString(), col2, y);
-                        y += lineH;
-                    };
-
-                    addRow('Receipt ID:', `#${entry.id.slice(-8).toUpperCase()}`);
-                    addRow('Date:', entry.date || 'N/A');
-                    addRow('Customer:', entry.customerName || 'N/A');
-                    addRow('Parcel Qty:', entry.parcelQuantity || 0);
-                    addRow('Distance:', `${entry.kilometer || 0} km`);
-                    addRow('Weight:', `${entry.kg || 0} kg`);
-                    addRow('Door2Door Fee:', `${(entry.door2doorFee || 0).toLocaleString()} Ks`);
-                    addRow('Express Fee:', `${(entry.expressFee || 0).toLocaleString()} Ks`);
-                    addRow('Petrol/Oil Fee:', `${(entry.petrolOilFee || 0).toLocaleString()} Ks`);
-                    addRow('Total Fees:', `${(entry.petrolOilFee || 0).toLocaleString()} Ks`);
-                    addRow('Petrol (L):', ((entry.kilometer || 0) / 8).toFixed(2));
-
-                    // Bus gates (multiline)
-                    const gates = entry.buseGate ? entry.buseGate.join(', ') : '—';
-                    doc.setFont('helvetica', 'bold');
-                    doc.text('Bus Gates:', col1, y);
-                    doc.setFont('helvetica', 'normal');
-                    doc.text(gates, col2, y, { maxWidth: pageWidth - col2 - 15 });
-                    y += lineH * 2;
-
-                    // Footer line and thank you
-                    doc.setDrawColor(200, 200, 220);
-                    doc.line(15, y, pageWidth-15, y);
-                    y += 5;
-                    doc.setFontSize(9);
-                    doc.setTextColor(100, 100, 120);
-                    doc.setFont('helvetica', 'italic');
-                    doc.text('Thank you for your trust in VTP Myanmar.', pageWidth/2, y, { align: 'center' });
-
-                    doc.save(`VTP_Receipt_${entry.id.slice(-6)}.pdf`);
-                    resolve();
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        }
-
-        function checkScreenSize() {
-            if (window.innerWidth >= 768) { filterSection.classList.add('active'); filterToggle.style.display = 'none'; }
-            else { filterSection.classList.remove('active'); filterToggle.style.display = 'flex'; filterToggle.innerHTML = '<i class="fas fa-filter"></i><span>Show Filters</span>'; filterToggle.classList.remove('active'); }
-        }
-
-        // Expose globals
-        window.removeFilter = removeFilter;
-        window.startLongPress = startLongPress;
-        window.clearLongPress = clearLongPress;
-        window.confirmEdit = confirmEdit;
-        window.cancelEdit = cancelEdit;
-        window.editEntry = editEntry;
-        window.deleteEntryPrompt = deleteEntryPrompt;
-        window.cancelDelete = cancelDelete;
-        window.confirmDelete = confirmDelete;
-        window.receiptEntryPrompt = receiptEntryPrompt;
-        window.cancelReceipt = cancelReceipt;
-        window.confirmReceipt = confirmReceipt;
-        window.closeSuccessMessage = closeSuccessMessage;
-
-        // Extra animation keyframe for receipt card
-        const styleSheet = document.createElement("style");
-        styleSheet.textContent = `
-            @keyframes gentleBounce {
-                0% { transform: scale(0.9); opacity: 0; }
-                50% { transform: scale(1.05); opacity: 1; }
-                100% { transform: scale(1); opacity: 1; }
-            }
-        `;
-        document.head.appendChild(styleSheet);
+        })();
     </script>
 </body>
 </html>
