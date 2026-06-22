@@ -2,31 +2,25 @@
 <html lang="my">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>EFG International School · သုတေသနစာတမ်း</title>
-    <!-- AOS Animation CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Google Font for Burmese -->
-    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Noto+Sans+Myanmar:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EFG - Dagon Seikkan (1) Campus</title>
     <style>
         :root {
-            --leaf-green: #5b8c5a;
-            --leaf-light: #8db88b;
-            --gold: #c9a84c;
-            --cream: #fef9f0;
-            --soft-white: #ffffff;
-            --dark-green: #1e4a2c;
-            --medium-green: #2d5a2d;
-            --card-bg: #f8fdf8;
-            --accent: #e8c97a;
-            --text-dark: #2c3e2e;
-            --text-medium: #4a674a;
-            --shadow-soft: 0 8px 32px rgba(30, 74, 44, 0.08);
-            --shadow-card: 0 4px 20px rgba(30, 60, 30, 0.06);
-            --shadow-hover: 0 12px 36px rgba(30, 74, 44, 0.14);
-            --border-radius-lg: 28px;
-            --border-radius-md: 20px;
-            --border-radius-sm: 14px;
+            --gold: #c9a050;
+            --gold-light: #e0c878;
+            --gold-dark: #8b6914;
+            --cream: #fdf8f0;
+            --cream-dark: #f5edd8;
+            --warm-bg: #faf6ed;
+            --text-dark: #3d2e14;
+            --text-medium: #5c4425;
+            --card-bg: #fffef9;
+            --shadow-gold: rgba(139, 105, 20, 0.2);
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --font-elegant: 'Georgia', 'Times New Roman', 'Noto Serif Myanmar', serif;
+            --font-body: 'Segoe UI', 'Helvetica Neue', 'Noto Sans Myanmar', sans-serif;
+            --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         * {
@@ -35,19 +29,28 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Padauk', 'Noto Sans Myanmar', sans-serif;
-            background: linear-gradient(180deg, #f5f9f0 0%, #fef9f0 15%, #fdf6ea 40%, #fef9f0 70%, #f5f9f0 100%);
-            color: var(--text-dark);
-            line-height: 1.8;
-            overflow-x: hidden;
+        html {
             scroll-behavior: smooth;
-            position: relative;
-            min-height: 100vh;
+            font-size: 16px;
         }
 
-        /* ========== FALLING LEAVES CONTAINER ========== */
-        .leaves-container {
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(170deg, #fdf8f0 0%, #f7f0e0 25%, #faf3e6 50%, #f5ead5 75%, #fdf8f0 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* ============ BACKGROUND PARTICLES CONTAINER ============ */
+        #particlesContainer {
             position: fixed;
             top: 0;
             left: 0;
@@ -58,881 +61,1067 @@
             overflow: hidden;
         }
 
-        .leaf {
+        /* Falling Leaf */
+        .falling-leaf {
             position: absolute;
             top: -60px;
+            font-size: 1.4rem;
+            opacity: 0.75;
             pointer-events: none;
-            animation: fallLeaf linear infinite;
-            opacity: 0;
-            filter: blur(0.3px);
-            will-change: transform;
+            animation: leafFall linear infinite;
+            filter: drop-shadow(0 2px 4px rgba(139, 105, 20, 0.2));
+            z-index: 0;
         }
 
-        @keyframes fallLeaf {
+        @keyframes leafFall {
             0% {
-                transform: translateY(-10vh) rotate(0deg) translateX(0px);
-                opacity: 0;
-            }
-            5% {
-                opacity: 0.8;
+                transform: translateY(-60px) translateX(0px) rotate(0deg) scale(1);
+                opacity: 0.85;
             }
             15% {
-                opacity: 0.65;
+                transform: translateY(12vh) translateX(35px) rotate(55deg) scale(1.05);
+                opacity: 0.9;
             }
             30% {
-                opacity: 0.55;
+                transform: translateY(26vh) translateX(-25px) rotate(120deg) scale(0.9);
+                opacity: 0.8;
             }
-            50% {
+            45% {
+                transform: translateY(42vh) translateX(40px) rotate(190deg) scale(1.02);
+                opacity: 0.75;
+            }
+            60% {
+                transform: translateY(58vh) translateX(-35px) rotate(260deg) scale(0.88);
+                opacity: 0.7;
+            }
+            75% {
+                transform: translateY(74vh) translateX(30px) rotate(330deg) scale(0.95);
+                opacity: 0.6;
+            }
+            90% {
+                transform: translateY(90vh) translateX(-20px) rotate(380deg) scale(0.8);
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(105vh) translateX(15px) rotate(430deg) scale(0.7);
+                opacity: 0;
+            }
+        }
+
+        /* Sparkle */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--gold-light);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleFloat linear infinite;
+            box-shadow: 0 0 8px 2px rgba(224, 200, 120, 0.7), 0 0 16px 4px rgba(201, 160, 80, 0.4);
+            z-index: 0;
+        }
+
+        @keyframes sparkleFloat {
+            0% {
+                transform: translateY(0px) scale(0);
+                opacity: 0;
+            }
+            10% {
+                transform: translateY(-10px) scale(1.2);
+                opacity: 1;
+            }
+            40% {
+                transform: translateY(-60px) scale(0.6);
                 opacity: 0.7;
             }
             70% {
-                opacity: 0.45;
-            }
-            85% {
-                opacity: 0.55;
-            }
-            95% {
-                opacity: 0.15;
+                transform: translateY(-120px) scale(0.2);
+                opacity: 0.2;
             }
             100% {
-                transform: translateY(105vh) rotate(540deg) translateX(80px);
+                transform: translateY(-200px) scale(0);
                 opacity: 0;
             }
         }
 
-        /* Sway variation */
-        @keyframes fallLeafSway {
-            0% {
-                transform: translateY(-10vh) rotate(0deg) translateX(0px);
-                opacity: 0;
-            }
-            5% {
-                opacity: 0.75;
-            }
-            20% {
-                transform: translateY(20vh) rotate(90deg) translateX(60px);
-                opacity: 0.6;
-            }
-            40% {
-                transform: translateY(40vh) rotate(180deg) translateX(-40px);
-                opacity: 0.7;
-            }
-            60% {
-                transform: translateY(60vh) rotate(270deg) translateX(50px);
+        /* Firefly */
+        .firefly {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #ffe9a0 0%, #d4a840 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: fireflyDrift ease-in-out infinite;
+            box-shadow: 0 0 14px 6px rgba(255, 220, 130, 0.6), 0 0 25px 10px rgba(200, 150, 50, 0.3);
+            z-index: 0;
+        }
+
+        @keyframes fireflyDrift {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(0.8);
                 opacity: 0.5;
             }
-            80% {
-                transform: translateY(80vh) rotate(380deg) translateX(-30px);
-                opacity: 0.55;
+            25% {
+                transform: translate(30px, -40px) scale(1.3);
+                opacity: 1;
             }
-            95% {
-                opacity: 0.12;
+            50% {
+                transform: translate(-20px, -80px) scale(0.7);
+                opacity: 0.6;
             }
-            100% {
-                transform: translateY(105vh) rotate(540deg) translateX(70px);
-                opacity: 0;
+            75% {
+                transform: translate(25px, -50px) scale(1.1);
+                opacity: 0.9;
             }
         }
 
-        /* ========== SPLASH SCREEN ========== */
-        .splash {
-            position: relative;
+        /* ============ LOADING SCREEN ============ */
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            min-height: 100vh;
-            background: linear-gradient(160deg, #e8f0e3 0%, #f7f3e8 30%, #fef9f0 55%, #fdf6ea 80%, #e8f0e3 100%);
+            height: 100%;
+            background: linear-gradient(160deg, #fdf8f0 0%, #f5edd8 40%, #faf3e6 70%, #fdf8f0 100%);
+            z-index: 9999;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            z-index: 2;
-            isolation: isolate;
+            transition: opacity 0.7s ease, visibility 0.7s ease;
+            pointer-events: all;
         }
 
-        /* Subtle radial glow behind logo */
-        .splash::before {
+        #loadingScreen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loading-toys {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .loading-toy {
+            font-size: 3rem;
+            animation: toyBounce 0.7s ease-in-out infinite;
+            display: inline-block;
+            transition: transform 0.3s;
+            cursor: default;
+        }
+        .loading-toy:nth-child(1) {
+            animation-delay: 0s;
+        }
+        .loading-toy:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+        .loading-toy:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+        .loading-toy:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+        .loading-toy:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+        .loading-toy:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes toyBounce {
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+            25% {
+                transform: translateY(-28px) scale(1.15);
+            }
+            50% {
+                transform: translateY(0) scale(0.95);
+            }
+            75% {
+                transform: translateY(-12px) scale(1.05);
+            }
+        }
+
+        .loading-text {
+            font-family: var(--font-elegant);
+            font-size: 1.2rem;
+            color: var(--gold-dark);
+            letter-spacing: 2px;
+            animation: loadingPulse 1.5s ease-in-out infinite;
+            text-align: center;
+        }
+
+        @keyframes loadingPulse {
+            0%,
+            100% {
+                opacity: 0.5;
+                letter-spacing: 2px;
+            }
+            50% {
+                opacity: 1;
+                letter-spacing: 6px;
+            }
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .loading-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: dotBounce 0.6s ease-in-out infinite;
+        }
+        .loading-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+        .loading-dot:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+        .loading-dot:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes dotBounce {
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateY(-16px);
+                opacity: 1;
+            }
+        }
+
+        /* ============ MAIN CONTENT ============ */
+        #mainContent {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 820px;
+            margin: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            pointer-events: none;
+        }
+
+        #mainContent.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        .main-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px 32px 44px;
+            box-shadow: var(--shadow-soft), 0 0 0 1px rgba(201, 160, 80, 0.2), 0 20px 50px rgba(139, 105, 20, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: visible;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            transition: all var(--transition-smooth);
+        }
+
+        .main-card::before {
             content: '';
             position: absolute;
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(180, 210, 160, 0.45) 0%, transparent 70%);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-            animation: pulseGlow 4s ease-in-out infinite;
-        }
-
-        @keyframes pulseGlow {
-            0%,
-            100% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 0.5;
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.25);
-                opacity: 0.8;
-            }
-        }
-
-        .splash-bg-text {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 220%;
-            height: 100%;
-            display: flex;
-            align-items: center;
+            inset: -3px;
+            border-radius: 27px;
+            padding: 3px;
+            background: linear-gradient(135deg, #d4b060 0%, #f0d890 25%, #c9a050 50%, #e8cc78 75%, #b89430 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            opacity: 0.7;
             pointer-events: none;
-            opacity: 0.1;
-            font-weight: 700;
-            font-size: clamp(2.5rem, 7vw, 6rem);
-            white-space: nowrap;
-            animation: scrollText 22s linear infinite;
-            color: var(--dark-green);
-            z-index: 0;
-            letter-spacing: 4px;
         }
 
-        @keyframes scrollText {
-            0% {
-                transform: translateX(0%);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .splash-logo-wrapper {
-            z-index: 3;
-            position: relative;
-            margin-bottom: 1.2rem;
-        }
-
-        .splash-logo {
-            width: 170px;
-            height: auto;
-            border-radius: 50%;
-            animation: floatLogo 3.5s ease-in-out infinite;
-            filter: drop-shadow(0 12px 28px rgba(30, 74, 44, 0.2));
-            z-index: 3;
-            position: relative;
-            object-fit: contain;
-            background: rgba(255, 255, 255, 0.5);
-            padding: 4px;
-        }
-
-        @keyframes floatLogo {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-14px);
-            }
-            100% {
-                transform: translateY(0);
-            }
-        }
-
-        /* Sparkle ring */
-        .sparkle-ring {
+        .main-card::after {
+            content: '';
             position: absolute;
-            width: 200px;
-            height: 200px;
-            border: 2px dashed rgba(180, 200, 150, 0.5);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: spinRing 20s linear infinite;
+            inset: 8px;
+            border-radius: 20px;
+            border: 1px solid rgba(201, 160, 80, 0.18);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Ornate corner decorations */
+        .corner-decor {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            pointer-events: none;
             z-index: 2;
-            pointer-events: none;
+            opacity: 0.5;
+            font-size: 1.6rem;
+        }
+        .corner-decor.top-left {
+            top: 16px;
+            left: 18px;
+        }
+        .corner-decor.top-right {
+            top: 16px;
+            right: 18px;
+        }
+        .corner-decor.bottom-left {
+            bottom: 16px;
+            left: 18px;
+        }
+        .corner-decor.bottom-right {
+            bottom: 16px;
+            right: 18px;
         }
 
-        @keyframes spinRing {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
-        }
-
-        .splash-title {
-            z-index: 3;
-            font-size: 2.6rem;
-            font-weight: 700;
-            color: var(--dark-green);
-            text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.7);
-            margin-bottom: 0.3rem;
-            text-align: center;
-            letter-spacing: 2px;
-        }
-
-        .splash-sub {
-            z-index: 3;
-            font-size: 1.15rem;
-            color: #3b5e3b;
-            background: rgba(255, 255, 245, 0.75);
-            padding: 0.5rem 2.2rem;
-            border-radius: 40px;
-            letter-spacing: 1.5px;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(180, 200, 150, 0.4);
-            font-weight: 500;
-        }
-
-        .splash-footer {
-            position: absolute;
-            bottom: 28px;
-            z-index: 3;
-            font-size: 0.95rem;
-            color: #5b7b5b;
-            background: rgba(255, 255, 250, 0.7);
-            padding: 0.4rem 2rem;
-            border-radius: 30px;
-            backdrop-filter: blur(6px);
-            letter-spacing: 1px;
-            border: 1px solid rgba(180, 200, 150, 0.3);
-        }
-
-        /* ========== SCROLL HINT ========== */
-        .btn-scroll-hint {
-            display: flex;
-            justify-content: center;
-            margin-top: -50px;
-            z-index: 10;
+        /* Logo Container */
+        .logo-container {
             position: relative;
+            z-index: 1;
+            display: inline-block;
+            margin-bottom: 12px;
+            animation: logoEntrance 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            opacity: 0;
+            transform: scale(0.3);
         }
-        .scroll-down {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: white;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: bounceDown 2.2s infinite;
-            cursor: pointer;
-            font-size: 1.3rem;
-            color: var(--medium-green);
-            border: 2px solid rgba(150, 190, 140, 0.4);
-            transition: all 0.3s;
+        .logo-container.animate {
+            opacity: 1;
+            transform: scale(1);
         }
-        .scroll-down:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
-        }
-        @keyframes bounceDown {
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-12px);
+
+        @keyframes logoEntrance {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(-15deg);
             }
             60% {
-                transform: translateY(-6px);
+                opacity: 1;
+                transform: scale(1.08) rotate(3deg);
+            }
+            80% {
+                transform: scale(0.94) rotate(-1deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
             }
         }
 
-        /* ========== MAIN CONTENT ========== */
-        .container {
-            max-width: 1000px;
+        .logo-img {
+            max-width: 180px;
+            width: 100%;
+            height: auto;
+            display: block;
             margin: 0 auto;
-            padding: 3rem 1.5rem 1rem;
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-radius: 40px 40px 0 0;
-            margin-top: -2.5rem;
-            position: relative;
-            z-index: 5;
-            box-shadow: 0 -20px 50px rgba(30, 60, 30, 0.06);
-            border: 1px solid rgba(200, 220, 190, 0.35);
-            border-bottom: none;
+            filter: drop-shadow(0 4px 12px rgba(139, 105, 20, 0.25));
+            transition: transform var(--transition-smooth), filter var(--transition-smooth);
+        }
+        .logo-img:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 6px 20px rgba(139, 105, 20, 0.4));
         }
 
-        section {
-            margin-bottom: 3.5rem;
-            position: relative;
+        .logo-fallback {
+            display: none;
+            font-family: var(--font-elegant);
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--gold-dark);
+            letter-spacing: 6px;
+            text-shadow: 0 3px 8px rgba(139, 105, 20, 0.3);
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #fdf8f0, #f5edd8);
+            border-radius: 16px;
+            border: 2px solid var(--gold-light);
         }
 
-        h2 {
-            font-size: 1.9rem;
-            color: var(--dark-green);
-            border-left: 7px solid var(--leaf-green);
-            padding-left: 1.2rem;
-            margin-bottom: 1.4rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+        /* Campus Name */
+        .campus-name {
             position: relative;
-        }
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 1.2rem;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--leaf-light), transparent);
-            border-radius: 2px;
-        }
-
-        h3 {
-            font-size: 1.35rem;
-            color: var(--medium-green);
-            margin: 1.6rem 0 0.7rem;
-            font-weight: 600;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius-lg);
-            padding: 1.8rem 2rem;
-            margin: 1.2rem 0;
-            box-shadow: var(--shadow-card);
-            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border: 1px solid rgba(180, 205, 170, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--leaf-light), var(--gold));
-            border-radius: 3px 0 0 3px;
+            z-index: 1;
+            font-family: var(--font-elegant);
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin: 18px 0 8px;
+            letter-spacing: 1px;
             opacity: 0;
-            transition: opacity 0.35s;
+            transform: translateY(20px);
+            transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-shadow: 0 2px 4px rgba(139, 105, 20, 0.1);
         }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-            border-color: rgba(160, 200, 150, 0.5);
-        }
-        .card:hover::before {
+        .campus-name.animate {
             opacity: 1;
-        }
-        .card p {
-            margin-bottom: 0.6rem;
-        }
-        .card p:last-child {
-            margin-bottom: 0;
+            transform: translateY(0);
         }
 
-        /* ========== TABLE ========== */
-        .table-wrapper {
-            overflow-x: auto;
-            border-radius: var(--border-radius-md);
-            box-shadow: var(--shadow-soft);
-            margin: 1.2rem 0;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 500px;
-            background: white;
-        }
-        th {
-            background: linear-gradient(135deg, #2d5a2d, #1f4b2c);
-            color: white;
-            padding: 1rem 1.2rem;
-            font-weight: 600;
+        .campus-subtitle {
+            position: relative;
+            z-index: 1;
+            font-family: var(--font-body);
             font-size: 0.95rem;
-            letter-spacing: 0.5px;
-            text-align: left;
+            color: var(--text-medium);
+            margin-bottom: 28px;
+            letter-spacing: 1.5px;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s;
+            font-style: italic;
         }
-        td {
-            padding: 1rem 1.2rem;
-            background: #f8fdf8;
-            border-bottom: 1px solid #e0ece0;
-            transition: background 0.2s;
-        }
-        tr:hover td {
-            background: #edf7ed;
-        }
-        tr:last-child td {
-            border-bottom: none;
-        }
-        td:first-child {
-            font-weight: 600;
-            color: var(--medium-green);
-            text-align: center;
+        .campus-subtitle.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* ========== LEADERS GRID ========== */
-        .leaders-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-        .leader-item {
-            background: white;
-            border-radius: var(--border-radius-md);
-            padding: 1.3rem 0.9rem;
-            text-align: center;
-            box-shadow: var(--shadow-card);
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border: 1px solid rgba(180, 205, 170, 0.25);
+        /* Divider */
+        .elegant-divider {
             position: relative;
-            overflow: hidden;
-        }
-        .leader-item::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 20%;
-            width: 60%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--leaf-light), transparent);
-            border-radius: 2px;
+            z-index: 1;
+            width: 80%;
+            max-width: 400px;
+            height: 2px;
+            margin: 0 auto 30px;
+            background: linear-gradient(90deg, transparent, var(--gold-light) 20%, var(--gold) 50%, var(--gold-light) 80%, transparent);
+            border-radius: 50%;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.6s ease 0.3s;
         }
-        .leader-item:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
-            border-color: rgba(160, 200, 150, 0.5);
-        }
-        .leader-item:hover::after {
+        .elegant-divider.animate {
             opacity: 1;
         }
-        .leader-name {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--dark-green);
-            margin-bottom: 0.3rem;
-        }
-        .leader-role {
-            font-size: 0.85rem;
-            color: var(--text-medium);
-            line-height: 1.4;
-        }
 
-        /* ========== VIDEO ========== */
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: var(--border-radius-lg);
-            margin: 2rem 0;
-            box-shadow: var(--shadow-soft);
-            border: 3px solid rgba(180, 205, 170, 0.3);
-            background: #000;
-        }
-        .video-wrapper iframe {
+        .elegant-divider::after {
+            content: '◆';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: calc(var(--border-radius-lg) - 3px);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.7rem;
+            color: var(--gold);
+            background: var(--card-bg);
+            padding: 0 10px;
         }
 
-        /* ========== HIGHLIGHT BOX ========== */
-        .highlight-box {
-            background: linear-gradient(135deg, #fffdf5, #fff7e0);
-            border-left: 6px solid #e8c97a;
-            padding: 1.4rem 1.8rem;
-            border-radius: var(--border-radius-sm);
-            margin: 1.5rem 0;
-            font-style: normal;
-            box-shadow: 0 2px 12px rgba(180, 150, 80, 0.08);
-            line-height: 1.9;
-        }
-        .highlight-box strong {
-            color: #8b6914;
+        /* Buttons Container */
+        .buttons-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            align-items: stretch;
         }
 
-        /* ========== MOTTO ========== */
-        .motto {
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-align: center;
-            color: var(--dark-green);
-            margin: 1.8rem 0;
-            background: linear-gradient(135deg, #eaf7ea, #f1f9f1);
-            padding: 1.4rem;
-            border-radius: 30px;
-            letter-spacing: 2px;
-            border: 1px solid rgba(160, 200, 150, 0.4);
-            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6);
-            box-shadow: 0 4px 16px rgba(30, 74, 44, 0.05);
-        }
-
-        /* ========== FOOTER ========== */
-        footer {
-            text-align: center;
-            padding: 2.5rem 1.5rem;
-            color: var(--text-medium);
-            font-size: 0.9rem;
-            background: linear-gradient(180deg, #e5f0e5, #d8ead8);
-            border-radius: 0 0 30px 30px;
-            margin-top: 2rem;
+        /* Individual Button */
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 22px;
+            background: linear-gradient(135deg, #fffef9 0%, #fdf8f0 50%, #faf3e6 100%);
+            border: 1.5px solid rgba(201, 160, 80, 0.35);
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
             letter-spacing: 0.5px;
-            border-top: 1px solid rgba(160, 200, 150, 0.3);
+            transition: all var(--transition-bounce);
+            box-shadow: 0 3px 12px rgba(139, 105, 20, 0.07);
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            min-width: 150px;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(25px);
+        }
+        .nav-btn.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-btn:nth-child(1).animate {
+            transition-delay: 0.4s;
+        }
+        .nav-btn:nth-child(2).animate {
+            transition-delay: 0.5s;
+        }
+        .nav-btn:nth-child(3).animate {
+            transition-delay: 0.6s;
+        }
+        .nav-btn:nth-child(4).animate {
+            transition-delay: 0.7s;
+        }
+        .nav-btn:nth-child(5).animate {
+            transition-delay: 0.8s;
         }
 
-        /* ========== RESPONSIVE ========== */
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(224, 200, 120, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
+            z-index: 0;
+        }
+
+        .nav-btn:hover::before,
+        .nav-btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--gold);
+            box-shadow: 0 8px 28px rgba(139, 105, 20, 0.18), 0 0 0 4px rgba(201, 160, 80, 0.08);
+            transform: translateY(-4px);
+            background: linear-gradient(135deg, #ffffff 0%, #fefcf6 50%, #fdf8f0 100%);
+            color: #2a1e0a;
+        }
+        .nav-btn:active {
+            transform: translateY(-1px) scale(0.97);
+            box-shadow: 0 3px 10px rgba(139, 105, 20, 0.12);
+            transition: all 0.15s ease;
+        }
+
+        .btn-icon {
+            font-size: 1.5rem;
+            display: inline-block;
+            z-index: 1;
+            transition: transform var(--transition-bounce);
+            flex-shrink: 0;
+        }
+        .nav-btn:hover .btn-icon {
+            transform: scale(1.25) rotate(-8deg);
+        }
+
+        .btn-label {
+            z-index: 1;
+            position: relative;
+        }
+
+        /* Sparkle burst on hover */
+        .nav-btn .hover-spark {
+            position: absolute;
+            pointer-events: none;
+            z-index: 2;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        .nav-btn:hover .hover-spark.spark-1 {
+            opacity: 1;
+            top: -8px;
+            left: 15%;
+            animation: sparkPop 0.6s ease forwards;
+        }
+        .nav-btn:hover .hover-spark.spark-2 {
+            opacity: 1;
+            top: -6px;
+            right: 18%;
+            animation: sparkPop 0.6s ease 0.1s forwards;
+        }
+        .nav-btn:hover .hover-spark.spark-3 {
+            opacity: 1;
+            bottom: -4px;
+            left: 50%;
+            animation: sparkPop 0.6s ease 0.2s forwards;
+        }
+
+        @keyframes sparkPop {
+            0% {
+                transform: scale(0) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5) translateY(-18px);
+                opacity: 0;
+            }
+        }
+
+        /* ============ RESPONSIVE ============ */
         @media (max-width: 768px) {
-            .splash-logo {
-                width: 130px;
+            .main-card {
+                padding: 28px 16px 32px;
+                border-radius: 20px;
             }
-            .splash-title {
-                font-size: 2rem;
+            .main-card::before {
+                border-radius: 23px;
             }
-            .splash-sub {
-                font-size: 1rem;
-                padding: 0.4rem 1.5rem;
+            .main-card::after {
+                border-radius: 16px;
+                inset: 6px;
             }
-            h2 {
-                font-size: 1.5rem;
+            .logo-img {
+                max-width: 130px;
             }
-            .container {
-                padding: 2rem 1rem 0.5rem;
-                border-radius: 30px 30px 0 0;
+            .logo-fallback {
+                font-size: 2.4rem;
+                letter-spacing: 4px;
             }
-            .card {
-                padding: 1.3rem 1.2rem;
+            .campus-name {
+                font-size: 1.4rem;
+                margin: 12px 0 4px;
             }
-            .leaders-grid {
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                gap: 0.7rem;
+            .campus-subtitle {
+                font-size: 0.8rem;
+                margin-bottom: 20px;
             }
-            .leader-item {
-                padding: 1rem 0.6rem;
+            .nav-btn {
+                padding: 12px 16px;
+                font-size: 0.85rem;
+                border-radius: 40px;
+                min-width: 120px;
+                gap: 7px;
             }
-            .motto {
+            .btn-icon {
                 font-size: 1.3rem;
-                padding: 1rem;
             }
-            .sparkle-ring {
-                width: 150px;
-                height: 150px;
+            .buttons-container {
+                gap: 10px;
             }
-            .splash::before {
-                width: 250px;
-                height: 250px;
+            .corner-decor {
+                width: 22px;
+                height: 22px;
+                font-size: 1.1rem;
+            }
+            .corner-decor.top-left {
+                top: 10px;
+                left: 10px;
+            }
+            .corner-decor.top-right {
+                top: 10px;
+                right: 10px;
+            }
+            .corner-decor.bottom-left {
+                bottom: 10px;
+                left: 10px;
+            }
+            .corner-decor.bottom-right {
+                bottom: 10px;
+                right: 10px;
+            }
+            .elegant-divider {
+                margin-bottom: 22px;
+            }
+            .loading-toy {
+                font-size: 2.2rem;
+            }
+            .loading-text {
+                font-size: 1rem;
             }
         }
 
         @media (max-width: 480px) {
-            .splash-logo {
-                width: 110px;
+            .main-card {
+                padding: 20px 10px 24px;
+                border-radius: 16px;
             }
-            .splash-title {
+            .main-card::before {
+                border-radius: 18px;
+                inset: -2px;
+            }
+            .main-card::after {
+                border-radius: 12px;
+                inset: 4px;
+            }
+            .logo-img {
+                max-width: 100px;
+            }
+            .logo-fallback {
+                font-size: 1.8rem;
+                letter-spacing: 3px;
+                padding: 8px 14px;
+            }
+            .campus-name {
+                font-size: 1.15rem;
+                letter-spacing: 0.5px;
+            }
+            .campus-subtitle {
+                font-size: 0.7rem;
+                letter-spacing: 1px;
+            }
+            .nav-btn {
+                padding: 10px 13px;
+                font-size: 0.78rem;
+                border-radius: 35px;
+                min-width: 100px;
+                gap: 5px;
+            }
+            .btn-icon {
+                font-size: 1.1rem;
+            }
+            .buttons-container {
+                gap: 8px;
+            }
+            .corner-decor {
+                display: none;
+            }
+            .elegant-divider {
+                margin-bottom: 16px;
+                width: 90%;
+            }
+            .elegant-divider::after {
+                font-size: 0.55rem;
+                padding: 0 6px;
+            }
+            .loading-toy {
                 font-size: 1.6rem;
             }
-            .splash-sub {
+            .loading-toys {
+                gap: 10px;
+            }
+            .loading-text {
                 font-size: 0.85rem;
-                padding: 0.35rem 1.2rem;
+                letter-spacing: 1px;
             }
-            .splash-footer {
-                font-size: 0.8rem;
-                padding: 0.3rem 1.5rem;
+            body {
+                padding: 8px;
             }
-            h2 {
-                font-size: 1.3rem;
-                padding-left: 0.8rem;
+            #mainContent {
+                margin: 8px;
             }
-            .card {
-                padding: 1rem 0.9rem;
-                border-radius: var(--border-radius-sm);
+        }
+
+        @media (min-width: 1200px) {
+            .main-card {
+                padding: 50px 44px 54px;
+                border-radius: 28px;
             }
-            .leaders-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 0.5rem;
+            .logo-img {
+                max-width: 220px;
             }
-            .leader-item {
-                padding: 0.8rem 0.4rem;
-                border-radius: var(--border-radius-sm);
+            .campus-name {
+                font-size: 2.4rem;
             }
-            .leader-name {
-                font-size: 0.9rem;
+            .nav-btn {
+                padding: 16px 28px;
+                font-size: 1rem;
+                min-width: 170px;
             }
-            .leader-role {
-                font-size: 0.7rem;
+            .btn-icon {
+                font-size: 1.7rem;
             }
-            .motto {
-                font-size: 1.1rem;
+            .buttons-container {
+                gap: 18px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ========== FALLING LEAVES CONTAINER ========== -->
-    <div class="leaves-container" id="leavesContainer" aria-hidden="true"></div>
-
-    <!-- ========== SPLASH SCREEN ========== -->
-    <div class="splash">
-        <div class="splash-bg-text" aria-hidden="true">
-            EFG International School Research &nbsp; EFG International School Research &nbsp; EFG International School Research
+    <!-- ==================== LOADING SCREEN ==================== -->
+    <div id="loadingScreen" aria-hidden="false">
+        <div class="loading-toys">
+            <span class="loading-toy">🧸</span>
+            <span class="loading-toy">🐰</span>
+            <span class="loading-toy">🦊</span>
+            <span class="loading-toy">🐻</span>
+            <span class="loading-toy">🐼</span>
+            <span class="loading-toy">🐣</span>
         </div>
-
-        <!-- Sparkle ring around logo -->
-        <div class="splash-logo-wrapper">
-            <div class="sparkle-ring"></div>
-            <!-- EFG Logo from Google Drive -->
-            <img class="splash-logo"
-            src="https://drive.google.com/thumbnail?id=1ulAEI3WHLBPDrHtsRGtbQOvfxDXjPxnQ&sz=w400"
-            alt="EFG Logo"
-            loading="eager"
-            onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22180%22 height=%22180%22%3E%3Crect width=%22180%22 height=%22180%22 rx=%2290%22 fill=%22%23d4e9d6%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2224%22 font-weight=%22bold%22 fill=%22%232d5a2d%22%3EEFG%3C/text%3E%3C/svg%3E';">
+        <p class="loading-text">Please wait, Mr.Zion is loading...</p>
+        <div class="loading-dots">
+            <span class="loading-dot"></span>
+            <span class="loading-dot"></span>
+            <span class="loading-dot"></span>
         </div>
-
-        <div class="splash-title">မွှေးပျံ့ပန်းတိုင်</div>
-        <div class="splash-sub">Exude Fragrance Goal</div>
-        <div class="splash-footer">EFG Research by Tr. Zion</div>
     </div>
 
-    <!-- Scroll hint -->
-    <div class="btn-scroll-hint" data-aos="fade-up" data-aos-delay="700">
-        <div class="scroll-down" onclick="document.querySelector('.container').scrollIntoView({behavior:'smooth'});">↓</div>
+    <!-- ==================== BACKGROUND PARTICLES ==================== -->
+    <div id="particlesContainer" aria-hidden="true"></div>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <div id="mainContent">
+        <div class="main-card">
+            <!-- Ornate corner decorations -->
+            <span class="corner-decor top-left">✦</span>
+            <span class="corner-decor top-right">✦</span>
+            <span class="corner-decor bottom-left">✦</span>
+            <span class="corner-decor bottom-right">✦</span>
+
+            <!-- Logo -->
+            <div class="logo-container" id="logoContainer">
+                <img
+                class="logo-img"
+                id="efgLogo"
+                src="https://drive.google.com/uc?export=view&id=1wwepUptB-arMxRIOFL9wtaVeX6BEv5SZ"
+                alt="EFG Logo"
+                loading="eager"
+                onerror="this.style.display='none';document.getElementById('logoFallback').style.display='block';"
+                >
+                <div class="logo-fallback" id="logoFallback" style="display:none;">EFG</div>
+            </div>
+
+            <!-- Campus Name -->
+            <h1 class="campus-name" id="campusName">Dagon Seikkan (1) Campus</h1>
+            <p class="campus-subtitle" id="campusSubtitle">— EFG International  · Pre-School —</p>
+
+            <!-- Divider -->
+            <div class="elegant-divider" id="elegantDivider"></div>
+
+            <!-- Buttons -->
+            <div class="buttons-container" id="buttonsContainer">
+                <!-- Button 1: ALAUNG PHAYAR -->
+                <button class="nav-btn" onclick="navigateTo('https://canva.link/p9bm61nf9vluoeu')" aria-label="ALAUNG PHAYAR">
+                    <span class="hover-spark spark-1">✨</span>
+                    <span class="hover-spark spark-2">💫</span>
+                    <span class="hover-spark spark-3">⭐</span>
+                    <span class="btn-icon">🏛️</span>
+                    <span class="btn-label">ALAUNG PHAYAR</span>
+                </button>
+
+                <!-- Button 2: BANDULA -->
+                <button class="nav-btn" onclick="navigateTo('https://canva.link/uq937ngqqv0zf7u')" aria-label="BANDULA">
+                    <span class="hover-spark spark-1">✨</span>
+                    <span class="hover-spark spark-2">💫</span>
+                    <span class="hover-spark spark-3">⭐</span>
+                    <span class="btn-icon">🦁</span>
+                    <span class="btn-label">BANDULA</span>
+                </button>
+
+                <!-- Button 3: KYANSITTHAR -->
+                <button class="nav-btn" onclick="navigateTo('https://canva.link/zqyngeseknrp0yf')" aria-label="KYANSITTHAR">
+                    <span class="hover-spark spark-1">✨</span>
+                    <span class="hover-spark spark-2">💫</span>
+                    <span class="hover-spark spark-3">⭐</span>
+                    <span class="btn-icon">👑</span>
+                    <span class="btn-label">KYANSITTHAR</span>
+                </button>
+
+                <!-- Button 4: BAYINNAUNG -->
+                <button class="nav-btn" onclick="navigateTo('https://canva.link/zhsxhfqumh4guex')" aria-label="BAYINNAUNG">
+                    <span class="hover-spark spark-1">✨</span>
+                    <span class="hover-spark spark-2">💫</span>
+                    <span class="hover-spark spark-3">⭐</span>
+                    <span class="btn-icon">🐘</span>
+                    <span class="btn-label">BAYINNAUNG</span>
+                </button>
+
+                <!-- Button 5: AHNAWHTAR -->
+                <button class="nav-btn" onclick="navigateTo('https://canva.link/wwytzvghp6pjrsv')" aria-label="AHNAWHTAR">
+                    <span class="hover-spark spark-1">✨</span>
+                    <span class="hover-spark spark-2">💫</span>
+                    <span class="hover-spark spark-3">⭐</span>
+                    <span class="btn-icon">🐎</span>
+                    <span class="btn-label">AHNAWHTAR</span>
+                </button>
+            </div>
+        </div>
     </div>
 
-    <!-- ========== MAIN RESEARCH CONTENT ========== -->
-    <div class="container">
-
-        <!-- Video: Smiling Child -->
-        <section data-aos="fade-up" data-aos-duration="800" data-aos-once="false">
-            <div class="video-wrapper">
-                <iframe src="https://drive.google.com/file/d/1xCQnTGvDKvUuY9YZ6TEtlEwrgXy7XAwy/preview"
-                allow="autoplay; fullscreen"
-                allowfullscreen
-                title="ကလေးငယ်လေး ပြုံးပြနေပုံ"
-                loading="lazy"></iframe>
-            </div>
-            <p style="text-align:center; color:#5b7b5b; margin-top:0.6rem; font-size:0.95rem;">
-                ✨ ချစ်စရာကောင်းသော ကလေးငယ် — EFG မှ ပျော်ရွှင်မှုအပြည့် ✨
-            </p>
-        </section>
-
-        <!-- Introduction -->
-        <section data-aos="fade-right" data-aos-duration="800" data-aos-once="false">
-            <h2>ခြုံငုံလေ့လာသုံးသပ်ချက်</h2>
-            <div class="card">
-                <p><strong>EFG (Exude Fragrance Goal) “မွှေးပျံ့ပန်းတိုင်”</strong> ဟူသောအမည်ဖြင့် ၂၀၁၅ ခုနှစ်ဝန်းကျင်တွင် တာမွေမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး၌ ကိုယ်ပိုင်အထက်တန်းကျောင်းအဖြစ် စတင်ရပ်တည်ခဲ့သည်။ ၂၀၁၉ ခုနှစ်တွင် EFG International Preschool &amp; Learning Center ကို စစ်တောင်းအပိုင်း ၃၊ ယုဇနဥယျာဉ်မြို့တော်၌ စတင်ဖွင့်လှစ်ခဲ့ပြီး ယခုအခါ ချင်းတွင်းရိပ်မွန်အိမ်ရာသို့ ပင်မကျောင်းဆောင်ကြီး ပြောင်းရွှေ့ထားပါသည်။</p>
-                <p>EFG သည် ကလေးသူငယ်များ၏ ဘက်စုံဉာဏ်ရည်ဖွံ့ဖြိုးရေးကို ဦးတည်ကာ နိုင်ငံတကာအဆင့်မီ သင်ရိုးညွှန်းတမ်းများဖြင့် သင်ကြားပေးနေသည့် မူကြိုနှင့် အင်္ဂလိပ်စာသင်ကြားရေးစင်တာတစ်ခုဖြစ်သည်။</p>
-            </div>
-        </section>
-
-        <!-- Campus Locations -->
-        <section data-aos="fade-up" data-aos-duration="800" data-aos-once="false">
-            <h2>ကျောင်းခွဲများ တည်နေရာ</h2>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr><th>စဉ်</th><th>ကျောင်းခွဲအမည်</th><th>မှတ်ချက်</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>၁</td><td>ဒဂုံဆိပ်ကမ်း ကျောင်းခွဲ (၁)</td><td></td></tr>
-                        <tr><td>၂</td><td>ဒဂုံဆိပ်ကမ်း ကျောင်းခွဲ (၂)</td><td></td></tr>
-                        <tr><td>၃</td><td>မြောက်ဒဂုံ ကျောင်းခွဲ</td><td></td></tr>
-                        <tr><td>၄</td><td><strong>သန်လျင် ကျောင်းခွဲ</strong></td><td>၂၀၂၄ ဇန်နဝါရီ – တတိယမြောက်ကျောင်းခွဲအဖြစ် သန်လျင်မြို့ပတ်လမ်းတွင် အသစ်တိုးချဲ့ဖွင့်လှစ်</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Logo Philosophy -->
-        <section data-aos="fade-left" data-aos-duration="800" data-aos-once="false">
-            <h2>ကျောင်းအမှတ်တံဆိပ်၏ အဓိပ္ပာယ်</h2>
-            <div class="card">
-                <p><strong>🌳 သစ်ပင်ကြီး</strong> – ကျောင်းသည် ကလေးငယ်များ၏ ကြီးထွားမှုအတွက် အာဟာရပြည့်သော မြေဆီလွှာကောင်းတစ်ခု။</p>
-                <p><strong>🍃 အရောင်စုံအရွက်လေးများ</strong> – ကလေးတစ်ဦးချင်းစီ၏ မတူညီသော ထူးခြားသည့်အရည်အချင်းများ (Diversity) ကို ကိုယ်စားပြု။</p>
-                <p><strong>📚 စာအုပ်နှင့် ခဲတံ</strong> – ပညာရေး၏ အခြေခံအုတ်မြစ်၊ ကလေးတို့၏ စူးစမ်းလိုစိတ်နှင့် တီထွင်ဖန်တီးနိုင်စွမ်း (Creativity) ကို အမြဲရှင်သန်စေမည့် ကတိ။</p>
-                <p><strong>🧒👧 ပျော်ရွှင်နေသော ကလေးငယ်နှစ်ဦး</strong> – “ကလေး” သည် ဗဟိုချက်။ ပျော်ရွှင်စွာကစားရင်း သင်ယူခြင်း (Learning through Play) မှ ဖြစ်ပေါ်လာသော ဦးနှောက်ဖွံ့ဖြိုးမှုကို ဖော်ညွှန်း။</p>
-            </div>
-        </section>
-
-        <!-- Motto -->
-        <section data-aos="zoom-in" data-aos-duration="800" data-aos-once="false">
-            <div class="motto">
-                “We Can, We Care, We Learn”
-            </div>
-            <div class="highlight-box">
-                <strong>We Can (ငါတို့ လုပ်နိုင်တယ်)</strong> – ကလေးငယ်တိုင်း “ငါလုပ်နိုင်တယ်” ဆိုသည့် Growth Mindset ဖြင့် ယုံကြည်မှုရှိစေရန်။<br>
-                <strong>We Care (ငါတို့ ဂရုစိုက်တယ်)</strong> – စိတ်ခံစားမှု၊ ဘေးကင်းလုံခြုံမှုနှင့် ကိုယ်ချင်းစာတရားကို မိသားစုသဖွယ်ဂရုစိုက်။<br>
-                <strong>We Learn (ငါတို့ သင်ယူတယ်)</strong> – ကလေးရော ဆရာပါ အမြဲမပြတ်သင်ယူပြီး အကောင်းဆုံးရလဒ်ကို ဖော်ဆောင်။
-            </div>
-        </section>
-
-        <!-- Founder & Leaders -->
-        <section data-aos="fade-up" data-aos-duration="800" data-aos-once="false">
-            <h2>တည်ထောင်သူနှင့် ခေါင်းဆောင်များ</h2>
-            <p><strong>တည်ထောင်သူနှင့် မတည်ဒါရိုက်တာ – ဆရာကြီး ဦးကျော်ငြိမ်းသန့်</strong> (Founder &amp; Managing Director)။ ညီအကိုများဖြစ်သော ဘဘဦးသန့်ဇင်နှင့် ဘဘဦးထိန်လင်းတို့မှာ ရှယ်ယာဝင်များဖြစ်သည်။</p>
-            <h3>ကျောင်းအုပ်ကြီးများနှင့် အဓိကတာဝန်ရှိသူများ</h3>
-            <div class="leaders-grid">
-                <div class="leader-item"><div class="leader-name">Tr. May May</div><div class="leader-role">Principal</div></div>
-                <div class="leader-item"><div class="leader-name">Tr. Irin</div><div class="leader-role">Personal Assistant</div></div>
-                <div class="leader-item"><div class="leader-name">Tr. Niana</div><div class="leader-role">Coordinator / Thanlyin Asst. Principal</div></div>
-                <div class="leader-item"><div class="leader-name">Tr. Raymond</div><div class="leader-role">Manager / DS-1 Asst. Principal</div></div>
-                <div class="leader-item"><div class="leader-name">Tr. Chris</div><div class="leader-role">Subject Leader</div></div>
-                <div class="leader-item"><div class="leader-name">Tr. Treeza</div><div class="leader-role">Academic Manager</div></div>
-                <div class="leader-item"><div class="leader-name">Tr. George</div><div class="leader-role">Motivational Coach</div></div>
-                <div class="leader-item"><div class="leader-name">Tr. Isabella</div><div class="leader-role">Project Leader</div></div>
-                <div class="leader-item"><div class="leader-name">Tr. Joy</div><div class="leader-role">Class Teacher Coach</div></div>
-                <div class="leader-item"><div class="leader-name">Tr. Lynx</div><div class="leader-role">Exam Developer / ND Asst. Principal</div></div>
-                <div class="leader-item"><div class="leader-name">Tr. Lily</div><div class="leader-role">DS-2 Asst. Principal</div></div>
-                <div class="leader-item"><div class="leader-name">Tr. Phoenix</div><div class="leader-role">Assessor</div></div>
-            </div>
-        </section>
-
-        <!-- Male Teachers Role -->
-        <section data-aos="fade-right" data-aos-duration="800" data-aos-once="false">
-            <h2>အမျိုးသားဆရာများ၏ အခန်းကဏ္ဍ</h2>
-            <div class="card">
-                <p><strong>၁။ ကာယဗလနှင့် ကြမ်းတမ်းခက်ထန်သော ကစားနည်းများ</strong> – ကြွက်သားကြီးများဖွံ့ဖြိုးရန် အပြေးအလွှားကစားခြင်းများကို အတူပါဝင်ပေး။</p>
-                <p><strong>၂။ ဖခင်ကဲ့သို့ အားကိုးထိုက်သော Role Model</strong> – ကလေးများအတွက် ယုံကြည်မှု၊ တာဝန်ယူမှု စံပြပုဂ္ဂိုလ်။</p>
-                <p><strong>၃။ ကျား/မ ညီမျှမှုနှင့် မခွဲခြားတတ်စေရန်</strong> – “စာသင်တာဟာ အမျိုးသမီးတွေပဲလုပ်တဲ့အလုပ်” ဟူသော အမြင်ကို ဖျက်ထုတ်ပေး။</p>
-                <p><strong>၄။ စွန့်စားလိုစိတ်နှင့် ခံနိုင်ရည်ရှိမှု (Resilience)</strong> – “လုပ်ကြည့်၊ ပြုတ်ကျရင် ပြန်ထ” ဆိုသည့် စိန်ခေါ်မှုဖြင့် EQ ဖွံ့ဖြိုးစေ။</p>
-            </div>
-        </section>
-
-        <!-- Curriculum -->
-        <section data-aos="fade-left" data-aos-duration="800" data-aos-once="false">
-            <h2>သင်ရိုးညွှန်းတမ်း</h2>
-            <div class="table-wrapper">
-                <table>
-                    <tr><th>ဘာသာရပ်အုပ်စု</th><th>ဘာသာရပ်များ</th></tr>
-                    <tr><td>Major Subjects (၄ ခု)</td><td>Myanmar, English, Maths, Science</td></tr>
-                    <tr><td>IQ / EQ</td><td>Music &amp; Dance, IQ, EQ, IT</td></tr>
-                    <tr><td>Social Science</td><td>History, Geography, Fine Art, Health &amp; Fitness (၂၀၂၆ မှ Government Course)</td></tr>
-                    <tr><td>Minor Subjects (၂ ခု)</td><td>(ကျောင်းမှ ထပ်ဆောင်းသတ်မှတ်ထားသော ဘာသာရပ်များ)</td></tr>
-                </table>
-            </div>
-            <p style="margin-top:0.8rem;">Cambridge အခြေခံ Oxford သင်ရိုး၊ ကိုယ်ပိုင်သင်ရိုးများကို အသုံးပြုပြီး Primary 4 တွင် Pearson သင်ရိုးကိုလည်း ဖြည့်စွက်ထားသည်။</p>
-        </section>
-
-        <!-- Vision & Mission -->
-        <section data-aos="fade-up" data-aos-duration="800" data-aos-once="false">
-            <h2>မျှော်မှန်းချက်နှင့် လုပ်ငန်းစဉ်</h2>
-            <p><strong>Vision</strong> – မြန်မာနိုင်ငံရှိ ရှေးဦးအရွယ်ကလေးငယ်များကို နိုင်ငံတကာအဆင့်မီ အတွေးအခေါ်၊ အရည်အချင်းနှင့် စာရိတ္တကောင်းမွန်သော ခေါင်းဆောင်ငယ်များအဖြစ် ပေါ်ထွက်စေရန်။</p>
-            <p><strong>Mission</strong> – ပျော်ရွှင်ဘေးကင်းသော ပတ်ဝန်းကျင်၊ ခေတ်မီထောက်ကူပစ္စည်းများ၊ ကျွမ်းကျင်ဆရာများဖြင့် ကလေးများ၏ ဘက်စုံအရည်အသွေးကို အချိုးညီစွာ ဖွံ့ဖြိုးစေရန်။</p>
-        </section>
-
-        <!-- Student Plenary Festival -->
-        <section data-aos="fade-right" data-aos-duration="800" data-aos-once="false">
-            <h2>ထူးခြားသော လှုပ်ရှားမှုများ</h2>
-            <p><strong>ကျောင်းသားစုံညီပွဲတော် (Student Plenary Festival)</strong> – Sky Star Hotel ၌ နှစ်စဉ်ကျင်းပ၊ စင်မြင့်ထက်တွင် သီချင်းကပြခြင်း၊ ပြဇာတ်တိုများ ဖျော်ဖြေခြင်းဖြင့် Stage Courage ရရှိစေကာ ဆုချီးမြှင့်ခြင်းဖြင့် Positive Reinforcement ပေး။</p>
-            <p><strong>နွေရာသီသင်တန်းများ (Summer Camps)</strong> – ပြင်ပကလေးများပါ တက်ရောက်နိုင်သည့် အထူးစွမ်းရည်မြှင့်သင်တန်းများ။</p>
-        </section>
-
-        <!-- SWOT -->
-        <section data-aos="fade-up" data-aos-duration="800" data-aos-once="false">
-            <h2>SWOT ဆန်းစစ်ချက်</h2>
-            <div class="card">
-                <p><strong>✅ အားသာချက်များ</strong> – ထူးခြားသောအမှတ်တံဆိပ်၊ ဗျူဟာကျသောနေရာများ၊ ခေတ်မီအဆောက်အအုံ။</p>
-                <p><strong>⚠️ အားနည်းချက်များ</strong> – အထက်တန်းပညာရေးမရှိသေးခြင်း၊ ဆရာအရည်အသွေးထိန်းသိမ်းရန် လိုအပ်ချက်။</p>
-                <p><strong>🌱 အခွင့်အလမ်းများ</strong> – ဒစ်ဂျစ်တယ်နည်းပညာတိုးချဲ့ခြင်း၊ Summer Camp များချဲ့ထွင်ခြင်း။</p>
-                <p><strong>⚡ စိန်ခေါ်မှုများ</strong> – စီးပွားရေးဖောင်းပွမှု၊ ပြိုင်ဘက်အသစ်များ ပေါ်ထွက်လာခြင်း။</p>
-            </div>
-        </section>
-
-        <!-- Conclusion -->
-        <section data-aos="fade-up" data-aos-duration="800" data-aos-once="false">
-            <h2>နိဂုံးနှင့် အကြံပြုချက်များ</h2>
-            <p>EFG သည် မြန်မာနိုင်ငံ၏ ရှေးဦးအရွယ်ပညာရေးတွင် ခိုင်မာသောနေရာရရှိထားပြီး <strong>“မွှေးပျံ့ပန်းတိုင်”</strong> အယူအဆဖြင့် ကလေးတစ်ဦးချင်းစီ၏ အတွင်းစိတ်အလှကို ဖော်ထုတ်ပေးလျက်ရှိသည်။</p>
-            <p><strong>အကြံပြုချက်များ</strong><br>
-                ၁။ Middle School အထိ သင်ရိုးတိုးချဲ့ရန် ပြင်ဆင်ပါ။<br>
-                ၂။ ECCD၊ Child Psychology သင်တန်းများကို ဆရာများအား ပုံမှန်ပံ့ပိုးပါ။<br>
-            ၃။ မိဘများနှင့် ဒစ်ဂျစ်တယ်ဆက်သွယ်ရေးစနစ် တည်ဆောက်ပါ။</p>
-        </section>
-
-        <footer>
-            © ၂၀၂၆ EFG International Preschool &amp; Learning Centre · သုတေသနစာတမ်း by Tr. Zion
-        </footer>
-    </div>
-
-    <!-- AOS Animation JS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
-    </script>
     <script>
-        // ========== Initialize AOS ==========
-        AOS.init({
-            once: false,
-            mirror: true,
-            offset: 50,
-            duration: 700,
-            easing: 'ease-in-out',
-        });
-
-        // ========== FALLING LEAVES ANIMATION ==========
         (function() {
-            const container = document.getElementById('leavesContainer');
-            const leafEmojis = ['🍃', '🍂', '🍁', '🌿', '🍀', '🍃', '🍂', '🌱', '🍁', '🍃', '🌿', '🍂'];
-            const totalLeaves = 28;
+            // ============ DOM ELEMENTS ============
+            const loadingScreen = document.getElementById('loadingScreen');
+            const mainContent = document.getElementById('mainContent');
+            const particlesContainer = document.getElementById('particlesContainer');
+            const logoContainer = document.getElementById('logoContainer');
+            const campusName = document.getElementById('campusName');
+            const campusSubtitle = document.getElementById('campusSubtitle');
+            const elegantDivider = document.getElementById('elegantDivider');
+            const navBtns = document.querySelectorAll('.nav-btn');
+            const efgLogo = document.getElementById('efgLogo');
 
-            function createLeaf() {
-                const leaf = document.createElement('span');
-                leaf.className = 'leaf';
-                leaf.textContent = leafEmojis[Math.floor(Math.random() * leafEmojis.length)];
-                leaf.setAttribute('aria-hidden', 'true');
+            // ============ CREATE BACKGROUND PARTICLES ============
+            function createFallingLeaves() {
+                const leafEmojis = ['🍂', '🍃', '🌿', '🌸', '🍁', '🌺', '🪷', '💮'];
+                const count = 28;
 
-                // Random properties
-                const size = Math.floor(Math.random() * 18) + 16; // 16px - 34px
-                const leftPos = Math.random() * 100; // 0% - 100%
-                const duration = Math.random() * 10 + 10; // 10s - 20s
-                const delay = Math.random() * 15; // 0s - 15s stagger
-                const swayType = Math.random() > 0.5 ? 'fallLeaf' : 'fallLeafSway';
-                const opacityBase = Math.random() * 0.3 + 0.35; // 0.35 - 0.65
+                for (let i = 0; i < count; i++) {
+                    const leaf = document.createElement('span');
+                    leaf.classList.add('falling-leaf');
+                    leaf.textContent = leafEmojis[Math.floor(Math.random() * leafEmojis.length)];
+                    leaf.style.left = Math.random() * 95 + '%';
+                    leaf.style.fontSize = (Math.random() * 1.4 + 0.8) + 'rem';
+                    leaf.style.animationDuration = (Math.random() * 12 + 9) + 's';
+                    leaf.style.animationDelay = (Math.random() * 14) + 's';
+                    leaf.style.opacity = (Math.random() * 0.35 + 0.45);
+                    particlesContainer.appendChild(leaf);
+                }
+            }
 
-                leaf.style.fontSize = size + 'px';
-                leaf.style.left = leftPos + '%';
-                leaf.style.animationDuration = duration + 's';
-                leaf.style.animationDelay = delay + 's';
-                leaf.style.animationName = swayType;
-                leaf.style.opacity = opacityBase;
+            function createSparkles() {
+                const count = 22;
+                for (let i = 0; i < count; i++) {
+                    const sparkle = document.createElement('div');
+                    sparkle.classList.add('sparkle');
+                    sparkle.style.left = Math.random() * 94 + '%';
+                    sparkle.style.top = Math.random() * 90 + '%';
+                    sparkle.style.width = (Math.random() * 4 + 2) + 'px';
+                    sparkle.style.height = sparkle.style.width;
+                    sparkle.style.animationDuration = (Math.random() * 5 + 4) + 's';
+                    sparkle.style.animationDelay = (Math.random() * 7) + 's';
+                    particlesContainer.appendChild(sparkle);
+                }
+            }
 
-                container.appendChild(leaf);
+            function createFireflies() {
+                const count = 10;
+                for (let i = 0; i < count; i++) {
+                    const firefly = document.createElement('div');
+                    firefly.classList.add('firefly');
+                    firefly.style.left = Math.random() * 88 + '%';
+                    firefly.style.top = Math.random() * 80 + '%';
+                    firefly.style.animationDuration = (Math.random() * 8 + 6) + 's';
+                    firefly.style.animationDelay = (Math.random() * 6) + 's';
+                    particlesContainer.appendChild(firefly);
+                }
+            }
 
-                // Remove and recreate leaf after animation ends
-                const totalTime = (duration + delay) * 1000;
+            createFallingLeaves();
+            createSparkles();
+            createFireflies();
+
+            // ============ LOADING SEQUENCE ============
+            const LOADING_DURATION = 2800; // 2.8 seconds
+
+            function hideLoadingAndShowContent() {
+                // Hide loading screen
+                loadingScreen.classList.add('hidden');
+
+                // Show main content
                 setTimeout(() => {
-                    if (leaf.parentNode) {
-                        leaf.remove();
-                        createLeaf();
-                    }
-                }, totalTime + 500);
+                    mainContent.classList.add('visible');
+
+                    // Staggered animations
+                    requestAnimationFrame(() => {
+                        logoContainer.classList.add('animate');
+                    });
+
+                    setTimeout(() => {
+                        campusName.classList.add('animate');
+                    }, 250);
+
+                    setTimeout(() => {
+                        campusSubtitle.classList.add('animate');
+                    }, 400);
+
+                    setTimeout(() => {
+                        elegantDivider.classList.add('animate');
+                    }, 500);
+
+                    // Animate buttons
+                    navBtns.forEach((btn, index) => {
+                        setTimeout(() => {
+                            btn.classList.add('animate');
+                        }, 550 + index * 110);
+                    });
+                }, 150);
             }
 
-            // Create initial leaves
-            for (let i = 0; i < totalLeaves; i++) {
-                createLeaf();
-            }
-
-            // Periodically ensure we have enough leaves
-            setInterval(() => {
-                const currentLeaves = container.querySelectorAll('.leaf').length;
-                if (currentLeaves < totalLeaves - 5) {
-                    for (let i = 0; i < 8; i++) {
-                        createLeaf();
-                    }
+            // Start loading sequence
+            window.addEventListener('DOMContentLoaded', () => {
+                // Preload logo image
+                if (efgLogo && efgLogo.complete && efgLogo.naturalWidth > 0) {
+                    // Image already cached
                 }
-            }, 8000);
 
-            // Logo image fallback handling
-            window.addEventListener('load', () => {
-                const logo = document.querySelector('.splash-logo');
-                if (logo) {
-                    logo.style.opacity = '1';
-                    // If image fails to load from Google Drive, the onerror handler
-                    // will replace it with an inline SVG fallback
-                }
+                // Ensure minimum loading time for the cute animation
+                setTimeout(hideLoadingAndShowContent, LOADING_DURATION);
             });
+
+            // Fallback: if loading takes too long, show content anyway
+            const maxLoadingTimeout = setTimeout(() => {
+                if (!mainContent.classList.contains('visible')) {
+                    hideLoadingAndShowContent();
+                }
+            }, LOADING_DURATION + 2000);
+
+            // Clean up timeout if already loaded
+            const originalHide = hideLoadingAndShowContent;
+            hideLoadingAndShowContent = function() {
+                clearTimeout(maxLoadingTimeout);
+                originalHide();
+            };
+
+            // ============ NAVIGATION FUNCTION ============
+            window.navigateTo = function(url) {
+                // Add a subtle click feedback
+                if (navigator.vibrate) {
+                    navigator.vibrate(15);
+                }
+
+                // Open link in a new tab
+                const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+
+                // Fallback if popup blocked
+                if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+                    // Create a temporary anchor as fallback
+                    const tempLink = document.createElement('a');
+                    tempLink.href = url;
+                    tempLink.target = '_blank';
+                    tempLink.rel = 'noopener noreferrer';
+                    tempLink.style.display = 'none';
+                    document.body.appendChild(tempLink);
+                    tempLink.click();
+                    document.body.removeChild(tempLink);
+                }
+            };
+
+            // ============ KEYBOARD ACCESSIBILITY ============
+            navBtns.forEach((btn) => {
+                btn.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        btn.click();
+                    }
+                });
+            });
+
+            // ============ HANDLE LOGO IMAGE ERROR ============
+            if (efgLogo) {
+                efgLogo.addEventListener('error', function() {
+                    this.style.display = 'none';
+                    const fallback = document.getElementById('logoFallback');
+                    if (fallback) {
+                        fallback.style.display = 'block';
+                    }
+                });
+
+                // Check if image loaded already
+                if (efgLogo.complete && efgLogo.naturalWidth === 0) {
+                    efgLogo.style.display = 'none';
+                    const fallback = document.getElementById('logoFallback');
+                    if (fallback) {
+                        fallback.style.display = 'block';
+                    }
+                }
+            }
+
+            // ============ SERVICE WORKER REGISTRATION FOR OFFLINE CACHING (Optional) ============
+            // This ensures the page works smoothly even with slow connections
+            if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+                // Could register a service worker here for production
+                // For now, we rely on browser cache
+            }
+
+            console.log('✨ EFG - Dagon Seikkan (1) Campus | Ready');
+            console.log('🌿 ရှေးခေတ်မြန်မာ့ဂုဏ်ဆောင် · အစဉ်အလာခေတ်မီပညာရေး');
         })();
     </script>
 </body>
