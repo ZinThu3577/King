@@ -1,29 +1,82 @@
 <!DOCTYPE html>
-<html lang="my">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EFG - Dagon Seikkan (1) Campus</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EFG International · Luxury Events</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome 6 (Free Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
     <style>
+        /* ----- CSS Variables for Light/Dark Theme ----- */
         :root {
-            --gold: #c9a050;
-            --gold-light: #e0c878;
-            --gold-dark: #8b6914;
-            --cream: #fdf8f0;
-            --cream-dark: #f5edd8;
-            --warm-bg: #faf6ed;
-            --text-dark: #3d2e14;
-            --text-medium: #5c4425;
-            --card-bg: #fffef9;
-            --shadow-gold: rgba(139, 105, 20, 0.2);
-            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.06);
-            --font-elegant: 'Georgia', 'Times New Roman', 'Noto Serif Myanmar', serif;
-            --font-body: 'Segoe UI', 'Helvetica Neue', 'Noto Sans Myanmar', sans-serif;
-            --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            /* Light theme (default) */
+            --bg-body: #fcf8f2;
+            --bg-gradient-start: #fcf6ed;
+            --bg-gradient-end: #f5e6d3;
+            --bg-splash: #fcf8f2;
+            --text-primary: #2a2218;
+            --text-muted: #6b5d4b;
+            --card-bg: rgba(255, 252, 248, 0.70);
+            --card-border: rgba(201, 160, 58, 0.15);
+            --card-shadow: 0 40px 100px rgba(120, 80, 30, 0.08), 0 0 0 1px rgba(201, 160, 58, 0.08);
+            --btn-bg: rgba(255, 255, 255, 0.4);
+            --btn-border: rgba(201, 160, 58, 0.15);
+            --btn-text: #2a2218;
+            --btn-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            --social-bg: rgba(255, 255, 255, 0.3);
+            --social-border: rgba(201, 160, 58, 0.08);
+            --divider-color: rgba(201, 160, 58, 0.06);
+            --scrollbar-track: #fcf8f2;
+            --scrollbar-thumb: #c9a03a;
+            --gold: #c9a03a;
+            --gold-light: #e8c86a;
+            --gold-dark: #a8842e;
+            --gold-glow: #e4b84c;
+            --gold-gradient: linear-gradient(135deg, #c9a03a, #f5d77a, #c9a03a);
+            --gold-text: linear-gradient(135deg, #c9a03a, #e8c86a, #a8842e);
+            /* Blob colors for light mode */
+            --blob1: rgba(212, 175, 55, 0.15);
+            --blob2: rgba(230, 200, 120, 0.10);
+            --blob3: rgba(180, 150, 80, 0.08);
         }
 
-        * {
+        /* Dark theme */
+        [data-theme="dark"] {
+            --bg-body: #0f0c0a;
+            --bg-gradient-start: #161210;
+            --bg-gradient-end: #0f0c0a;
+            --bg-splash: #0f0c0a;
+            --text-primary: #f5f0eb;
+            --text-muted: #b8aea5;
+            --card-bg: rgba(20, 16, 14, 0.70);
+            --card-border: rgba(201, 160, 58, 0.10);
+            --card-shadow: 0 40px 100px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(201, 160, 58, 0.05);
+            --btn-bg: rgba(255, 255, 255, 0.04);
+            --btn-border: rgba(201, 160, 58, 0.10);
+            --btn-text: #f5f0eb;
+            --btn-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --social-bg: rgba(255, 255, 255, 0.04);
+            --social-border: rgba(201, 160, 58, 0.06);
+            --divider-color: rgba(201, 160, 58, 0.04);
+            --scrollbar-track: #0f0c0a;
+            --scrollbar-thumb: #a8842e;
+            /* Blob colors for dark mode */
+            --blob1: rgba(212, 175, 55, 0.12);
+            --blob2: rgba(200, 170, 100, 0.08);
+            --blob3: rgba(160, 130, 70, 0.06);
+        }
+
+        /* ----- RESET & BASE ----- */
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -31,1098 +84,936 @@
 
         html {
             scroll-behavior: smooth;
-            font-size: 16px;
         }
 
         body {
-            font-family: var(--font-body);
-            background: linear-gradient(170deg, #fdf8f0 0%, #f7f0e0 25%, #faf3e6 50%, #f5ead5 75%, #fdf8f0 100%);
-            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
+            padding: 1.5rem;
+            background: var(--bg-body);
             position: relative;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
-            -webkit-user-select: none;
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+            color: var(--text-primary);
         }
 
-        /* ============ BACKGROUND PARTICLES CONTAINER ============ */
-        #particlesContainer {
+        /* ===== ANIMATED BLUR BACKGROUND (Blobs) ===== */
+        .blob-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+            inset: 0;
             z-index: 0;
             overflow: hidden;
-        }
-
-        /* Falling Leaf */
-        .falling-leaf {
-            position: absolute;
-            top: -60px;
-            font-size: 1.4rem;
-            opacity: 0.75;
             pointer-events: none;
-            animation: leafFall linear infinite;
-            filter: drop-shadow(0 2px 4px rgba(139, 105, 20, 0.2));
-            z-index: 0;
         }
 
-        @keyframes leafFall {
-            0% {
-                transform: translateY(-60px) translateX(0px) rotate(0deg) scale(1);
-                opacity: 0.85;
-            }
-            15% {
-                transform: translateY(12vh) translateX(35px) rotate(55deg) scale(1.05);
-                opacity: 0.9;
-            }
-            30% {
-                transform: translateY(26vh) translateX(-25px) rotate(120deg) scale(0.9);
-                opacity: 0.8;
-            }
-            45% {
-                transform: translateY(42vh) translateX(40px) rotate(190deg) scale(1.02);
-                opacity: 0.75;
-            }
-            60% {
-                transform: translateY(58vh) translateX(-35px) rotate(260deg) scale(0.88);
-                opacity: 0.7;
-            }
-            75% {
-                transform: translateY(74vh) translateX(30px) rotate(330deg) scale(0.95);
-                opacity: 0.6;
-            }
-            90% {
-                transform: translateY(90vh) translateX(-20px) rotate(380deg) scale(0.8);
-                opacity: 0.4;
-            }
-            100% {
-                transform: translateY(105vh) translateX(15px) rotate(430deg) scale(0.7);
-                opacity: 0;
-            }
-        }
-
-        /* Sparkle */
-        .sparkle {
+        .blob {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--gold-light);
             border-radius: 50%;
-            pointer-events: none;
-            animation: sparkleFloat linear infinite;
-            box-shadow: 0 0 8px 2px rgba(224, 200, 120, 0.7), 0 0 16px 4px rgba(201, 160, 80, 0.4);
-            z-index: 0;
+            filter: blur(80px);
+            will-change: transform, opacity;
+            animation: floatBlob 20s ease-in-out infinite alternate;
+            transition: background 0.8s ease;
         }
 
-        @keyframes sparkleFloat {
+        .blob:nth-child(1) {
+            width: 500px;
+            height: 500px;
+            top: -10%;
+            left: -10%;
+            background: var(--blob1);
+            animation-duration: 22s;
+            animation-delay: 0s;
+        }
+
+        .blob:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            bottom: -5%;
+            right: -5%;
+            background: var(--blob2);
+            animation-duration: 26s;
+            animation-delay: -6s;
+        }
+
+        .blob:nth-child(3) {
+            width: 350px;
+            height: 350px;
+            top: 40%;
+            left: 50%;
+            background: var(--blob3);
+            animation-duration: 18s;
+            animation-delay: -12s;
+        }
+
+        .blob:nth-child(4) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            right: 20%;
+            background: var(--blob1);
+            animation-duration: 24s;
+            animation-delay: -8s;
+            opacity: 0.6;
+        }
+
+        .blob:nth-child(5) {
+            width: 250px;
+            height: 250px;
+            bottom: 20%;
+            left: 10%;
+            background: var(--blob2);
+            animation-duration: 28s;
+            animation-delay: -15s;
+            opacity: 0.5;
+        }
+
+        @keyframes floatBlob {
             0% {
-                transform: translateY(0px) scale(0);
-                opacity: 0;
-            }
-            10% {
-                transform: translateY(-10px) scale(1.2);
-                opacity: 1;
-            }
-            40% {
-                transform: translateY(-60px) scale(0.6);
-                opacity: 0.7;
-            }
-            70% {
-                transform: translateY(-120px) scale(0.2);
-                opacity: 0.2;
-            }
-            100% {
-                transform: translateY(-200px) scale(0);
-                opacity: 0;
-            }
-        }
-
-        /* Firefly */
-        .firefly {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: radial-gradient(circle, #ffe9a0 0%, #d4a840 40%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: fireflyDrift ease-in-out infinite;
-            box-shadow: 0 0 14px 6px rgba(255, 220, 130, 0.6), 0 0 25px 10px rgba(200, 150, 50, 0.3);
-            z-index: 0;
-        }
-
-        @keyframes fireflyDrift {
-            0%,
-            100% {
-                transform: translate(0, 0) scale(0.8);
-                opacity: 0.5;
+                transform: translate(0, 0) scale(1) rotate(0deg);
             }
             25% {
-                transform: translate(30px, -40px) scale(1.3);
-                opacity: 1;
+                transform: translate(60px, -80px) scale(1.1) rotate(5deg);
             }
             50% {
-                transform: translate(-20px, -80px) scale(0.7);
-                opacity: 0.6;
+                transform: translate(-40px, 60px) scale(0.9) rotate(-3deg);
             }
             75% {
-                transform: translate(25px, -50px) scale(1.1);
-                opacity: 0.9;
+                transform: translate(80px, 40px) scale(1.05) rotate(4deg);
+            }
+            100% {
+                transform: translate(-60px, -40px) scale(0.95) rotate(-5deg);
             }
         }
 
-        /* ============ LOADING SCREEN ============ */
-        #loadingScreen {
+        /* ===== SPLASH SCREEN ===== */
+        #splash {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(160deg, #fdf8f0 0%, #f5edd8 40%, #faf3e6 70%, #fdf8f0 100%);
+            inset: 0;
             z-index: 9999;
+            background: var(--bg-splash);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.7s ease, visibility 0.7s ease;
-            pointer-events: all;
+            transition: opacity 1.2s ease, visibility 1.2s ease, background 0.5s ease;
+            text-align: center;
+            padding: 2rem;
         }
 
-        #loadingScreen.hidden {
+        #splash.hidden {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
 
-        .loading-toys {
-            display: flex;
-            gap: 18px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 20px;
+        .splash-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 8vw, 5.8rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            transition: color 0.5s ease;
         }
 
-        .loading-toy {
-            font-size: 3rem;
-            animation: toyBounce 0.7s ease-in-out infinite;
-            display: inline-block;
-            transition: transform 0.3s;
-            cursor: default;
-        }
-        .loading-toy:nth-child(1) {
-            animation-delay: 0s;
-        }
-        .loading-toy:nth-child(2) {
-            animation-delay: 0.1s;
-        }
-        .loading-toy:nth-child(3) {
-            animation-delay: 0.2s;
-        }
-        .loading-toy:nth-child(4) {
-            animation-delay: 0.3s;
-        }
-        .loading-toy:nth-child(5) {
-            animation-delay: 0.4s;
-        }
-        .loading-toy:nth-child(6) {
-            animation-delay: 0.5s;
+        .splash-title .gold {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerGold 3s ease-in-out infinite alternate;
         }
 
-        @keyframes toyBounce {
-            0%,
-            100% {
-                transform: translateY(0) scale(1);
-            }
-            25% {
-                transform: translateY(-28px) scale(1.15);
-            }
-            50% {
-                transform: translateY(0) scale(0.95);
-            }
-            75% {
-                transform: translateY(-12px) scale(1.05);
-            }
-        }
-
-        .loading-text {
-            font-family: var(--font-elegant);
-            font-size: 1.2rem;
-            color: var(--gold-dark);
-            letter-spacing: 2px;
-            animation: loadingPulse 1.5s ease-in-out infinite;
-            text-align: center;
-        }
-
-        @keyframes loadingPulse {
-            0%,
-            100% {
-                opacity: 0.5;
-                letter-spacing: 2px;
-            }
-            50% {
-                opacity: 1;
-                letter-spacing: 6px;
-            }
-        }
-
-        .loading-dots {
-            display: flex;
-            gap: 8px;
-            margin-top: 12px;
-        }
-        .loading-dot {
-            width: 10px;
-            height: 10px;
-            background: var(--gold);
-            border-radius: 50%;
-            animation: dotBounce 0.6s ease-in-out infinite;
-        }
-        .loading-dot:nth-child(1) {
-            animation-delay: 0s;
-        }
-        .loading-dot:nth-child(2) {
-            animation-delay: 0.15s;
-        }
-        .loading-dot:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        @keyframes dotBounce {
-            0%,
-            100% {
-                transform: translateY(0);
-                opacity: 0.4;
-            }
-            50% {
-                transform: translateY(-16px);
-                opacity: 1;
-            }
-        }
-
-        /* ============ MAIN CONTENT ============ */
-        #mainContent {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 820px;
-            margin: 20px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            pointer-events: none;
-        }
-
-        #mainContent.visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: all;
-        }
-
-        .main-card {
-            background: var(--card-bg);
-            border-radius: 24px;
-            padding: 40px 32px 44px;
-            box-shadow: var(--shadow-soft), 0 0 0 1px rgba(201, 160, 80, 0.2), 0 20px 50px rgba(139, 105, 20, 0.1);
-            text-align: center;
-            position: relative;
-            overflow: visible;
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            transition: all var(--transition-smooth);
-        }
-
-        .main-card::before {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 27px;
-            padding: 3px;
-            background: linear-gradient(135deg, #d4b060 0%, #f0d890 25%, #c9a050 50%, #e8cc78 75%, #b89430 100%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            z-index: -1;
-            opacity: 0.7;
-            pointer-events: none;
-        }
-
-        .main-card::after {
-            content: '';
-            position: absolute;
-            inset: 8px;
-            border-radius: 20px;
-            border: 1px solid rgba(201, 160, 80, 0.18);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Ornate corner decorations */
-        .corner-decor {
-            position: absolute;
-            width: 32px;
-            height: 32px;
-            pointer-events: none;
-            z-index: 2;
-            opacity: 0.5;
-            font-size: 1.6rem;
-        }
-        .corner-decor.top-left {
-            top: 16px;
-            left: 18px;
-        }
-        .corner-decor.top-right {
-            top: 16px;
-            right: 18px;
-        }
-        .corner-decor.bottom-left {
-            bottom: 16px;
-            left: 18px;
-        }
-        .corner-decor.bottom-right {
-            bottom: 16px;
-            right: 18px;
-        }
-
-        /* Logo Container */
-        .logo-container {
-            position: relative;
-            z-index: 1;
-            display: inline-block;
-            margin-bottom: 12px;
-            animation: logoEntrance 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            opacity: 0;
-            transform: scale(0.3);
-        }
-        .logo-container.animate {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        @keyframes logoEntrance {
+        @keyframes shimmerGold {
             0% {
-                opacity: 0;
-                transform: scale(0.3) rotate(-15deg);
-            }
-            60% {
-                opacity: 1;
-                transform: scale(1.08) rotate(3deg);
-            }
-            80% {
-                transform: scale(0.94) rotate(-1deg);
+                background-position: 0% 50%;
             }
             100% {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
+                background-position: 200% 50%;
             }
         }
 
-        .logo-img {
-            max-width: 180px;
-            width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            filter: drop-shadow(0 4px 12px rgba(139, 105, 20, 0.25));
-            transition: transform var(--transition-smooth), filter var(--transition-smooth);
-        }
-        .logo-img:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 6px 20px rgba(139, 105, 20, 0.4));
+        .splash-sub {
+            font-size: clamp(1rem, 1.6vw, 1.5rem);
+            color: var(--text-muted);
+            font-weight: 300;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            opacity: 0.8;
+            transition: color 0.5s ease;
         }
 
-        .logo-fallback {
-            display: none;
-            font-family: var(--font-elegant);
-            font-size: 3.5rem;
-            font-weight: bold;
-            color: var(--gold-dark);
-            letter-spacing: 6px;
-            text-shadow: 0 3px 8px rgba(139, 105, 20, 0.3);
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #fdf8f0, #f5edd8);
-            border-radius: 16px;
-            border: 2px solid var(--gold-light);
-        }
-
-        /* Campus Name */
-        .campus-name {
+        .splash-loader {
+            margin-top: 3rem;
+            width: 70px;
+            height: 70px;
             position: relative;
-            z-index: 1;
-            font-family: var(--font-elegant);
-            font-size: 2rem;
-            color: var(--text-dark);
-            margin: 18px 0 8px;
-            letter-spacing: 1px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
-            text-shadow: 0 2px 4px rgba(139, 105, 20, 0.1);
-        }
-        .campus-name.animate {
-            opacity: 1;
-            transform: translateY(0);
         }
 
-        .campus-subtitle {
-            position: relative;
-            z-index: 1;
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            color: var(--text-medium);
-            margin-bottom: 28px;
-            letter-spacing: 1.5px;
-            opacity: 0;
-            transform: translateY(15px);
-            transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s;
-            font-style: italic;
-        }
-        .campus-subtitle.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Divider */
-        .elegant-divider {
-            position: relative;
-            z-index: 1;
-            width: 80%;
-            max-width: 400px;
-            height: 2px;
-            margin: 0 auto 30px;
-            background: linear-gradient(90deg, transparent, var(--gold-light) 20%, var(--gold) 50%, var(--gold-light) 80%, transparent);
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity 0.6s ease 0.3s;
-        }
-        .elegant-divider.animate {
-            opacity: 1;
-        }
-
-        .elegant-divider::after {
-            content: '◆';
+        .splash-loader::before {
+            content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 0.7rem;
-            color: var(--gold);
-            background: var(--card-bg);
-            padding: 0 10px;
+            inset: 0;
+            border-radius: 50%;
+            border: 2px solid rgba(201, 160, 58, 0.15);
+            border-top-color: var(--gold);
+            animation: spin 1.2s cubic-bezier(0.6, 0, 0.4, 1) infinite;
         }
 
-        /* Buttons Container */
-        .buttons-container {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            justify-content: center;
-            align-items: stretch;
+        .splash-loader::after {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border-radius: 50%;
+            border: 2px solid rgba(201, 160, 58, 0.05);
+            border-top-color: var(--gold-light);
+            animation: spin 1.8s cubic-bezier(0.6, 0, 0.4, 1) infinite reverse;
         }
 
-        /* Individual Button */
-        .nav-btn {
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .splash-line {
+            width: 140px;
+            height: 2px;
+            margin: 2.5rem auto 0;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            border-radius: 4px;
+            animation: expandLine 2.4s ease-in-out infinite alternate;
+        }
+
+        @keyframes expandLine {
+            0% {
+                transform: scaleX(0.3);
+                opacity: 0.2;
+            }
+            100% {
+                transform: scaleX(1);
+                opacity: 1;
+            }
+        }
+
+        /* ===== THEME TOGGLE BUTTON ===== */
+        .theme-toggle-wrapper {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 100;
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 14px 22px;
-            background: linear-gradient(135deg, #fffef9 0%, #fdf8f0 50%, #faf3e6 100%);
-            border: 1.5px solid rgba(201, 160, 80, 0.35);
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            letter-spacing: 0.5px;
-            transition: all var(--transition-bounce);
-            box-shadow: 0 3px 12px rgba(139, 105, 20, 0.07);
-            position: relative;
-            overflow: hidden;
-            white-space: nowrap;
-            text-decoration: none;
-            -webkit-tap-highlight-color: transparent;
-            outline: none;
-            min-width: 150px;
-            justify-content: center;
-            opacity: 0;
-            transform: translateY(25px);
-        }
-        .nav-btn.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .nav-btn:nth-child(1).animate {
-            transition-delay: 0.4s;
-        }
-        .nav-btn:nth-child(2).animate {
-            transition-delay: 0.5s;
-        }
-        .nav-btn:nth-child(3).animate {
-            transition-delay: 0.6s;
-        }
-        .nav-btn:nth-child(4).animate {
-            transition-delay: 0.7s;
-        }
-        .nav-btn:nth-child(5).animate {
-            transition-delay: 0.8s;
+            gap: 0.6rem;
         }
 
-        .nav-btn::before {
+        .theme-toggle {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 60px;
+            padding: 0.6rem 1.2rem;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: var(--card-shadow);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            border-color: var(--gold);
+        }
+
+        .theme-toggle .toggle-icon {
+            font-size: 1.1rem;
+            transition: transform 0.4s ease;
+        }
+
+        .theme-toggle:hover .toggle-icon {
+            transform: rotate(20deg);
+        }
+
+        /* ===== MAIN CONTENT WRAPPER ===== */
+        #main-content {
+            opacity: 0;
+            transition: opacity 1.6s ease 0.4s;
+            width: 100%;
+            max-width: 880px;
+            position: relative;
+            z-index: 2;
+        }
+
+        #main-content.visible {
+            opacity: 1;
+        }
+
+        /* ===== LUXURY CARD ===== */
+        .luxury-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(24px) saturate(1.6);
+            -webkit-backdrop-filter: blur(24px) saturate(1.6);
+            border-radius: 24px;
+            padding: 3rem 2.8rem;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.6s ease, transform 0.4s ease, background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .luxury-card:hover {
+            box-shadow: 0 50px 120px rgba(120, 80, 30, 0.06), 0 0 0 1px rgba(201, 160, 58, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Interactive glow on card */
+        .luxury-card::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(224, 200, 120, 0.3) 0%, transparent 70%);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.5s ease, height 0.5s ease;
+            inset: 0;
+            border-radius: 24px;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(212, 175, 55, 0.06), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
             z-index: 0;
         }
 
-        .nav-btn:hover::before,
-        .nav-btn:active::before {
-            width: 300px;
-            height: 300px;
+        .luxury-card:hover::before {
+            opacity: 1;
         }
 
-        .nav-btn:hover {
-            border-color: var(--gold);
-            box-shadow: 0 8px 28px rgba(139, 105, 20, 0.18), 0 0 0 4px rgba(201, 160, 80, 0.08);
-            transform: translateY(-4px);
-            background: linear-gradient(135deg, #ffffff 0%, #fefcf6 50%, #fdf8f0 100%);
-            color: #2a1e0a;
-        }
-        .nav-btn:active {
-            transform: translateY(-1px) scale(0.97);
-            box-shadow: 0 3px 10px rgba(139, 105, 20, 0.12);
-            transition: all 0.15s ease;
-        }
-
-        .btn-icon {
-            font-size: 1.5rem;
-            display: inline-block;
-            z-index: 1;
-            transition: transform var(--transition-bounce);
-            flex-shrink: 0;
-        }
-        .nav-btn:hover .btn-icon {
-            transform: scale(1.25) rotate(-8deg);
-        }
-
-        .btn-label {
-            z-index: 1;
+        .luxury-card>* {
             position: relative;
+            z-index: 1;
         }
 
-        /* Sparkle burst on hover */
-        .nav-btn .hover-spark {
+        /* Decorative gold corners */
+        .deco-corner {
             position: absolute;
+            width: 50px;
+            height: 50px;
             pointer-events: none;
-            z-index: 2;
-            font-size: 0.8rem;
+            opacity: 0.12;
+            z-index: 0;
+        }
+        .deco-corner-tl {
+            top: 15px;
+            left: 15px;
+            border-top: 1.5px solid var(--gold);
+            border-left: 1.5px solid var(--gold);
+        }
+        .deco-corner-tr {
+            top: 15px;
+            right: 15px;
+            border-top: 1.5px solid var(--gold);
+            border-right: 1.5px solid var(--gold);
+        }
+        .deco-corner-bl {
+            bottom: 15px;
+            left: 15px;
+            border-bottom: 1.5px solid var(--gold);
+            border-left: 1.5px solid var(--gold);
+        }
+        .deco-corner-br {
+            bottom: 15px;
+            right: 15px;
+            border-bottom: 1.5px solid var(--gold);
+            border-right: 1.5px solid var(--gold);
+        }
+
+        /* ===== LOGO SECTION ===== */
+        .logo-section {
+            text-align: center;
+            margin-bottom: 2.8rem;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        /* ===== LOGO IMAGE with HIGH GLOW EFFECT ===== */
+        .logo-img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(201, 160, 58, 0.2);
+            box-shadow: 
+                0 0 40px rgba(201, 160, 58, 0.15),
+                0 0 80px rgba(201, 160, 58, 0.08),
+                0 0 120px rgba(201, 160, 58, 0.04);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            background: var(--bg-body);
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05) rotate(-1deg);
+            box-shadow: 
+                0 0 60px rgba(201, 160, 58, 0.25),
+                0 0 120px rgba(201, 160, 58, 0.12),
+                0 0 180px rgba(201, 160, 58, 0.06);
+        }
+
+        .logo-img-fallback {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: var(--gold-gradient);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.2rem;
+            font-weight: 900;
+            font-family: 'Playfair Display', serif;
+            color: #2a2218;
+            border: 2px solid rgba(201, 160, 58, 0.15);
+            box-shadow: 0 0 60px rgba(201, 160, 58, 0.15);
+        }
+
+        .school-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-top: 0.2rem;
+            transition: color 0.5s ease;
+        }
+
+        .school-name .gold-text {
+            background: var(--gold-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .school-sub {
+            font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+            color: var(--text-muted);
+            font-weight: 300;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-top: -0.3rem;
+            opacity: 0.8;
+            transition: color 0.5s ease;
+        }
+
+        .divider-gold {
+            width: 100px;
+            height: 2px;
+            margin: 1rem auto 0;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            border-radius: 4px;
+        }
+
+        /* ===== EVENT BUTTONS ===== */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 2.5rem 0 2rem;
+        }
+
+        .event-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1rem 1.8rem;
+            background: var(--btn-bg);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--btn-border);
+            border-radius: 60px;
+            color: var(--btn-text);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--btn-shadow);
+        }
+
+        .event-btn .btn-icon {
+            color: var(--gold);
+            font-size: 1.3rem;
+            width: 1.8rem;
+            text-align: center;
+            filter: drop-shadow(0 0 6px rgba(201, 160, 58, 0.3));
+            transition: all 0.4s ease;
+        }
+
+        .event-btn .btn-text {
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--btn-text);
+            transition: color 0.3s ease;
+        }
+
+        .event-btn .btn-glow {
+            position: absolute;
+            inset: -50%;
+            background: radial-gradient(circle at center, rgba(201, 160, 58, 0.10), transparent 70%);
             opacity: 0;
-            transition: all 0.5s ease;
-        }
-        .nav-btn:hover .hover-spark.spark-1 {
-            opacity: 1;
-            top: -8px;
-            left: 15%;
-            animation: sparkPop 0.6s ease forwards;
-        }
-        .nav-btn:hover .hover-spark.spark-2 {
-            opacity: 1;
-            top: -6px;
-            right: 18%;
-            animation: sparkPop 0.6s ease 0.1s forwards;
-        }
-        .nav-btn:hover .hover-spark.spark-3 {
-            opacity: 1;
-            bottom: -4px;
-            left: 50%;
-            animation: sparkPop 0.6s ease 0.2s forwards;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
         }
 
-        @keyframes sparkPop {
-            0% {
-                transform: scale(0) translateY(0);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1.5) translateY(-18px);
-                opacity: 0;
-            }
+        .event-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            border-color: var(--gold);
+            background: var(--btn-bg);
+            box-shadow: 0 16px 50px rgba(201, 160, 58, 0.08);
         }
 
-        /* ============ RESPONSIVE ============ */
+        .event-btn:hover .btn-icon {
+            transform: translateX(4px) scale(1.15);
+            color: var(--gold);
+            filter: drop-shadow(0 0 15px rgba(201, 160, 58, 0.6)) drop-shadow(0 0 30px rgba(201, 160, 58, 0.2));
+        }
+
+        .event-btn:hover .btn-glow {
+            opacity: 1;
+        }
+
+        .event-btn:active {
+            transform: translateY(0px) scale(0.96);
+        }
+
+        /* ===== SOCIAL SECTION ===== */
+        .social-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--divider-color);
+            flex-wrap: wrap;
+            transition: border-color 0.5s ease;
+        }
+
+        .social-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--text-muted);
+            font-weight: 400;
+            opacity: 0.5;
+            transition: color 0.5s ease;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--social-bg);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--social-border);
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: var(--gold-gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .social-link i {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.4s ease, color 0.4s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.05);
+            border-color: var(--gold);
+            box-shadow: 0 16px 50px rgba(201, 160, 58, 0.06);
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        .social-link:hover i {
+            color: #2a2218;
+            transform: scale(1.1);
+        }
+
+        .social-link:active {
+            transform: translateY(0px) scale(0.95);
+        }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .main-card {
-                padding: 28px 16px 32px;
-                border-radius: 20px;
+            body {
+                padding: 1rem;
             }
-            .main-card::before {
-                border-radius: 23px;
+            .luxury-card {
+                padding: 2rem 1.5rem;
+                border-radius: 18px;
             }
-            .main-card::after {
-                border-radius: 16px;
-                inset: 6px;
+            .logo-img,
+            .logo-img-fallback {
+                width: 100px;
+                height: 100px;
             }
-            .logo-img {
-                max-width: 130px;
+            .events-grid {
+                grid-template-columns: 1fr;
+                gap: 0.9rem;
             }
-            .logo-fallback {
-                font-size: 2.4rem;
-                letter-spacing: 4px;
+            .event-btn {
+                padding: 0.9rem 1.2rem;
+                font-size: 0.95rem;
+                justify-content: center;
             }
-            .campus-name {
-                font-size: 1.4rem;
-                margin: 12px 0 4px;
+            .social-link {
+                width: 46px;
+                height: 46px;
+                font-size: 1.2rem;
             }
-            .campus-subtitle {
+            .deco-corner {
+                width: 30px;
+                height: 30px;
+            }
+            .splash-title {
+                font-size: clamp(2.4rem, 10vw, 3.4rem);
+            }
+            .theme-toggle-wrapper {
+                top: 1rem;
+                right: 1rem;
+            }
+            .theme-toggle {
+                padding: 0.4rem 0.9rem;
                 font-size: 0.8rem;
-                margin-bottom: 20px;
             }
-            .nav-btn {
-                padding: 12px 16px;
-                font-size: 0.85rem;
-                border-radius: 40px;
-                min-width: 120px;
-                gap: 7px;
+            /* Adjust blob sizes for mobile */
+            .blob {
+                filter: blur(60px);
             }
-            .btn-icon {
-                font-size: 1.3rem;
+            .blob:nth-child(1) {
+                width: 300px;
+                height: 300px;
             }
-            .buttons-container {
-                gap: 10px;
+            .blob:nth-child(2) {
+                width: 250px;
+                height: 250px;
             }
-            .corner-decor {
-                width: 22px;
-                height: 22px;
-                font-size: 1.1rem;
+            .blob:nth-child(3) {
+                width: 200px;
+                height: 200px;
             }
-            .corner-decor.top-left {
-                top: 10px;
-                left: 10px;
+            .blob:nth-child(4) {
+                width: 180px;
+                height: 180px;
             }
-            .corner-decor.top-right {
-                top: 10px;
-                right: 10px;
-            }
-            .corner-decor.bottom-left {
-                bottom: 10px;
-                left: 10px;
-            }
-            .corner-decor.bottom-right {
-                bottom: 10px;
-                right: 10px;
-            }
-            .elegant-divider {
-                margin-bottom: 22px;
-            }
-            .loading-toy {
-                font-size: 2.2rem;
-            }
-            .loading-text {
-                font-size: 1rem;
+            .blob:nth-child(5) {
+                width: 150px;
+                height: 150px;
             }
         }
 
         @media (max-width: 480px) {
-            .main-card {
-                padding: 20px 10px 24px;
-                border-radius: 16px;
+            .luxury-card {
+                padding: 1.5rem 1rem;
+                border-radius: 14px;
             }
-            .main-card::before {
-                border-radius: 18px;
-                inset: -2px;
+            .logo-img,
+            .logo-img-fallback {
+                width: 80px;
+                height: 80px;
             }
-            .main-card::after {
-                border-radius: 12px;
-                inset: 4px;
-            }
-            .logo-img {
-                max-width: 100px;
-            }
-            .logo-fallback {
-                font-size: 1.8rem;
-                letter-spacing: 3px;
-                padding: 8px 14px;
-            }
-            .campus-name {
-                font-size: 1.15rem;
-                letter-spacing: 0.5px;
-            }
-            .campus-subtitle {
-                font-size: 0.7rem;
-                letter-spacing: 1px;
-            }
-            .nav-btn {
-                padding: 10px 13px;
-                font-size: 0.78rem;
-                border-radius: 35px;
-                min-width: 100px;
-                gap: 5px;
-            }
-            .btn-icon {
-                font-size: 1.1rem;
-            }
-            .buttons-container {
-                gap: 8px;
-            }
-            .corner-decor {
-                display: none;
-            }
-            .elegant-divider {
-                margin-bottom: 16px;
-                width: 90%;
-            }
-            .elegant-divider::after {
-                font-size: 0.55rem;
-                padding: 0 6px;
-            }
-            .loading-toy {
+            .school-name {
                 font-size: 1.6rem;
             }
-            .loading-toys {
-                gap: 10px;
-            }
-            .loading-text {
+            .event-btn {
+                padding: 0.75rem 1rem;
                 font-size: 0.85rem;
-                letter-spacing: 1px;
+                gap: 0.5rem;
             }
-            body {
-                padding: 8px;
+            .event-btn .btn-icon {
+                font-size: 1.1rem;
+                width: 1.6rem;
             }
-            #mainContent {
-                margin: 8px;
+            .social-section {
+                gap: 1.2rem;
+            }
+            .theme-toggle-wrapper {
+                top: 0.8rem;
+                right: 0.8rem;
+            }
+            .theme-toggle {
+                padding: 0.3rem 0.7rem;
+                font-size: 0.7rem;
+                gap: 0.3rem;
+            }
+            .blob {
+                filter: blur(40px);
+            }
+            .blob:nth-child(1) {
+                width: 200px;
+                height: 200px;
+            }
+            .blob:nth-child(2) {
+                width: 180px;
+                height: 180px;
+            }
+            .blob:nth-child(3) {
+                width: 150px;
+                height: 150px;
+            }
+            .blob:nth-child(4) {
+                width: 120px;
+                height: 120px;
+            }
+            .blob:nth-child(5) {
+                width: 100px;
+                height: 100px;
             }
         }
 
-        @media (min-width: 1200px) {
-            .main-card {
-                padding: 50px 44px 54px;
-                border-radius: 28px;
-            }
-            .logo-img {
-                max-width: 220px;
-            }
-            .campus-name {
-                font-size: 2.4rem;
-            }
-            .nav-btn {
-                padding: 16px 28px;
-                font-size: 1rem;
-                min-width: 170px;
-            }
-            .btn-icon {
-                font-size: 1.7rem;
-            }
-            .buttons-container {
-                gap: 18px;
-            }
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold-dark);
         }
     </style>
 </head>
 <body>
 
-    <!-- ==================== LOADING SCREEN ==================== -->
-    <div id="loadingScreen" aria-hidden="false">
-        <div class="loading-toys">
-            <span class="loading-toy">🧸</span>
-            <span class="loading-toy">🐰</span>
-            <span class="loading-toy">🦊</span>
-            <span class="loading-toy">🐻</span>
-            <span class="loading-toy">🐼</span>
-            <span class="loading-toy">🐣</span>
-        </div>
-        <p class="loading-text">Please wait, Mr.Zion is loading...</p>
-        <div class="loading-dots">
-            <span class="loading-dot"></span>
-            <span class="loading-dot"></span>
-            <span class="loading-dot"></span>
+    <!-- ===== ANIMATED BLUR BACKGROUND (Blobs) ===== -->
+    <div class="blob-bg">
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+    </div>
+
+    <!-- ===== THEME TOGGLE (top-right) ===== -->
+    <div class="theme-toggle-wrapper">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <span class="toggle-icon" id="toggleIcon"><i class="fa-regular fa-moon"></i></span>
+            <span id="toggleLabel">Dark</span>
+        </button>
+    </div>
+
+    <!-- ===== SPLASH SCREEN ===== -->
+    <div id="splash" role="status" aria-label="Loading">
+        <div class="splash-content">
+            <div class="splash-title">
+                <span class="gold">EFG</span> International
+            </div>
+            <div class="splash-sub">Primary School &amp; Learning Center</div>
+            <div class="splash-loader"></div>
+            <div class="splash-line"></div>
         </div>
     </div>
 
-    <!-- ==================== BACKGROUND PARTICLES ==================== -->
-    <div id="particlesContainer" aria-hidden="true"></div>
+    <!-- ===== MAIN CONTENT ===== -->
+    <div id="main-content">
+        <div class="luxury-card" id="luxuryCard">
 
-    <!-- ==================== MAIN CONTENT ==================== -->
-    <div id="mainContent">
-        <div class="main-card">
-            <!-- Ornate corner decorations -->
-            <span class="corner-decor top-left">✦</span>
-            <span class="corner-decor top-right">✦</span>
-            <span class="corner-decor bottom-left">✦</span>
-            <span class="corner-decor bottom-right">✦</span>
+            <!-- Decorative Corners -->
+            <div class="deco-corner deco-corner-tl"></div>
+            <div class="deco-corner deco-corner-tr"></div>
+            <div class="deco-corner deco-corner-bl"></div>
+            <div class="deco-corner deco-corner-br"></div>
 
-            <!-- Logo -->
-            <div class="logo-container" id="logoContainer">
-                <img
-                class="logo-img"
-                id="efgLogo"
-                src="https://drive.google.com/uc?export=view&id=1wwepUptB-arMxRIOFL9wtaVeX6BEv5SZ"
-                alt="EFG Logo"
-                loading="eager"
-                onerror="this.style.display='none';document.getElementById('logoFallback').style.display='block';"
-                >
-                <div class="logo-fallback" id="logoFallback" style="display:none;">EFG</div>
+            <!-- LOGO & TITLE -->
+            <div class="logo-section">
+                <div class="logo-wrapper">
+                    <!-- Google Drive Image (Direct Link using File ID) -->
+                    <img
+                    class="logo-img"
+                    src="https://drive.google.com/uc?export=view&id=1wwepUptB-arMxRIOFL9wtaVeX6BEv5SZ"
+                    alt="EFG International Primary School Logo"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    loading="lazy"
+                    />
+                    <div class="logo-img-fallback">EFG</div>
+
+                    <h1 class="school-name">
+                        <span class="gold-text">EFG</span> International<br />Primary School
+                    </h1>
+                    <p class="school-sub">&amp; Learning Center</p>
+                    <div class="divider-gold"></div>
+                </div>
             </div>
 
-            <!-- Campus Name -->
-            <h1 class="campus-name" id="campusName">Dagon Seikkan (1) Campus</h1>
-            <p class="campus-subtitle" id="campusSubtitle">— EFG International  · Pre-School —</p>
-
-            <!-- Divider -->
-            <div class="elegant-divider" id="elegantDivider"></div>
-
-            <!-- Buttons -->
-            <div class="buttons-container" id="buttonsContainer">
-                <!-- Button 1: ALAUNG PHAYAR -->
-                <button class="nav-btn" onclick="navigateTo('https://canva.link/ra0ckbl58em8ket')" aria-label="ALAUNG PHAYAR">
-                    <span class="hover-spark spark-1">✨</span>
-                    <span class="hover-spark spark-2">💫</span>
-                    <span class="hover-spark spark-3">⭐</span>
-                    <span class="btn-icon">🏛️</span>
-                    <span class="btn-label">ALAUNG PHAYAR</span>
-                </button>
-
-                <!-- Button 2: BANDULA -->
-                <button class="nav-btn" onclick="navigateTo('https://canva.link/7twl6e926e8tsbf')" aria-label="BANDULA">
-                    <span class="hover-spark spark-1">✨</span>
-                    <span class="hover-spark spark-2">💫</span>
-                    <span class="hover-spark spark-3">⭐</span>
-                    <span class="btn-icon">🦁</span>
-                    <span class="btn-label">BANDULA</span>
-                </button>
-
-                <!-- Button 3: KYANSITTHAR -->
-                <button class="nav-btn" onclick="navigateTo('https://canva.link/0xtm63f4tjx6gb0')" aria-label="KYANSITTHAR">
-                    <span class="hover-spark spark-1">✨</span>
-                    <span class="hover-spark spark-2">💫</span>
-                    <span class="hover-spark spark-3">⭐</span>
-                    <span class="btn-icon">👑</span>
-                    <span class="btn-label">KYANSITTHAR</span>
-                </button>
-
-                <!-- Button 4: BAYINNAUNG -->
-                <button class="nav-btn" onclick="navigateTo('https://canva.link/ed5uvukw1xkn84q')" aria-label="BAYINNAUNG">
-                    <span class="hover-spark spark-1">✨</span>
-                    <span class="hover-spark spark-2">💫</span>
-                    <span class="hover-spark spark-3">⭐</span>
-                    <span class="btn-icon">🐘</span>
-                    <span class="btn-label">BAYINNAUNG</span>
-                </button>
-
-                <!-- Button 5: AHNAWHTAR -->
-                <button class="nav-btn" onclick="navigateTo('https://canva.link/wamhtl1xhvmu955')" aria-label="AHNAWHTAR">
-                    <span class="hover-spark spark-1">✨</span>
-                    <span class="hover-spark spark-2">💫</span>
-                    <span class="hover-spark spark-3">⭐</span>
-                    <span class="btn-icon">🐎</span>
-                    <span class="btn-label">AHNAWHTAR</span>
-                </button>
+            <!-- ===== EVENT BUTTONS ===== -->
+            <div class="events-grid">
+                <a href="https://canva.link/aa0wcmbrl2z7yr2" target="_blank" rel="noopener noreferrer" class="event-btn event-a">
+                    <span class="btn-glow"></span>
+                    <span class="btn-icon"><i class="fa-regular fa-calendar-alt"></i></span>
+                    <span class="btn-text">Event A</span>
+                </a>
+                <a href="https://canva.link/iiu4m9gj7ax6ver" target="_blank" rel="noopener noreferrer" class="event-btn event-b">
+                    <span class="btn-glow"></span>
+                    <span class="btn-icon"><i class="fa-regular fa-calendar-check"></i></span>
+                    <span class="btn-text">Event B</span>
+                </a>
+                <a href="https://canva.link/5vqynh3sgl1g26w" target="_blank" rel="noopener noreferrer" class="event-btn event-c">
+                    <span class="btn-glow"></span>
+                    <span class="btn-icon"><i class="fa-regular fa-calendar-plus"></i></span>
+                    <span class="btn-text">Event C</span>
+                </a>
             </div>
+
+            <!-- SOCIAL -->
+            <div class="social-section">
+                <span class="social-label">Connect</span>
+                <a href="https://www.facebook.com/share/1GHQoSwVPB/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+            </div>
+
         </div>
     </div>
 
+    <!-- ===== JAVASCRIPT ===== -->
     <script>
         (function() {
-            // ============ DOM ELEMENTS ============
-            const loadingScreen = document.getElementById('loadingScreen');
-            const mainContent = document.getElementById('mainContent');
-            const particlesContainer = document.getElementById('particlesContainer');
-            const logoContainer = document.getElementById('logoContainer');
-            const campusName = document.getElementById('campusName');
-            const campusSubtitle = document.getElementById('campusSubtitle');
-            const elegantDivider = document.getElementById('elegantDivider');
-            const navBtns = document.querySelectorAll('.nav-btn');
-            const efgLogo = document.getElementById('efgLogo');
+            'use strict';
 
-            // ============ CREATE BACKGROUND PARTICLES ============
-            function createFallingLeaves() {
-                const leafEmojis = ['🍂', '🍃', '🌿', '🌸', '🍁', '🌺', '🪷', '💮'];
-                const count = 28;
+            // ----- THEME TOGGLE -----
+            const toggleBtn = document.getElementById('themeToggle');
+            const toggleIcon = document.getElementById('toggleIcon');
+            const toggleLabel = document.getElementById('toggleLabel');
+            const html = document.documentElement;
 
-                for (let i = 0; i < count; i++) {
-                    const leaf = document.createElement('span');
-                    leaf.classList.add('falling-leaf');
-                    leaf.textContent = leafEmojis[Math.floor(Math.random() * leafEmojis.length)];
-                    leaf.style.left = Math.random() * 95 + '%';
-                    leaf.style.fontSize = (Math.random() * 1.4 + 0.8) + 'rem';
-                    leaf.style.animationDuration = (Math.random() * 12 + 9) + 's';
-                    leaf.style.animationDelay = (Math.random() * 14) + 's';
-                    leaf.style.opacity = (Math.random() * 0.35 + 0.45);
-                    particlesContainer.appendChild(leaf);
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', savedTheme);
+            updateToggleUI(savedTheme);
+
+            toggleBtn.addEventListener('click', function() {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateToggleUI(newTheme);
+            });
+
+            function updateToggleUI(theme) {
+                if (theme === 'dark') {
+                    toggleIcon.innerHTML = '<i class="fa-regular fa-sun"></i>';
+                    toggleLabel.textContent = 'Light';
+                } else {
+                    toggleIcon.innerHTML = '<i class="fa-regular fa-moon"></i>';
+                    toggleLabel.textContent = 'Dark';
                 }
             }
 
-            function createSparkles() {
-                const count = 22;
-                for (let i = 0; i < count; i++) {
-                    const sparkle = document.createElement('div');
-                    sparkle.classList.add('sparkle');
-                    sparkle.style.left = Math.random() * 94 + '%';
-                    sparkle.style.top = Math.random() * 90 + '%';
-                    sparkle.style.width = (Math.random() * 4 + 2) + 'px';
-                    sparkle.style.height = sparkle.style.width;
-                    sparkle.style.animationDuration = (Math.random() * 5 + 4) + 's';
-                    sparkle.style.animationDelay = (Math.random() * 7) + 's';
-                    particlesContainer.appendChild(sparkle);
-                }
-            }
+            // ----- SPLASH SCREEN -----
+            const splash = document.getElementById('splash');
+            const mainContent = document.getElementById('main-content');
 
-            function createFireflies() {
-                const count = 10;
-                for (let i = 0; i < count; i++) {
-                    const firefly = document.createElement('div');
-                    firefly.classList.add('firefly');
-                    firefly.style.left = Math.random() * 88 + '%';
-                    firefly.style.top = Math.random() * 80 + '%';
-                    firefly.style.animationDuration = (Math.random() * 8 + 6) + 's';
-                    firefly.style.animationDelay = (Math.random() * 6) + 's';
-                    particlesContainer.appendChild(firefly);
-                }
-            }
-
-            createFallingLeaves();
-            createSparkles();
-            createFireflies();
-
-            // ============ LOADING SEQUENCE ============
-            const LOADING_DURATION = 2800; // 2.8 seconds
-
-            function hideLoadingAndShowContent() {
-                // Hide loading screen
-                loadingScreen.classList.add('hidden');
-
-                // Show main content
-                setTimeout(() => {
+            function hideSplash() {
+                if (!splash.classList.contains('hidden')) {
+                    splash.classList.add('hidden');
                     mainContent.classList.add('visible');
-
-                    // Staggered animations
-                    requestAnimationFrame(() => {
-                        logoContainer.classList.add('animate');
-                    });
-
-                    setTimeout(() => {
-                        campusName.classList.add('animate');
-                    }, 250);
-
-                    setTimeout(() => {
-                        campusSubtitle.classList.add('animate');
-                    }, 400);
-
-                    setTimeout(() => {
-                        elegantDivider.classList.add('animate');
-                    }, 500);
-
-                    // Animate buttons
-                    navBtns.forEach((btn, index) => {
-                        setTimeout(() => {
-                            btn.classList.add('animate');
-                        }, 550 + index * 110);
-                    });
-                }, 150);
+                }
             }
 
-            // Start loading sequence
-            window.addEventListener('DOMContentLoaded', () => {
-                // Preload logo image
-                if (efgLogo && efgLogo.complete && efgLogo.naturalWidth > 0) {
-                    // Image already cached
-                }
+            // Auto hide after 3.2s
+            setTimeout(hideSplash, 3200);
 
-                // Ensure minimum loading time for the cute animation
-                setTimeout(hideLoadingAndShowContent, LOADING_DURATION);
+            // Skip splash on click / tap
+            splash.addEventListener('click', hideSplash);
+            splash.addEventListener('touchstart', hideSplash, { passive: true });
+
+            // Skip splash on Enter key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !splash.classList.contains('hidden')) {
+                    hideSplash();
+                }
             });
 
-            // Fallback: if loading takes too long, show content anyway
-            const maxLoadingTimeout = setTimeout(() => {
-                if (!mainContent.classList.contains('visible')) {
-                    hideLoadingAndShowContent();
-                }
-            }, LOADING_DURATION + 2000);
+            // ----- LUXURY CARD : MOUSE-FOLLOW GLOW -----
+            const card = document.getElementById('luxuryCard');
 
-            // Clean up timeout if already loaded
-            const originalHide = hideLoadingAndShowContent;
-            hideLoadingAndShowContent = function() {
-                clearTimeout(maxLoadingTimeout);
-                originalHide();
-            };
-
-            // ============ NAVIGATION FUNCTION ============
-            window.navigateTo = function(url) {
-                // Add a subtle click feedback
-                if (navigator.vibrate) {
-                    navigator.vibrate(15);
-                }
-
-                // Open link in a new tab
-                const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
-
-                // Fallback if popup blocked
-                if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-                    // Create a temporary anchor as fallback
-                    const tempLink = document.createElement('a');
-                    tempLink.href = url;
-                    tempLink.target = '_blank';
-                    tempLink.rel = 'noopener noreferrer';
-                    tempLink.style.display = 'none';
-                    document.body.appendChild(tempLink);
-                    tempLink.click();
-                    document.body.removeChild(tempLink);
-                }
-            };
-
-            // ============ KEYBOARD ACCESSIBILITY ============
-            navBtns.forEach((btn) => {
-                btn.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        btn.click();
-                    }
-                });
+            card.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                this.style.setProperty('--x', x + '%');
+                this.style.setProperty('--y', y + '%');
             });
 
-            // ============ HANDLE LOGO IMAGE ERROR ============
-            if (efgLogo) {
-                efgLogo.addEventListener('error', function() {
+            card.addEventListener('mouseleave', function() {
+                this.style.setProperty('--x', '50%');
+                this.style.setProperty('--y', '50%');
+            });
+
+            // ----- LOGO FALLBACK -----
+            const logoImg = document.querySelector('.logo-img');
+            const fallback = document.querySelector('.logo-img-fallback');
+            if (logoImg) {
+                logoImg.addEventListener('error', function() {
                     this.style.display = 'none';
-                    const fallback = document.getElementById('logoFallback');
-                    if (fallback) {
-                        fallback.style.display = 'block';
-                    }
+                    if (fallback) fallback.style.display = 'flex';
                 });
-
-                // Check if image loaded already
-                if (efgLogo.complete && efgLogo.naturalWidth === 0) {
-                    efgLogo.style.display = 'none';
-                    const fallback = document.getElementById('logoFallback');
-                    if (fallback) {
-                        fallback.style.display = 'block';
-                    }
-                }
             }
 
-            // ============ SERVICE WORKER REGISTRATION FOR OFFLINE CACHING (Optional) ============
-            // This ensures the page works smoothly even with slow connections
-            if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
-                // Could register a service worker here for production
-                // For now, we rely on browser cache
-            }
+            // ----- BUTTON TACTILE FEEDBACK -----
+            const btns = document.querySelectorAll('.event-btn, .social-link');
+            btns.forEach(function(btn) {
+                btn.addEventListener('mousedown', function() {
+                    this.style.transition = 'transform 0.08s ease';
+                    this.style.transform = 'scale(0.96)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 120);
+                });
+            });
 
-            console.log('✨ EFG - Dagon Seikkan (1) Campus | Ready');
-            console.log('🌿 ရှေးခေတ်မြန်မာ့ဂုဏ်ဆောင် · အစဉ်အလာခေတ်မီပညာရေး');
+            // ----- CONSOLE GREETING -----
+            console.log('%c✦ EFG International ✦', 'font-size:22px; font-weight:700; color:#c9a03a;');
+            console.log('%cA radiant luxury experience.', 'font-size:14px; color:#6b5d4b;');
+
         })();
     </script>
+
 </body>
 </html>
