@@ -3,1017 +3,1123 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EFG International · Luxury Events</title>
-
-    <!-- Google Fonts -->
+    <title>EFG International Primary School</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-    <!-- Font Awesome 6 (Free Icons) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <style>
-        /* ----- CSS Variables for Light/Dark Theme ----- */
-        :root {
-            /* Light theme (default) */
-            --bg-body: #fcf8f2;
-            --bg-gradient-start: #fcf6ed;
-            --bg-gradient-end: #f5e6d3;
-            --bg-splash: #fcf8f2;
-            --text-primary: #2a2218;
-            --text-muted: #6b5d4b;
-            --card-bg: rgba(255, 252, 248, 0.70);
-            --card-border: rgba(201, 160, 58, 0.15);
-            --card-shadow: 0 40px 100px rgba(120, 80, 30, 0.08), 0 0 0 1px rgba(201, 160, 58, 0.08);
-            --btn-bg: rgba(255, 255, 255, 0.4);
-            --btn-border: rgba(201, 160, 58, 0.15);
-            --btn-text: #2a2218;
-            --btn-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-            --social-bg: rgba(255, 255, 255, 0.3);
-            --social-border: rgba(201, 160, 58, 0.08);
-            --divider-color: rgba(201, 160, 58, 0.06);
-            --scrollbar-track: #fcf8f2;
-            --scrollbar-thumb: #c9a03a;
-            --gold: #c9a03a;
-            --gold-light: #e8c86a;
-            --gold-dark: #a8842e;
-            --gold-glow: #e4b84c;
-            --gold-gradient: linear-gradient(135deg, #c9a03a, #f5d77a, #c9a03a);
-            --gold-text: linear-gradient(135deg, #c9a03a, #e8c86a, #a8842e);
-            /* Blob colors for light mode */
-            --blob1: rgba(212, 175, 55, 0.15);
-            --blob2: rgba(230, 200, 120, 0.10);
-            --blob3: rgba(180, 150, 80, 0.08);
-        }
-
-        /* Dark theme */
-        [data-theme="dark"] {
-            --bg-body: #0f0c0a;
-            --bg-gradient-start: #161210;
-            --bg-gradient-end: #0f0c0a;
-            --bg-splash: #0f0c0a;
-            --text-primary: #f5f0eb;
-            --text-muted: #b8aea5;
-            --card-bg: rgba(20, 16, 14, 0.70);
-            --card-border: rgba(201, 160, 58, 0.10);
-            --card-shadow: 0 40px 100px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(201, 160, 58, 0.05);
-            --btn-bg: rgba(255, 255, 255, 0.04);
-            --btn-border: rgba(201, 160, 58, 0.10);
-            --btn-text: #f5f0eb;
-            --btn-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            --social-bg: rgba(255, 255, 255, 0.04);
-            --social-border: rgba(201, 160, 58, 0.06);
-            --divider-color: rgba(201, 160, 58, 0.04);
-            --scrollbar-track: #0f0c0a;
-            --scrollbar-thumb: #a8842e;
-            /* Blob colors for dark mode */
-            --blob1: rgba(212, 175, 55, 0.12);
-            --blob2: rgba(200, 170, 100, 0.08);
-            --blob3: rgba(160, 130, 70, 0.06);
-        }
-
-        /* ----- RESET & BASE ----- */
-        *,
-        *::before,
-        *::after {
+        /* ====== GLOBAL RESET & VARIABLES ====== */
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        :root {
+            --bg-primary: #f8f4f0;
+            --bg-secondary: #ffffff;
+            --text-primary: #1a1a2e;
+            --text-secondary: #2d2d44;
+            --text-muted: #5a5a7a;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-border: rgba(0, 0, 0, 0.08);
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            --glass: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --nav-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            --section-overlay: rgba(0, 0, 0, 0.35);
+            --red-primary: #dc143c;
+            --red-glow: rgba(220, 20, 60, 0.5);
+            --red-bg: #1a050a;
+            --gold-primary: #d4a017;
+            --gold-glow: rgba(212, 160, 23, 0.5);
+            --gold-bg: #1a1405;
+            --purple-primary: #9b4dff;
+            --purple-glow: rgba(155, 77, 255, 0.6);
+            --purple-bg: #0e0518;
+            --transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        [data-theme="dark"] {
+            --bg-primary: #0f0e1a;
+            --bg-secondary: #1a1a2e;
+            --text-primary: #f0ece4;
+            --text-secondary: #d4d0c8;
+            --text-muted: #a09a90;
+            --card-bg: rgba(26, 26, 46, 0.7);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            --glass: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --nav-bg: rgba(15, 14, 26, 0.9);
+            --nav-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        }
         html {
             scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
         }
-
         body {
             font-family: 'Inter', sans-serif;
-            min-height: 100vh;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background var(--transition-smooth), color var(--transition-smooth);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        .scroll-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+        section {
+            scroll-snap-align: start;
+            height: 100vh;
+            min-height: 700px;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem;
-            background: var(--bg-body);
             position: relative;
-            overflow-x: hidden;
-            transition: background 0.5s ease, color 0.5s ease;
-            color: var(--text-primary);
+            overflow: hidden;
+            padding: 80px 24px 40px;
+            transition: background var(--transition-smooth);
         }
 
-        /* ===== ANIMATED BLUR BACKGROUND (Blobs) ===== */
-        .blob-bg {
+        /* ====== NAVBAR ====== */
+        .navbar {
             position: fixed;
-            inset: 0;
-            z-index: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--nav-shadow);
+            transition: background var(--transition-smooth), box-shadow var(--transition-smooth);
+        }
+        .navbar .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .navbar .brand span {
+            color: var(--red-primary);
+            font-weight: 900;
+        }
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .theme-toggle {
+            width: 48px;
+            height: 26px;
+            border-radius: 13px;
+            background: var(--text-muted);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.3s ease;
+            flex-shrink: 0;
+        }
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fff;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        [data-theme="dark"] .theme-toggle {
+            background: var(--gold-primary);
+        }
+        [data-theme="dark"] .theme-toggle::after {
+            transform: translateX(22px);
+        }
+
+        /* ====== SCROLL INDICATOR ====== */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            animation: floatDown 2s ease-in-out infinite;
+            opacity: 0.6;
+        }
+        .scroll-indicator .mouse {
+            width: 24px;
+            height: 38px;
+            border: 2px solid var(--text-muted);
+            border-radius: 12px;
+            position: relative;
+        }
+        .scroll-indicator .mouse .wheel {
+            width: 4px;
+            height: 8px;
+            background: var(--text-muted);
+            border-radius: 2px;
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scrollWheel 2s ease-in-out infinite;
+        }
+        @keyframes scrollWheel {
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+                opacity: 0.2;
+            }
+        }
+        @keyframes floatDown {
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(6px);
+            }
+        }
+
+        /* ====== HERO ====== */
+        #hero {
+            background: var(--bg-primary);
+            flex-direction: column;
+            text-align: center;
+            padding-bottom: 60px;
+        }
+        #hero .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            max-width: 800px;
+            z-index: 2;
+            position: relative;
+        }
+        #hero .logo-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
             overflow: hidden;
+            border: 4px solid var(--red-primary);
+            box-shadow: 0 0 60px rgba(220, 20, 60, 0.25), 0 20px 60px rgba(0, 0, 0, 0.15);
+            flex-shrink: 0;
+            background: #2a2a3a;
+        }
+        #hero .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        #hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 8vw, 4.8rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            color: var(--text-primary);
+        }
+        #hero h1 .highlight {
+            background: linear-gradient(135deg, var(--red-primary), #ff6b8a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        #hero .subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-secondary);
+            max-width: 500px;
+            font-weight: 300;
+            letter-spacing: 0.04em;
+        }
+
+        /* ====== EVENT SECTIONS COMMON ====== */
+        .event-section {
+            position: relative;
+            color: #fff;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+        .event-section .event-bg-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.4;
+        }
+        .event-section .event-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            transition: background var(--transition-smooth);
+        }
+        .event-section .event-content {
+            position: relative;
+            z-index: 3;
+            max-width: 1100px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            padding: 0 16px;
+        }
+        .event-section .event-text {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .event-section .event-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .event-section .event-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 4.2rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+        }
+        .event-section .event-title .accent {
+            display: inline-block;
+            position: relative;
+        }
+        .event-section .event-title .accent::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            opacity: 0.5;
+        }
+        .event-section .event-body {
+            font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+            font-weight: 300;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 480px;
+        }
+        .event-section .event-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.35s ease;
+            margin-top: 8px;
+            align-self: flex-start;
+            cursor: pointer;
+        }
+        .event-section .event-btn:hover {
+            transform: scale(1.04) translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.18);
+        }
+        .event-section .event-btn .arrow {
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .event-section .event-btn:hover .arrow {
+            transform: translateX(6px);
+        }
+        .event-section .event-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: scale(0.92) translateY(30px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+            aspect-ratio: 4/3;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .event-section .event-image.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+        .event-section .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+        .event-section .event-image:hover img {
+            transform: scale(1.04);
+        }
+
+        /* ====== EVENT A – RED ====== */
+        #event-a {
+            background: var(--red-bg);
+        }
+        #event-a .event-overlay {
+            background: linear-gradient(135deg, rgba(20, 2, 5, 0.7) 0%, rgba(80, 8, 20, 0.4) 100%);
+        }
+        #event-a .event-title .accent::after {
+            background: var(--red-primary);
+        }
+        #event-a .event-btn {
+            border-color: var(--red-glow);
+        }
+        #event-a .event-btn:hover {
+            background: var(--red-primary);
+            border-color: var(--red-primary);
+            box-shadow: 0 0 40px var(--red-glow);
+        }
+        #star-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
             pointer-events: none;
         }
 
-        .blob {
+        /* ====== EVENT B – GOLD ====== */
+        #event-b {
+            background: var(--gold-bg);
+        }
+        #event-b .event-overlay {
+            background: linear-gradient(135deg, rgba(20, 14, 2, 0.7) 0%, rgba(60, 40, 5, 0.4) 100%);
+        }
+        #event-b .event-title .accent::after {
+            background: var(--gold-primary);
+        }
+        #event-b .event-btn {
+            border-color: var(--gold-glow);
+        }
+        #event-b .event-btn:hover {
+            background: var(--gold-primary);
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 40px var(--gold-glow);
+        }
+        #gold-particles {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .gold-sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #ffe066, #d4a017);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(212, 160, 23, 0.8);
+            animation: sparkleFloat linear infinite;
+            opacity: 0;
+        }
+        @keyframes sparkleFloat {
+            0% {
+                transform: translateY(100vh) scale(0.2) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) scale(1.4) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* ====== EVENT C – PURPLE (ENHANCED) ====== */
+        #event-c {
+            background: var(--purple-bg);
+        }
+        #event-c .event-overlay {
+            background: linear-gradient(135deg, rgba(14, 5, 24, 0.75) 0%, rgba(60, 20, 80, 0.55) 100%);
+        }
+        #event-c .event-title .accent::after {
+            background: var(--purple-primary);
+        }
+        #event-c .event-btn {
+            border-color: var(--purple-glow);
+        }
+        #event-c .event-btn:hover {
+            background: var(--purple-primary);
+            border-color: var(--purple-primary);
+            box-shadow: 0 0 40px var(--purple-glow);
+        }
+
+        /* Purple Orbs Container */
+        #purple-orbs {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .purple-orb {
             position: absolute;
             border-radius: 50%;
+            background: radial-gradient(circle, rgba(155, 77, 255, 0.6), rgba(155, 77, 255, 0.08));
+            filter: blur(40px);
+            animation: orbDrift linear infinite alternate;
+            box-shadow: 0 0 120px rgba(155, 77, 255, 0.4);
+            will-change: transform;
+        }
+        /* Big glow orbs */
+        .purple-orb.glow-1 {
+            background: radial-gradient(circle, rgba(180, 100, 255, 0.5), rgba(155, 77, 255, 0.05));
+            filter: blur(60px);
+            box-shadow: 0 0 200px rgba(155, 77, 255, 0.5);
+        }
+        .purple-orb.glow-2 {
+            background: radial-gradient(circle, rgba(220, 140, 255, 0.4), rgba(155, 77, 255, 0.03));
             filter: blur(80px);
-            will-change: transform, opacity;
-            animation: floatBlob 20s ease-in-out infinite alternate;
-            transition: background 0.8s ease;
+            box-shadow: 0 0 250px rgba(180, 100, 255, 0.4);
         }
 
-        .blob:nth-child(1) {
-            width: 500px;
-            height: 500px;
-            top: -10%;
-            left: -10%;
-            background: var(--blob1);
-            animation-duration: 22s;
-            animation-delay: 0s;
-        }
-
-        .blob:nth-child(2) {
-            width: 400px;
-            height: 400px;
-            bottom: -5%;
-            right: -5%;
-            background: var(--blob2);
-            animation-duration: 26s;
-            animation-delay: -6s;
-        }
-
-        .blob:nth-child(3) {
-            width: 350px;
-            height: 350px;
-            top: 40%;
-            left: 50%;
-            background: var(--blob3);
-            animation-duration: 18s;
-            animation-delay: -12s;
-        }
-
-        .blob:nth-child(4) {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            right: 20%;
-            background: var(--blob1);
-            animation-duration: 24s;
-            animation-delay: -8s;
-            opacity: 0.6;
-        }
-
-        .blob:nth-child(5) {
-            width: 250px;
-            height: 250px;
-            bottom: 20%;
-            left: 10%;
-            background: var(--blob2);
-            animation-duration: 28s;
-            animation-delay: -15s;
-            opacity: 0.5;
-        }
-
-        @keyframes floatBlob {
+        @keyframes orbDrift {
             0% {
                 transform: translate(0, 0) scale(1) rotate(0deg);
             }
             25% {
-                transform: translate(60px, -80px) scale(1.1) rotate(5deg);
+                transform: translate(60px, -40px) scale(1.2) rotate(10deg);
             }
             50% {
-                transform: translate(-40px, 60px) scale(0.9) rotate(-3deg);
+                transform: translate(-30px, 60px) scale(1.4) rotate(20deg);
             }
             75% {
-                transform: translate(80px, 40px) scale(1.05) rotate(4deg);
+                transform: translate(80px, 30px) scale(0.9) rotate(-10deg);
             }
             100% {
-                transform: translate(-60px, -40px) scale(0.95) rotate(-5deg);
+                transform: translate(-50px, -60px) scale(1.3) rotate(-20deg);
             }
         }
 
-        /* ===== SPLASH SCREEN ===== */
-        #splash {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: var(--bg-splash);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 1.2s ease, visibility 1.2s ease, background 0.5s ease;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        #splash.hidden {
-            opacity: 0;
-            visibility: hidden;
+        /* Purple floating particles (tiny stars) */
+        .purple-particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 150, 255, 0.9), rgba(155, 77, 255, 0.2));
+            box-shadow: 0 0 20px rgba(155, 77, 255, 0.6);
+            animation: particleFloat linear infinite;
             pointer-events: none;
+            will-change: transform;
         }
-
-        .splash-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.8rem, 8vw, 5.8rem);
-            font-weight: 700;
-            line-height: 1.1;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-            transition: color 0.5s ease;
-        }
-
-        .splash-title .gold {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmerGold 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes shimmerGold {
+        @keyframes particleFloat {
             0% {
-                background-position: 0% 50%;
+                transform: translateY(100vh) translateX(0) scale(0.3);
+                opacity: 0;
             }
-            100% {
-                background-position: 200% 50%;
-            }
-        }
-
-        .splash-sub {
-            font-size: clamp(1rem, 1.6vw, 1.5rem);
-            color: var(--text-muted);
-            font-weight: 300;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            margin-top: 0.5rem;
-            opacity: 0.8;
-            transition: color 0.5s ease;
-        }
-
-        .splash-loader {
-            margin-top: 3rem;
-            width: 70px;
-            height: 70px;
-            position: relative;
-        }
-
-        .splash-loader::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            border: 2px solid rgba(201, 160, 58, 0.15);
-            border-top-color: var(--gold);
-            animation: spin 1.2s cubic-bezier(0.6, 0, 0.4, 1) infinite;
-        }
-
-        .splash-loader::after {
-            content: '';
-            position: absolute;
-            inset: 10px;
-            border-radius: 50%;
-            border: 2px solid rgba(201, 160, 58, 0.05);
-            border-top-color: var(--gold-light);
-            animation: spin 1.8s cubic-bezier(0.6, 0, 0.4, 1) infinite reverse;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .splash-line {
-            width: 140px;
-            height: 2px;
-            margin: 2.5rem auto 0;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            border-radius: 4px;
-            animation: expandLine 2.4s ease-in-out infinite alternate;
-        }
-
-        @keyframes expandLine {
-            0% {
-                transform: scaleX(0.3);
-                opacity: 0.2;
-            }
-            100% {
-                transform: scaleX(1);
+            15% {
                 opacity: 1;
             }
+            85% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(80px) scale(1.2);
+                opacity: 0;
+            }
         }
 
-        /* ===== THEME TOGGLE BUTTON ===== */
-        .theme-toggle-wrapper {
-            position: fixed;
-            top: 1.5rem;
-            right: 1.5rem;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        .theme-toggle {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border);
-            border-radius: 60px;
-            padding: 0.6rem 1.2rem;
-            color: var(--text-primary);
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            box-shadow: var(--card-shadow);
-            font-family: 'Inter', sans-serif;
-        }
-
-        .theme-toggle:hover {
-            transform: translateY(-2px);
-            border-color: var(--gold);
-        }
-
-        .theme-toggle .toggle-icon {
-            font-size: 1.1rem;
-            transition: transform 0.4s ease;
-        }
-
-        .theme-toggle:hover .toggle-icon {
-            transform: rotate(20deg);
-        }
-
-        /* ===== MAIN CONTENT WRAPPER ===== */
-        #main-content {
-            opacity: 0;
-            transition: opacity 1.6s ease 0.4s;
-            width: 100%;
-            max-width: 880px;
-            position: relative;
-            z-index: 2;
-        }
-
-        #main-content.visible {
-            opacity: 1;
-        }
-
-        /* ===== LUXURY CARD ===== */
-        .luxury-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(24px) saturate(1.6);
-            -webkit-backdrop-filter: blur(24px) saturate(1.6);
-            border-radius: 24px;
-            padding: 3rem 2.8rem;
-            border: 1px solid var(--card-border);
-            box-shadow: var(--card-shadow);
-            position: relative;
-            overflow: hidden;
-            transition: box-shadow 0.6s ease, transform 0.4s ease, background 0.5s ease, border-color 0.5s ease;
-        }
-
-        .luxury-card:hover {
-            box-shadow: 0 50px 120px rgba(120, 80, 30, 0.06), 0 0 0 1px rgba(201, 160, 58, 0.2);
-            transform: translateY(-3px);
-        }
-
-        /* Interactive glow on card */
-        .luxury-card::before {
+        /* Pulsing glow overlay for Event C */
+        #event-c::before {
             content: '';
             position: absolute;
             inset: 0;
-            border-radius: 24px;
-            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(212, 175, 55, 0.06), transparent 60%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .luxury-card:hover::before {
-            opacity: 1;
-        }
-
-        .luxury-card>* {
-            position: relative;
             z-index: 1;
-        }
-
-        /* Decorative gold corners */
-        .deco-corner {
-            position: absolute;
-            width: 50px;
-            height: 50px;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(155, 77, 255, 0.20) 0%, transparent 55%),
+                radial-gradient(circle at 80% 70%, rgba(155, 77, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(180, 100, 255, 0.05) 0%, transparent 70%);
             pointer-events: none;
-            opacity: 0.12;
-            z-index: 0;
+            animation: pulseGlow 5s ease-in-out infinite alternate;
         }
-        .deco-corner-tl {
-            top: 15px;
-            left: 15px;
-            border-top: 1.5px solid var(--gold);
-            border-left: 1.5px solid var(--gold);
-        }
-        .deco-corner-tr {
-            top: 15px;
-            right: 15px;
-            border-top: 1.5px solid var(--gold);
-            border-right: 1.5px solid var(--gold);
-        }
-        .deco-corner-bl {
-            bottom: 15px;
-            left: 15px;
-            border-bottom: 1.5px solid var(--gold);
-            border-left: 1.5px solid var(--gold);
-        }
-        .deco-corner-br {
-            bottom: 15px;
-            right: 15px;
-            border-bottom: 1.5px solid var(--gold);
-            border-right: 1.5px solid var(--gold);
+        @keyframes pulseGlow {
+            0% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.6;
+            }
         }
 
-        /* ===== LOGO SECTION ===== */
-        .logo-section {
-            text-align: center;
-            margin-bottom: 2.8rem;
-        }
-
-        .logo-wrapper {
+        /* ====== FOOTER ====== */
+        #footer {
+            scroll-snap-align: end;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            min-height: 200px;
+            height: auto;
+            padding: 60px 24px 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1.2rem;
-        }
-
-        /* ===== LOGO IMAGE with HIGH GLOW EFFECT ===== */
-        .logo-img {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(201, 160, 58, 0.2);
-            box-shadow: 
-                0 0 40px rgba(201, 160, 58, 0.15),
-                0 0 80px rgba(201, 160, 58, 0.08),
-                0 0 120px rgba(201, 160, 58, 0.04);
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            background: var(--bg-body);
-        }
-
-        .logo-img:hover {
-            transform: scale(1.05) rotate(-1deg);
-            box-shadow: 
-                0 0 60px rgba(201, 160, 58, 0.25),
-                0 0 120px rgba(201, 160, 58, 0.12),
-                0 0 180px rgba(201, 160, 58, 0.06);
-        }
-
-        .logo-img-fallback {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            background: var(--gold-gradient);
-            display: none;
-            align-items: center;
             justify-content: center;
-            font-size: 3.2rem;
-            font-weight: 900;
-            font-family: 'Playfair Display', serif;
-            color: #2a2218;
-            border: 2px solid rgba(201, 160, 58, 0.15);
-            box-shadow: 0 0 60px rgba(201, 160, 58, 0.15);
-        }
-
-        .school-name {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 5vw, 3.4rem);
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            color: var(--text-primary);
-            line-height: 1.2;
-            margin-top: 0.2rem;
-            transition: color 0.5s ease;
-        }
-
-        .school-name .gold-text {
-            background: var(--gold-text);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .school-sub {
-            font-size: clamp(0.9rem, 1.3vw, 1.1rem);
-            color: var(--text-muted);
-            font-weight: 300;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            margin-top: -0.3rem;
-            opacity: 0.8;
-            transition: color 0.5s ease;
-        }
-
-        .divider-gold {
-            width: 100px;
-            height: 2px;
-            margin: 1rem auto 0;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            border-radius: 4px;
-        }
-
-        /* ===== EVENT BUTTONS ===== */
-        .events-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.2rem;
-            margin: 2.5rem 0 2rem;
-        }
-
-        .event-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            padding: 1rem 1.8rem;
-            background: var(--btn-bg);
-            backdrop-filter: blur(4px);
-            border: 1px solid var(--btn-border);
-            border-radius: 60px;
-            color: var(--btn-text);
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--btn-shadow);
-        }
-
-        .event-btn .btn-icon {
-            color: var(--gold);
-            font-size: 1.3rem;
-            width: 1.8rem;
+            gap: 20px;
             text-align: center;
-            filter: drop-shadow(0 0 6px rgba(201, 160, 58, 0.3));
-            transition: all 0.4s ease;
+            border-top: 1px solid var(--card-border);
         }
-
-        .event-btn .btn-text {
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            color: var(--btn-text);
-            transition: color 0.3s ease;
+        #footer .footer-content {
+            max-width: 500px;
         }
-
-        .event-btn .btn-glow {
-            position: absolute;
-            inset: -50%;
-            background: radial-gradient(circle at center, rgba(201, 160, 58, 0.10), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-        }
-
-        .event-btn:hover {
-            transform: translateY(-4px) scale(1.02);
-            border-color: var(--gold);
-            background: var(--btn-bg);
-            box-shadow: 0 16px 50px rgba(201, 160, 58, 0.08);
-        }
-
-        .event-btn:hover .btn-icon {
-            transform: translateX(4px) scale(1.15);
-            color: var(--gold);
-            filter: drop-shadow(0 0 15px rgba(201, 160, 58, 0.6)) drop-shadow(0 0 30px rgba(201, 160, 58, 0.2));
-        }
-
-        .event-btn:hover .btn-glow {
-            opacity: 1;
-        }
-
-        .event-btn:active {
-            transform: translateY(0px) scale(0.96);
-        }
-
-        /* ===== SOCIAL SECTION ===== */
-        .social-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--divider-color);
-            flex-wrap: wrap;
-            transition: border-color 0.5s ease;
-        }
-
-        .social-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
+        #footer .footer-content p {
+            font-size: 0.9rem;
             color: var(--text-muted);
-            font-weight: 400;
-            opacity: 0.5;
-            transition: color 0.5s ease;
+            margin-bottom: 12px;
         }
-
-        .social-link {
+        #footer .social-link {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: var(--social-bg);
-            backdrop-filter: blur(4px);
-            border: 1px solid var(--social-border);
+            gap: 12px;
+            padding: 12px 28px;
+            border-radius: 50px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
             color: var(--text-primary);
-            font-size: 1.4rem;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             text-decoration: none;
-            position: relative;
-            overflow: hidden;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+            box-shadow: var(--shadow);
+        }
+        #footer .social-link:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+            border-color: var(--red-primary);
+        }
+        #footer .social-link svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+            transition: fill 0.3s;
+        }
+        #footer .social-link:hover svg {
+            fill: var(--red-primary);
+        }
+        #footer .copyright {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            opacity: 0.6;
+            margin-top: 8px;
         }
 
-        .social-link::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            background: var(--gold-gradient);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .social-link i {
-            position: relative;
-            z-index: 1;
-            transition: transform 0.4s ease, color 0.4s ease;
-        }
-
-        .social-link:hover {
-            transform: translateY(-5px) scale(1.05);
-            border-color: var(--gold);
-            box-shadow: 0 16px 50px rgba(201, 160, 58, 0.06);
-        }
-
-        .social-link:hover::before {
-            opacity: 1;
-        }
-
-        .social-link:hover i {
-            color: #2a2218;
-            transform: scale(1.1);
-        }
-
-        .social-link:active {
-            transform: translateY(0px) scale(0.95);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 1024px) {
+            .event-section .event-content {
+                gap: 32px;
             }
-            .luxury-card {
-                padding: 2rem 1.5rem;
-                border-radius: 18px;
+            .event-section .event-title {
+                font-size: clamp(2.4rem, 5vw, 3.2rem);
             }
-            .logo-img,
-            .logo-img-fallback {
-                width: 100px;
-                height: 100px;
-            }
-            .events-grid {
+        }
+        @media (max-width: 820px) {
+            .event-section .event-content {
                 grid-template-columns: 1fr;
-                gap: 0.9rem;
+                gap: 24px;
+                text-align: center;
+                max-width: 560px;
             }
-            .event-btn {
-                padding: 0.9rem 1.2rem;
-                font-size: 0.95rem;
-                justify-content: center;
+            .event-section .event-body {
+                max-width: 100%;
+                margin: 0 auto;
             }
-            .social-link {
-                width: 46px;
-                height: 46px;
-                font-size: 1.2rem;
+            .event-section .event-btn {
+                align-self: center;
             }
-            .deco-corner {
-                width: 30px;
-                height: 30px;
+            .event-section .event-image {
+                max-width: 480px;
+                margin: 0 auto;
+                aspect-ratio: 4/3;
+                width: 100%;
             }
-            .splash-title {
-                font-size: clamp(2.4rem, 10vw, 3.4rem);
-            }
-            .theme-toggle-wrapper {
-                top: 1rem;
-                right: 1rem;
-            }
-            .theme-toggle {
-                padding: 0.4rem 0.9rem;
-                font-size: 0.8rem;
-            }
-            /* Adjust blob sizes for mobile */
-            .blob {
-                filter: blur(60px);
-            }
-            .blob:nth-child(1) {
-                width: 300px;
-                height: 300px;
-            }
-            .blob:nth-child(2) {
-                width: 250px;
-                height: 250px;
-            }
-            .blob:nth-child(3) {
-                width: 200px;
-                height: 200px;
-            }
-            .blob:nth-child(4) {
-                width: 180px;
-                height: 180px;
-            }
-            .blob:nth-child(5) {
-                width: 150px;
-                height: 150px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .luxury-card {
-                padding: 1.5rem 1rem;
-                border-radius: 14px;
-            }
-            .logo-img,
-            .logo-img-fallback {
-                width: 80px;
-                height: 80px;
-            }
-            .school-name {
-                font-size: 1.6rem;
-            }
-            .event-btn {
-                padding: 0.75rem 1rem;
-                font-size: 0.85rem;
-                gap: 0.5rem;
-            }
-            .event-btn .btn-icon {
-                font-size: 1.1rem;
-                width: 1.6rem;
-            }
-            .social-section {
-                gap: 1.2rem;
-            }
-            .theme-toggle-wrapper {
-                top: 0.8rem;
-                right: 0.8rem;
-            }
-            .theme-toggle {
-                padding: 0.3rem 0.7rem;
-                font-size: 0.7rem;
-                gap: 0.3rem;
-            }
-            .blob {
-                filter: blur(40px);
-            }
-            .blob:nth-child(1) {
-                width: 200px;
-                height: 200px;
-            }
-            .blob:nth-child(2) {
-                width: 180px;
-                height: 180px;
-            }
-            .blob:nth-child(3) {
-                width: 150px;
-                height: 150px;
-            }
-            .blob:nth-child(4) {
+            #hero .logo-circle {
                 width: 120px;
                 height: 120px;
             }
-            .blob:nth-child(5) {
-                width: 100px;
-                height: 100px;
+            .navbar {
+                padding: 12px 20px;
+            }
+            .navbar .brand {
+                font-size: 0.95rem;
+            }
+            .scroll-indicator {
+                display: none;
+            }
+            section {
+                padding: 70px 16px 30px;
+                min-height: 600px;
+            }
+            .event-section .event-text {
+                transform: translateY(20px);
+            }
+            .event-section .event-image {
+                transform: scale(0.96) translateY(20px);
+            }
+        }
+        @media (max-width: 480px) {
+            #hero .logo-circle {
+                width: 96px;
+                height: 96px;
+                border-width: 3px;
+            }
+            #hero h1 {
+                font-size: clamp(1.8rem, 10vw, 2.6rem);
+            }
+            .navbar .brand {
+                font-size: 0.8rem;
+            }
+            .event-section .event-title {
+                font-size: clamp(2rem, 8vw, 2.8rem);
+            }
+            .event-section .event-btn {
+                padding: 12px 28px;
+                font-size: 0.85rem;
+            }
+            #footer .social-link {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+            #footer .social-link svg {
+                width: 24px;
+                height: 24px;
             }
         }
 
-        /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar {
-            width: 5px;
+        /* ====== UTILITIES ====== */
+        .hidden {
+            opacity: 0 !important;
+            transform: translateY(40px) !important;
+            pointer-events: none;
         }
-        ::-webkit-scrollbar-track {
-            background: var(--scrollbar-track);
+        .visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            pointer-events: auto;
         }
-        ::-webkit-scrollbar-thumb {
-            background: var(--scrollbar-thumb);
-            border-radius: 10px;
+        .img-loading {
+            filter: blur(8px) brightness(0.7);
+            transition: filter 0.6s ease;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--gold-dark);
+        .img-loaded {
+            filter: blur(0) brightness(1);
+        }
+        @supports not (scroll-snap-type: y mandatory) {
+            .scroll-container {
+                height: auto;
+                overflow-y: visible;
+            }
+            section {
+                height: auto;
+                min-height: 100vh;
+                scroll-snap-align: none;
+            }
+        }
+        .img-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: #2a2a3a;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 20px;
+        }
+        .img-placeholder.red-bg {
+            background: #8b0a1a;
+        }
+        .img-placeholder.gold-bg {
+            background: #9e7a1a;
+        }
+        .img-placeholder.purple-bg {
+            background: #4a1a6a;
+        }
+        .img-placeholder.logo-bg {
+            background: #1a2a3a;
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== ANIMATED BLUR BACKGROUND (Blobs) ===== -->
-    <div class="blob-bg">
-        <div class="blob"></div>
-        <div class="blob"></div>
-        <div class="blob"></div>
-        <div class="blob"></div>
-        <div class="blob"></div>
-    </div>
-
-    <!-- ===== THEME TOGGLE (top-right) ===== -->
-    <div class="theme-toggle-wrapper">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-            <span class="toggle-icon" id="toggleIcon"><i class="fa-regular fa-moon"></i></span>
-            <span id="toggleLabel">Dark</span>
-        </button>
-    </div>
-
-    <!-- ===== SPLASH SCREEN ===== -->
-    <div id="splash" role="status" aria-label="Loading">
-        <div class="splash-content">
-            <div class="splash-title">
-                <span class="gold">EFG</span> International
-            </div>
-            <div class="splash-sub">Primary School &amp; Learning Center</div>
-            <div class="splash-loader"></div>
-            <div class="splash-line"></div>
+    <!-- ====== NAVBAR ====== -->
+    <nav class="navbar">
+        <a href="#" class="brand">EFG <span>International</span> Primary School</a>
+        <div class="nav-controls">
+            <button class="theme-toggle" id="themeToggle"></button>
         </div>
-    </div>
+    </nav>
 
-    <!-- ===== MAIN CONTENT ===== -->
-    <div id="main-content">
-        <div class="luxury-card" id="luxuryCard">
+    <!-- ====== SCROLL CONTAINER ====== -->
+    <main class="scroll-container">
 
-            <!-- Decorative Corners -->
-            <div class="deco-corner deco-corner-tl"></div>
-            <div class="deco-corner deco-corner-tr"></div>
-            <div class="deco-corner deco-corner-bl"></div>
-            <div class="deco-corner deco-corner-br"></div>
+        <!-- ====== HERO ====== -->
+        <section id="hero">
+            <div class="hero-content">
+                <div class="logo-circle">
+                    <!-- LOGO (Stable Google Cache Link) -->
+                    <img src="https://lh3.googleusercontent.com/d/1wwepUptB-arMxRIOFL9wtaVeX6BEv5SZ=s800" alt="EFG Logo" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder logo-bg\'>EFG</div>';" />
+                </div>
+                <h1>Welcome to <br /><span class="highlight">EFG International</span></h1>
+                <p class="subtitle">Inspiring minds, shaping futures — a world of discovery awaits.</p>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse"><div class="wheel"></div></div>
+                <span>Scroll</span>
+            </div>
+        </section>
 
-            <!-- LOGO & TITLE -->
-            <div class="logo-section">
-                <div class="logo-wrapper">
-                    <!-- Google Drive Image (Direct Link using File ID) -->
-                    <img
-                    class="logo-img"
-                    src="https://drive.google.com/uc?export=view&id=1wwepUptB-arMxRIOFL9wtaVeX6BEv5SZ"
-                    alt="EFG International Primary School Logo"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                    loading="lazy"
-                    />
-                    <div class="logo-img-fallback">EFG</div>
-
-                    <h1 class="school-name">
-                        <span class="gold-text">EFG</span> International<br />Primary School
-                    </h1>
-                    <p class="school-sub">&amp; Learning Center</p>
-                    <div class="divider-gold"></div>
+        <!-- ====== EVENT A – RED (Keep existing) ====== -->
+        <section id="event-a" class="event-section">
+            <img class="event-bg-image" src="https://lh3.googleusercontent.com/d/1XRI_VXJsC-ncja4hd_ThQTuA4vzVsCDd=s1200" alt="Event A bg" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';" />
+            <div class="event-overlay"></div>
+            <canvas id="star-canvas"></canvas>
+            <div class="event-content">
+                <div class="event-text" id="eventAText">
+                    <h2 class="event-title">Event <span class="accent">A</span><br /><span style="font-size:0.5em; font-weight:400; opacity:0.6; letter-spacing:0.06em;">✦ Ignite ✦</span></h2>
+                    <p class="event-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <a href="https://canva.link/aa0wcmbrl2z7yr2" target="_blank" rel="noopener noreferrer" class="event-btn">View Details <span class="arrow">→</span></a>
+                </div>
+                <div class="event-image" id="eventAImage">
+                    <img src="https://lh3.googleusercontent.com/d/1XRI_VXJsC-ncja4hd_ThQTuA4vzVsCDd=s1000" alt="Event A" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder red-bg\'>Event A</div>';" />
                 </div>
             </div>
+        </section>
 
-            <!-- ===== EVENT BUTTONS ===== -->
-            <div class="events-grid">
-                <a href="https://canva.link/aa0wcmbrl2z7yr2" target="_blank" rel="noopener noreferrer" class="event-btn event-a">
-                    <span class="btn-glow"></span>
-                    <span class="btn-icon"><i class="fa-regular fa-calendar-alt"></i></span>
-                    <span class="btn-text">Event A</span>
-                </a>
-                <a href="https://canva.link/iiu4m9gj7ax6ver" target="_blank" rel="noopener noreferrer" class="event-btn event-b">
-                    <span class="btn-glow"></span>
-                    <span class="btn-icon"><i class="fa-regular fa-calendar-check"></i></span>
-                    <span class="btn-text">Event B</span>
-                </a>
-                <a href="https://canva.link/5vqynh3sgl1g26w" target="_blank" rel="noopener noreferrer" class="event-btn event-c">
-                    <span class="btn-glow"></span>
-                    <span class="btn-icon"><i class="fa-regular fa-calendar-plus"></i></span>
-                    <span class="btn-text">Event C</span>
-                </a>
+        <!-- ====== EVENT B – GOLD (New image) ====== -->
+        <section id="event-b" class="event-section">
+            <img class="event-bg-image" src="https://lh3.googleusercontent.com/d/15kyLI5k1XPOfAPE2O51s1EuTrAOvCF6z=s1200" alt="Event B bg" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';" />
+            <div class="event-overlay"></div>
+            <div id="gold-particles"></div>
+            <div class="event-content">
+                <div class="event-text" id="eventBText">
+                    <h2 class="event-title">Event <span class="accent">B</span><br /><span style="font-size:0.5em; font-weight:400; opacity:0.6; letter-spacing:0.06em;">✦ Radiance ✦</span></h2>
+                    <p class="event-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <a href="https://www.canva.com/design/DAHPifoheTs/fIdLvfhRdUz4NmSyuEB-1w/view?utm_content=DAHPifoheTs&utm_campaign=designshare&utm_medium=link&utm_source=viewer" target="_blank" rel="noopener noreferrer" class="event-btn">View Details <span class="arrow">→</span></a>
+                </div>
+                <div class="event-image" id="eventBImage">
+                    <img src="https://lh3.googleusercontent.com/d/15kyLI5k1XPOfAPE2O51s1EuTrAOvCF6z=s1000" alt="Event B" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder gold-bg\'>Event B</div>';" />
+                </div>
             </div>
+        </section>
 
-            <!-- SOCIAL -->
-            <div class="social-section">
-                <span class="social-label">Connect</span>
-                <a href="https://www.facebook.com/share/1GHQoSwVPB/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
+        <!-- ====== EVENT C – PURPLE (New image + Enhanced Effects) ====== -->
+        <section id="event-c" class="event-section">
+            <div class="event-overlay"></div>
+            <div id="purple-orbs"></div>
+            <div class="event-content">
+                <div class="event-text" id="eventCText">
+                    <h2 class="event-title">Event <span class="accent">C</span><br /><span style="font-size:0.5em; font-weight:400; opacity:0.6; letter-spacing:0.06em;">✦ Vision ✦</span></h2>
+                    <p class="event-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <a href="https://www.canva.com/design/DAHPiarr0XE/iAWGbp_ITYeTyZkz00fQNA/view?utm_content=DAHPiarr0XE&utm_campaign=designshare&utm_medium=link&utm_source=viewer" target="_blank" rel="noopener noreferrer" class="event-btn">View Details <span class="arrow">→</span></a>
+                </div>
+                <div class="event-image" id="eventCImage">
+                    <img src="https://lh3.googleusercontent.com/d/11ebHqFXuCQFcRK-GEqfaJSH3FAmIlhVK=s1000" alt="Event C" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder purple-bg\'>Event C</div>';" />
+                </div>
             </div>
+        </section>
 
-        </div>
-    </div>
+        <!-- ====== FOOTER ====== -->
+        <footer id="footer">
+            <div class="footer-content">
+                <p>Follow us on Facebook for the latest updates</p>
+                <a href="https://www.facebook.com/share/1GHQoSwVPB/" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    @EFG International School
+                </a>
+                <p class="copyright">© 2026 EFG International Primary School. All rights reserved.</p>
+            </div>
+        </footer>
+    </main>
 
-    <!-- ===== JAVASCRIPT ===== -->
+    <!-- ====== JAVASCRIPT ====== -->
     <script>
         (function() {
             'use strict';
 
             // ----- THEME TOGGLE -----
-            const toggleBtn = document.getElementById('themeToggle');
-            const toggleIcon = document.getElementById('toggleIcon');
-            const toggleLabel = document.getElementById('toggleLabel');
+            const themeToggle = document.getElementById('themeToggle');
             const html = document.documentElement;
-
-            // Check for saved theme preference
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            html.setAttribute('data-theme', savedTheme);
-            updateToggleUI(savedTheme);
-
-            toggleBtn.addEventListener('click', function() {
-                const currentTheme = html.getAttribute('data-theme');
-                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                html.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-                updateToggleUI(newTheme);
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) html.setAttribute('data-theme', savedTheme);
+            else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute(
+                'data-theme', 'dark');
+            themeToggle.addEventListener('click', function() {
+                const current = html.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                html.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
             });
 
-            function updateToggleUI(theme) {
-                if (theme === 'dark') {
-                    toggleIcon.innerHTML = '<i class="fa-regular fa-sun"></i>';
-                    toggleLabel.textContent = 'Light';
-                } else {
-                    toggleIcon.innerHTML = '<i class="fa-regular fa-moon"></i>';
-                    toggleLabel.textContent = 'Dark';
-                }
-            }
-
-            // ----- SPLASH SCREEN -----
-            const splash = document.getElementById('splash');
-            const mainContent = document.getElementById('main-content');
-
-            function hideSplash() {
-                if (!splash.classList.contains('hidden')) {
-                    splash.classList.add('hidden');
-                    mainContent.classList.add('visible');
-                }
-            }
-
-            // Auto hide after 3.2s
-            setTimeout(hideSplash, 3200);
-
-            // Skip splash on click / tap
-            splash.addEventListener('click', hideSplash);
-            splash.addEventListener('touchstart', hideSplash, { passive: true });
-
-            // Skip splash on Enter key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' && !splash.classList.contains('hidden')) {
-                    hideSplash();
-                }
-            });
-
-            // ----- LUXURY CARD : MOUSE-FOLLOW GLOW -----
-            const card = document.getElementById('luxuryCard');
-
-            card.addEventListener('mousemove', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-                this.style.setProperty('--x', x + '%');
-                this.style.setProperty('--y', y + '%');
-            });
-
-            card.addEventListener('mouseleave', function() {
-                this.style.setProperty('--x', '50%');
-                this.style.setProperty('--y', '50%');
-            });
-
-            // ----- LOGO FALLBACK -----
-            const logoImg = document.querySelector('.logo-img');
-            const fallback = document.querySelector('.logo-img-fallback');
-            if (logoImg) {
-                logoImg.addEventListener('error', function() {
-                    this.style.display = 'none';
-                    if (fallback) fallback.style.display = 'flex';
+            // ----- SCROLL REVEAL -----
+            const textElements = document.querySelectorAll('.event-text');
+            const imageElements = document.querySelectorAll('.event-image');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
                 });
+            }, { threshold: 0.25, rootMargin: '0px 0px -40px 0px' });
+            textElements.forEach(el => revealObserver.observe(el));
+            imageElements.forEach(el => revealObserver.observe(el));
+
+            // Hero reveal
+            const heroContent = document.querySelector('#hero .hero-content');
+            if (heroContent) {
+                const heroObs = new IntersectionObserver((entries) => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) { e.target.style.opacity = '1';
+                            e.target.style.transform = 'translateY(0)'; }
+                    });
+                }, { threshold: 0.2 });
+                heroObs.observe(heroContent);
+                heroContent.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                heroContent.style.opacity = '0';
+                heroContent.style.transform = 'translateY(20px)';
             }
 
-            // ----- BUTTON TACTILE FEEDBACK -----
-            const btns = document.querySelectorAll('.event-btn, .social-link');
-            btns.forEach(function(btn) {
-                btn.addEventListener('mousedown', function() {
-                    this.style.transition = 'transform 0.08s ease';
-                    this.style.transform = 'scale(0.96)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 120);
+            // ----- STAR CANVAS (Event A) -----
+            const canvas = document.getElementById('star-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let stars = [],
+                    W, H;
+
+                function resizeCanvas() {
+                    const rect = canvas.parentElement.getBoundingClientRect();
+                    canvas.width = rect.width;
+                    canvas.height = rect.height;
+                    W = canvas.width;
+                    H = canvas.height;
+                }
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+                const STAR_COUNT = 180;
+                class Star {
+                    constructor() { this.reset();
+                        this.y = Math.random() * H; }
+                    reset() {
+                        this.x = Math.random() * W;
+                        this.y = -10 - Math.random() * 40;
+                        this.size = Math.random() * 3.2 + 1.2;
+                        this.speed = Math.random() * 1.2 + 0.6;
+                        this.opacity = Math.random() * 0.8 + 0.2;
+                        this.twinkleSpeed = Math.random() * 0.03 + 0.01;
+                        this.twinkleOffset = Math.random() * Math.PI * 2;
+                    }
+                    update(time) {
+                        this.y += this.speed;
+                        if (this.y > H + 20) { this.reset();
+                            this.y = -10 - Math.random() * 40; }
+                        this.currentOpacity = this.opacity * (0.6 + 0.4 * Math.sin(time * this.twinkleSpeed + this
+                            .twinkleOffset));
+                    }
+                    draw(ctx) {
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 2);
+                        const alpha = this.currentOpacity;
+                        grad.addColorStop(0, `rgba(255, 80, 120, ${alpha})`);
+                        grad.addColorStop(0.4, `rgba(220, 20, 60, ${alpha * 0.6})`);
+                        grad.addColorStop(1, `rgba(220, 20, 60, 0)`);
+                        ctx.fillStyle = grad;
+                        ctx.fill();
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size * 0.3, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.5})`;
+                        ctx.fill();
+                    }
+                }
+                for (let i = 0; i < STAR_COUNT; i++) stars.push(new Star());
+                let animFrame = null,
+                    time = 0;
+
+                function animateStars() {
+                    time += 1;
+                    ctx.clearRect(0, 0, W, H);
+                    const grad = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.7);
+                    grad.addColorStop(0, 'rgba(220, 20, 60, 0.04)');
+                    grad.addColorStop(1, 'rgba(220, 20, 60, 0)');
+                    ctx.fillStyle = grad;
+                    ctx.fillRect(0, 0, W, H);
+                    for (const star of stars) { star.update(time);
+                        star.draw(ctx); }
+                    animFrame = requestAnimationFrame(animateStars);
+                }
+                const eventASection = document.getElementById('event-a');
+                let starRunning = false;
+                const starObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            if (!starRunning) { starRunning = true;
+                                animateStars(); }
+                        } else {
+                            if (starRunning) { starRunning = false; if (animFrame) { cancelAnimationFrame(
+                                    animFrame);
+                                    animFrame = null; } ctx.clearRect(0, 0, W, H); }
+                        }
+                    });
+                }, { threshold: 0.05 });
+                starObserver.observe(eventASection);
+                window.addEventListener('beforeunload', function() { if (animFrame) { cancelAnimationFrame(animFrame);
+                        animFrame = null; } });
+            }
+
+            // ----- GOLD PARTICLES (Event B) -----
+            const goldContainer = document.getElementById('gold-particles');
+            if (goldContainer) {
+                for (let i = 0; i < 80; i++) {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'gold-sparkle';
+                    const size = Math.random() * 8 + 3;
+                    sparkle.style.width = size + 'px';
+                    sparkle.style.height = size + 'px';
+                    sparkle.style.left = Math.random() * 100 + '%';
+                    sparkle.style.animationDuration = (Math.random() * 14 + 8) + 's';
+                    sparkle.style.animationDelay = (Math.random() * 16) + 's';
+                    sparkle.style.opacity = Math.random() * 0.7 + 0.3;
+                    goldContainer.appendChild(sparkle);
+                }
+            }
+
+            // ----- PURPLE ORBS & PARTICLES (Event C – ENHANCED) -----
+            const orbContainer = document.getElementById('purple-orbs');
+            if (orbContainer) {
+                // Big glowing orbs (more visible)
+                const orbConfigs = [
+                    { size: 320, x: 10, y: 15, duration: 18, delay: 0, cls: 'glow-1' },
+                    { size: 280, x: 70, y: 60, duration: 22, delay: 3, cls: 'glow-2' },
+                    { size: 200, x: 40, y: 30, duration: 16, delay: 6, cls: '' },
+                    { size: 350, x: 85, y: 20, duration: 24, delay: 2, cls: 'glow-1' },
+                    { size: 180, x: 55, y: 75, duration: 20, delay: 8, cls: 'glow-2' },
+                    { size: 260, x: 25, y: 50, duration: 19, delay: 4, cls: '' },
+                    { size: 300, x: 60, y: 10, duration: 21, delay: 7, cls: 'glow-1' },
+                    { size: 220, x: 90, y: 45, duration: 17, delay: 5, cls: 'glow-2' },
+                    { size: 160, x: 15, y: 80, duration: 23, delay: 9, cls: '' },
+                    { size: 380, x: 50, y: 40, duration: 26, delay: 1, cls: 'glow-1' },
+                    { size: 240, x: 75, y: 70, duration: 20, delay: 6, cls: 'glow-2' },
+                    { size: 190, x: 30, y: 25, duration: 18, delay: 3, cls: '' },
+                ];
+                orbConfigs.forEach((cfg) => {
+                    const orb = document.createElement('div');
+                    orb.className = 'purple-orb' + (cfg.cls ? ' ' + cfg.cls : '');
+                    orb.style.width = cfg.size + 'px';
+                    orb.style.height = cfg.size + 'px';
+                    orb.style.left = cfg.x + '%';
+                    orb.style.top = cfg.y + '%';
+                    orb.style.animationDuration = cfg.duration + 's';
+                    orb.style.animationDelay = cfg.delay + 's';
+                    orb.style.opacity = Math.random() * 0.4 + 0.3;
+                    orbContainer.appendChild(orb);
                 });
+
+                // Tiny floating particles (extra pop)
+                for (let i = 0; i < 50; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'purple-particle';
+                    const size = Math.random() * 6 + 2;
+                    particle.style.width = size + 'px';
+                    particle.style.height = size + 'px';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDuration = (Math.random() * 18 + 12) + 's';
+                    particle.style.animationDelay = (Math.random() * 20) + 's';
+                    particle.style.opacity = Math.random() * 0.8 + 0.2;
+                    orbContainer.appendChild(particle);
+                }
+            }
+
+            // ----- IMAGE LOADING HANDLING -----
+            document.querySelectorAll('img').forEach(img => {
+                if (img.complete) { img.classList.remove('img-loading');
+                    img.classList.add('img-loaded'); } else {
+                    img.addEventListener('load', function() { this.classList.remove('img-loading');
+                        this.classList.add('img-loaded'); });
+                    img.addEventListener('error', function() { this.classList.remove('img-loading'); });
+                }
             });
 
-            // ----- CONSOLE GREETING -----
-            console.log('%c✦ EFG International ✦', 'font-size:22px; font-weight:700; color:#c9a03a;');
-            console.log('%cA radiant luxury experience.', 'font-size:14px; color:#6b5d4b;');
+            // ----- PARALLAX BACKGROUND -----
+            const bgImages = document.querySelectorAll('.event-bg-image');
+            if (bgImages.length) {
+                let ticking = false;
+                window.addEventListener('scroll', function() {
+                    if (!ticking) {
+                        window.requestAnimationFrame(function() {
+                            const scrollY = window.scrollY;
+                            bgImages.forEach((img) => {
+                                const section = img.closest('.event-section');
+                                if (section) {
+                                    const rect = section.getBoundingClientRect();
+                                    const offset = rect.top + window.scrollY;
+                                    const progress = (scrollY - offset) / rect.height;
+                                    const translate = progress * 30;
+                                    img.style.transform = `translateY(${translate}px) scale(1.05)`;
+                                }
+                            });
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                }, { passive: true });
+            }
 
+            console.log('🎬 EFG International — Stable image links (lh3) applied. Please ensure files are Public on Drive.');
         })();
     </script>
-
 </body>
 </html>
