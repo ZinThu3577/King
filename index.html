@@ -476,12 +476,12 @@
             }
         }
 
-        /* ====== EVENT C – PURPLE (ENHANCED) ====== */
+        /* ====== EVENT C – PURPLE (OPTIMIZED for performance) ====== */
         #event-c {
             background: var(--purple-bg);
         }
         #event-c .event-overlay {
-            background: linear-gradient(135deg, rgba(14, 5, 24, 0.75) 0%, rgba(60, 20, 80, 0.55) 100%);
+            background: linear-gradient(135deg, rgba(14, 5, 24, 0.8) 0%, rgba(60, 20, 80, 0.5) 100%);
         }
         #event-c .event-title .accent::after {
             background: var(--purple-primary);
@@ -508,91 +508,78 @@
         .purple-orb {
             position: absolute;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(155, 77, 255, 0.6), rgba(155, 77, 255, 0.08));
-            filter: blur(40px);
+            background: radial-gradient(circle, rgba(155, 77, 255, 0.5), rgba(155, 77, 255, 0.05));
+            filter: blur(30px);
             animation: orbDrift linear infinite alternate;
-            box-shadow: 0 0 120px rgba(155, 77, 255, 0.4);
-            will-change: transform;
+            box-shadow: 0 0 80px rgba(155, 77, 255, 0.3);
+            will-change: transform, opacity;
         }
         /* Big glow orbs */
         .purple-orb.glow-1 {
-            background: radial-gradient(circle, rgba(180, 100, 255, 0.5), rgba(155, 77, 255, 0.05));
-            filter: blur(60px);
-            box-shadow: 0 0 200px rgba(155, 77, 255, 0.5);
+            background: radial-gradient(circle, rgba(180, 100, 255, 0.4), rgba(155, 77, 255, 0.02));
+            filter: blur(40px);
+            box-shadow: 0 0 120px rgba(155, 77, 255, 0.3);
         }
         .purple-orb.glow-2 {
-            background: radial-gradient(circle, rgba(220, 140, 255, 0.4), rgba(155, 77, 255, 0.03));
-            filter: blur(80px);
-            box-shadow: 0 0 250px rgba(180, 100, 255, 0.4);
+            background: radial-gradient(circle, rgba(220, 140, 255, 0.3), rgba(155, 77, 255, 0.01));
+            filter: blur(50px);
+            box-shadow: 0 0 150px rgba(180, 100, 255, 0.2);
         }
 
         @keyframes orbDrift {
             0% {
                 transform: translate(0, 0) scale(1) rotate(0deg);
             }
-            25% {
-                transform: translate(60px, -40px) scale(1.2) rotate(10deg);
-            }
-            50% {
-                transform: translate(-30px, 60px) scale(1.4) rotate(20deg);
-            }
-            75% {
-                transform: translate(80px, 30px) scale(0.9) rotate(-10deg);
-            }
             100% {
-                transform: translate(-50px, -60px) scale(1.3) rotate(-20deg);
+                transform: translate(80px, -50px) scale(1.3) rotate(20deg);
             }
         }
 
-        /* Purple floating particles (tiny stars) */
+        /* Purple floating particles (tiny stars) - reduced count */
         .purple-particle {
             position: absolute;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(200, 150, 255, 0.9), rgba(155, 77, 255, 0.2));
-            box-shadow: 0 0 20px rgba(155, 77, 255, 0.6);
+            background: radial-gradient(circle, rgba(200, 150, 255, 0.8), rgba(155, 77, 255, 0.1));
+            box-shadow: 0 0 15px rgba(155, 77, 255, 0.3);
             animation: particleFloat linear infinite;
             pointer-events: none;
-            will-change: transform;
+            will-change: transform, opacity;
         }
         @keyframes particleFloat {
             0% {
                 transform: translateY(100vh) translateX(0) scale(0.3);
                 opacity: 0;
             }
-            15% {
+            20% {
                 opacity: 1;
             }
-            85% {
+            80% {
                 opacity: 1;
             }
             100% {
-                transform: translateY(-10vh) translateX(80px) scale(1.2);
+                transform: translateY(-10vh) translateX(60px) scale(1);
                 opacity: 0;
             }
         }
 
-        /* Pulsing glow overlay for Event C */
+        /* Pulsing glow overlay for Event C - kept simple */
         #event-c::before {
             content: '';
             position: absolute;
             inset: 0;
             z-index: 1;
             background:
-                radial-gradient(circle at 20% 30%, rgba(155, 77, 255, 0.20) 0%, transparent 55%),
-                radial-gradient(circle at 80% 70%, rgba(155, 77, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(180, 100, 255, 0.05) 0%, transparent 70%);
+                radial-gradient(circle at 30% 40%, rgba(155, 77, 255, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 70% 60%, rgba(155, 77, 255, 0.10) 0%, transparent 50%);
             pointer-events: none;
-            animation: pulseGlow 5s ease-in-out infinite alternate;
+            animation: pulseGlow 6s ease-in-out infinite alternate;
         }
         @keyframes pulseGlow {
             0% {
-                opacity: 0.5;
-            }
-            50% {
-                opacity: 1;
+                opacity: 0.4;
             }
             100% {
-                opacity: 0.6;
+                opacity: 0.8;
             }
         }
 
@@ -657,7 +644,7 @@
             margin-top: 8px;
         }
 
-        /* ====== RESPONSIVE ====== */
+        /* ====== RESPONSIVE (Mobile Optimization) ====== */
         @media (max-width: 1024px) {
             .event-section .event-content {
                 gap: 32px;
@@ -708,6 +695,24 @@
             }
             .event-section .event-image {
                 transform: scale(0.96) translateY(20px);
+            }
+
+            /* ====== MOBILE FIX: Reduce Purple Effects to stop Lag ====== */
+            .purple-orb {
+                filter: blur(15px) !important;
+                box-shadow: 0 0 40px rgba(155, 77, 255, 0.2) !important;
+                opacity: 0.6 !important;
+            }
+            .purple-orb.glow-1,
+            .purple-orb.glow-2 {
+                filter: blur(20px) !important;
+                box-shadow: 0 0 60px rgba(155, 77, 255, 0.15) !important;
+            }
+            #event-c::before {
+                display: none !important; /* Remove heavy gradient overlay on mobile */
+            }
+            .purple-particle {
+                opacity: 0.4 !important;
             }
         }
         @media (max-width: 480px) {
@@ -813,7 +818,6 @@
         <section id="hero">
             <div class="hero-content">
                 <div class="logo-circle">
-                    <!-- LOGO (Stable Google Cache Link) -->
                     <img src="https://lh3.googleusercontent.com/d/1wwepUptB-arMxRIOFL9wtaVeX6BEv5SZ=s800" alt="EFG Logo" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder logo-bg\'>EFG</div>';" />
                 </div>
                 <h1>Welcome to <br /><span class="highlight">EFG International</span></h1>
@@ -825,52 +829,53 @@
             </div>
         </section>
 
-        <!-- ====== EVENT A – RED (Keep existing) ====== -->
+        <!-- ====== EVENT A – RED ====== -->
         <section id="event-a" class="event-section">
-            <img class="event-bg-image" src="https://lh3.googleusercontent.com/d/1XRI_VXJsC-ncja4hd_ThQTuA4vzVsCDd=s1200" alt="Event A bg" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';" />
+            <img class="event-bg-image" src="https://lh3.googleusercontent.com/d/1KDN0r43SzhUEJhYEKrJZzRFCZoW1oP7K=s1200" alt="Event A bg" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';" />
             <div class="event-overlay"></div>
             <canvas id="star-canvas"></canvas>
             <div class="event-content">
                 <div class="event-text" id="eventAText">
-                    <h2 class="event-title">Event <span class="accent">A</span><br /><span style="font-size:0.5em; font-weight:400; opacity:0.6; letter-spacing:0.06em;">✦ Ignite ✦</span></h2>
-                    <p class="event-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <h2 class="event-title">Event <span class="accent">A</span><br /><span style="font-size:0.5em; font-weight:400; opacity:0.6; letter-spacing:0.06em;"><a href="https://fontmeme.com/burmese/"><img width="300" src="https://fontmeme.com/permalink/260902/65f3a854.png" alt="burmese" border="0"></a></span></h2>
+                    <p class="event-body">A Day of Scarlet Elegance — Celebrating Together in the Spirit of the 1900s.</p>
                     <a href="https://canva.link/aa0wcmbrl2z7yr2" target="_blank" rel="noopener noreferrer" class="event-btn">View Details <span class="arrow">→</span></a>
                 </div>
                 <div class="event-image" id="eventAImage">
-                    <img src="https://lh3.googleusercontent.com/d/1XRI_VXJsC-ncja4hd_ThQTuA4vzVsCDd=s1000" alt="Event A" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder red-bg\'>Event A</div>';" />
+                    <img src="https://lh3.googleusercontent.com/d/1kLpHSTCH9AWPk_0QltR1R1mKgwUw-set=s1000" alt="Event A" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder red-bg\'>Event A</div>';" />
                 </div>
             </div>
         </section>
 
-        <!-- ====== EVENT B – GOLD (New image) ====== -->
+        <!-- ====== EVENT B – GOLD ====== -->
         <section id="event-b" class="event-section">
-            <img class="event-bg-image" src="https://lh3.googleusercontent.com/d/15kyLI5k1XPOfAPE2O51s1EuTrAOvCF6z=s1200" alt="Event B bg" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';" />
+            <img class="event-bg-image" src="https://lh3.googleusercontent.com/d/1BWR3jfB1SPPhP4UOovPCG5pUY_olv4_E=s1200" alt="Event B bg" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';" />
             <div class="event-overlay"></div>
             <div id="gold-particles"></div>
             <div class="event-content">
                 <div class="event-text" id="eventBText">
-                    <h2 class="event-title">Event <span class="accent">B</span><br /><span style="font-size:0.5em; font-weight:400; opacity:0.6; letter-spacing:0.06em;">✦ Radiance ✦</span></h2>
-                    <p class="event-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <h2 class="event-title">Event <span class="accent">B</span><br /><span style="font-size:0.5em; font-weight:400; opacity:0.6; letter-spacing:0.06em;"><a href="https://fontmeme.com/burmese/"><img width="100" src="https://fontmeme.com/permalink/260902/53017803.png" alt="burmese" border="0"></a></span></h2>
+                    <p class="event-body">Golden Heritage — Celebrating the Beauty of Myanmar’s Ethnic Cultures.</p>
                     <a href="https://www.canva.com/design/DAHPifoheTs/fIdLvfhRdUz4NmSyuEB-1w/view?utm_content=DAHPifoheTs&utm_campaign=designshare&utm_medium=link&utm_source=viewer" target="_blank" rel="noopener noreferrer" class="event-btn">View Details <span class="arrow">→</span></a>
                 </div>
                 <div class="event-image" id="eventBImage">
-                    <img src="https://lh3.googleusercontent.com/d/15kyLI5k1XPOfAPE2O51s1EuTrAOvCF6z=s1000" alt="Event B" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder gold-bg\'>Event B</div>';" />
+                    <img src="https://lh3.googleusercontent.com/d/1BWR3jfB1SPPhP4UOovPCG5pUY_olv4_E=s1000" alt="Event B" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder gold-bg\'>Event B</div>';" />
                 </div>
             </div>
         </section>
 
-        <!-- ====== EVENT C – PURPLE (New image + Enhanced Effects) ====== -->
+        <!-- ====== EVENT C – PURPLE (Optimized) ====== -->
         <section id="event-c" class="event-section">
+            <img class="event-bg-image" src="https://lh3.googleusercontent.com/d/1xeE_pHd3SX9-a9D2nbhMwDwf9otePFFF=s1200" alt="Event B bg" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';" />
             <div class="event-overlay"></div>
             <div id="purple-orbs"></div>
             <div class="event-content">
                 <div class="event-text" id="eventCText">
-                    <h2 class="event-title">Event <span class="accent">C</span><br /><span style="font-size:0.5em; font-weight:400; opacity:0.6; letter-spacing:0.06em;">✦ Vision ✦</span></h2>
-                    <p class="event-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <a href="https://www.canva.com/design/DAHPiarr0XE/iAWGbp_ITYeTyZkz00fQNA/view?utm_content=DAHPiarr0XE&utm_campaign=designshare&utm_medium=link&utm_source=viewer" target="_blank" rel="noopener noreferrer" class="event-btn">View Details <span class="arrow">→</span></a>
+                    <h2 class="event-title">Event <span class="accent">C</span><br /><span style="font-size:0.5em; font-weight:400; opacity:0.6; letter-spacing:0.06em;">✦ Little Feet, Bigger Beat ✦</span></h2>
+                    <p class="event-body">Where Little Steps Create Big Dreams.</p>
+                    <a href="https://canva.link/5vqynh3sgl1g26w" target="_blank" rel="noopener noreferrer" class="event-btn">View Details <span class="arrow">→</span></a>
                 </div>
                 <div class="event-image" id="eventCImage">
-                    <img src="https://lh3.googleusercontent.com/d/11ebHqFXuCQFcRK-GEqfaJSH3FAmIlhVK=s1000" alt="Event C" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder purple-bg\'>Event C</div>';" />
+                    <img src="https://lh3.googleusercontent.com/d/1xeE_pHd3SX9-a9D2nbhMwDwf9otePFFF=s1200" alt="Event C" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder purple-bg\'>Event C</div>';" />
                 </div>
             </div>
         </section>
@@ -1037,23 +1042,17 @@
                 }
             }
 
-            // ----- PURPLE ORBS & PARTICLES (Event C – ENHANCED) -----
+            // ----- PURPLE ORBS & PARTICLES (OPTIMIZED for Performance) -----
             const orbContainer = document.getElementById('purple-orbs');
             if (orbContainer) {
-                // Big glowing orbs (more visible)
+                // Reduced to 6 orbs for better mobile performance
                 const orbConfigs = [
-                    { size: 320, x: 10, y: 15, duration: 18, delay: 0, cls: 'glow-1' },
-                    { size: 280, x: 70, y: 60, duration: 22, delay: 3, cls: 'glow-2' },
-                    { size: 200, x: 40, y: 30, duration: 16, delay: 6, cls: '' },
-                    { size: 350, x: 85, y: 20, duration: 24, delay: 2, cls: 'glow-1' },
-                    { size: 180, x: 55, y: 75, duration: 20, delay: 8, cls: 'glow-2' },
-                    { size: 260, x: 25, y: 50, duration: 19, delay: 4, cls: '' },
-                    { size: 300, x: 60, y: 10, duration: 21, delay: 7, cls: 'glow-1' },
-                    { size: 220, x: 90, y: 45, duration: 17, delay: 5, cls: 'glow-2' },
-                    { size: 160, x: 15, y: 80, duration: 23, delay: 9, cls: '' },
-                    { size: 380, x: 50, y: 40, duration: 26, delay: 1, cls: 'glow-1' },
-                    { size: 240, x: 75, y: 70, duration: 20, delay: 6, cls: 'glow-2' },
-                    { size: 190, x: 30, y: 25, duration: 18, delay: 3, cls: '' },
+                    { size: 300, x: 15, y: 20, duration: 20, delay: 0, cls: 'glow-1' },
+                    { size: 250, x: 70, y: 65, duration: 24, delay: 3, cls: 'glow-2' },
+                    { size: 180, x: 40, y: 35, duration: 18, delay: 6, cls: '' },
+                    { size: 350, x: 85, y: 25, duration: 26, delay: 2, cls: 'glow-1' },
+                    { size: 160, x: 55, y: 80, duration: 22, delay: 8, cls: 'glow-2' },
+                    { size: 220, x: 25, y: 55, duration: 20, delay: 4, cls: '' },
                 ];
                 orbConfigs.forEach((cfg) => {
                     const orb = document.createElement('div');
@@ -1064,21 +1063,21 @@
                     orb.style.top = cfg.y + '%';
                     orb.style.animationDuration = cfg.duration + 's';
                     orb.style.animationDelay = cfg.delay + 's';
-                    orb.style.opacity = Math.random() * 0.4 + 0.3;
+                    orb.style.opacity = Math.random() * 0.3 + 0.25;
                     orbContainer.appendChild(orb);
                 });
 
-                // Tiny floating particles (extra pop)
-                for (let i = 0; i < 50; i++) {
+                // Reduced to 20 particles for better mobile performance
+                for (let i = 0; i < 20; i++) {
                     const particle = document.createElement('div');
                     particle.className = 'purple-particle';
                     const size = Math.random() * 6 + 2;
                     particle.style.width = size + 'px';
                     particle.style.height = size + 'px';
                     particle.style.left = Math.random() * 100 + '%';
-                    particle.style.animationDuration = (Math.random() * 18 + 12) + 's';
+                    particle.style.animationDuration = (Math.random() * 18 + 14) + 's';
                     particle.style.animationDelay = (Math.random() * 20) + 's';
-                    particle.style.opacity = Math.random() * 0.8 + 0.2;
+                    particle.style.opacity = Math.random() * 0.5 + 0.2;
                     orbContainer.appendChild(particle);
                 }
             }
@@ -1118,7 +1117,7 @@
                 }, { passive: true });
             }
 
-            console.log('🎬 EFG International — Stable image links (lh3) applied. Please ensure files are Public on Drive.');
+            console.log('🎬 EFG International — Purple section optimized for mobile performance!');
         })();
     </script>
 </body>
